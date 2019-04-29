@@ -1,0 +1,9 @@
+<svg id="mastering-icon" width="24px" height="24px" viewBox="0 2 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g  stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(0.000000, 2.000000)">
+        <rect id="line-1" fill="#FF569F" height="6" width="2" x="0" y="4.5"></rect>
+        <rect id="line-2" fill="#FF569F" height="18" width="2" x="4" y="0"></rect>
+        <rect id="line-3" fill="#FF569F" height="8" width="2" x="8" y="4"></rect>
+        <rect id="line-4" fill="#FF569F" height="12" width="2" x="12" y="2"></rect>
+        <rect id="line-5" fill="#FF569F" height="6" width="2" x="16" y="4.5"></rect>
+    </g>
+</svg>

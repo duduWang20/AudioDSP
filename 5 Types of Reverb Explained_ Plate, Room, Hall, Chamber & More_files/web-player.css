@@ -1,0 +1,650 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(https://fonts.gstatic.com/s/opensans/v13/MTP_ySUJH_bn48VBG8sNShampu5_7CjHW5spxoeN3Vs.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3ZBw1xU1rKptJj_0jans920.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+/* Headphones player */
+[v-cloak] { display:none; }
+
+.select-headphones {
+	font-size: 14px;
+	color: #73757B;
+	font-weight: 300;
+}
+
+.select-headphones .btn {
+	min-width: 100px;
+}
+
+.select-headphones .btn-lg {
+	padding: 7px;
+	font-size: 16px;
+}
+
+.img-fix {
+  position: relative;
+  top: -3px;
+}
+
+.p-sr-title {
+  position: relative;
+  top: -55px;
+  left: 80px;
+  font-family: AkkuratPro;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: 0.1px;
+  color: #4672d5;
+}
+
+.select-headphones, .select-headphones p {
+  font-size: 14px !important;
+}
+
+.p-sr-enable {
+  position: relative;
+  top: -55px;
+  left: 80px;
+  font-family: AkkuratPro;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: 0.1px;
+  color: #4672d5;
+}
+
+.p-sr-disable {
+  position: relative;
+  top: -55px;
+  left: 80px;
+  font-family: AkkuratPro;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: 0.1px;
+  color: #99a0ae;
+}
+
+.select-headphones .modal-footer {
+    text-align: center;
+    border-color: #CFD5E3;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.select-headphones .title {
+	color: #424650;
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.select-headphones h3 {
+	text-align: center;
+	font-size: 26px;
+	color: #4F5666;
+	font-weight: 300;
+  margin-top: 0;
+}
+.select-headphones h4 {
+	text-align: center;
+	color: #73757B;
+	font-size: 14px;
+	font-weight: 300;
+}
+
+#select-headphones {
+  padding-top: 0 !important;
+}
+
+.select-headphones-list {
+	list-style: none;
+    margin: 24px -15px 25px -15px;
+    padding: 0;
+    border-top: 1px solid #CFD5E3;
+    border-bottom: 1px solid #CFD5E3;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+.select-headphones-list > li:last-child {
+	margin-bottom: 30px;
+}
+
+.dot {
+  height: 72px;
+  width: 72px;
+  border-radius: 50%;
+  display: inline-block;
+  transition: all 0.1618s ease-in-out;
+  position: relative;
+}
+
+.power {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+}
+
+.grey {
+  background-color: #c7cad3;
+}
+
+.blue {
+  background-color: #4672d5;
+}
+
+.select-headphones-list .collapsible-item-header,
+.select-headphones-expand-list li {
+	cursor: pointer;
+    padding: 0 24px;
+    min-height: 48px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex: 1;
+    flex: 1;
+    position: relative;
+}
+.select-headphones-expand-list li {
+	padding-left: 52px;
+}
+
+.select-headphones-list .collapsible-item {
+	position: relative;
+}
+
+.select-headphones-list .collapsible-item:after {
+    height: 1px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    content: " ";
+    bottom: 0;
+    background-color: #CFD5E3;
+    margin: 0px 16px;
+}
+
+.select-headphones-list .collapsible-item-header .fa-angle-down {
+	transition: all .4s cubic-bezier(.25,.8,.25,1);
+	display: inline-flex;
+	vertical-align: middle;
+	font-size: 22px;
+}
+.select-headphones-list .open .collapsible-item-header .fa-angle-down {
+	transform: rotate(180deg) translate3D(0,0,0);
+}
+
+.select-headphones-list .collapsible-item-header .title {
+	margin-right: 8px;
+}
+
+.select-headphones-expand-list {
+	list-style: none;
+	padding: 0;
+}
+
+.select-headphones-expand-list li .btn {
+	display: none;
+	background: transparent;
+	font-weight: 700;
+	border-width: 2px;
+	padding: 2px 8px;
+}
+.select-headphones-expand-list li:hover .btn {
+	display: block;
+}
+
+.select-headphones-expand-list li:hover, .select-headphones-expand-list li.active {
+	background-color: #E4E9F2;
+}
+
+.headphones-submit-form {
+    max-width: 356px;
+    margin: 36px auto;
+}
+.section-player h4 {
+	font-weight: 300;
+}
+.player-container {
+	overflow: hidden;
+	position: relative;
+	background-color: #424650;
+}
+.player-header {
+	height: 64px;
+  line-height: 64px;
+	position: relative;
+}
+
+.headphone-link {
+  display: inline-block;
+  height: 64px;
+  line-height: 64px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  vertical-align: top;
+}
+
+.flip-h {
+  margin-left: 8px;
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+}
+
+.goto-headphones {
+  font-family: AkkuratPro;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.43;
+  letter-spacing: 0.2px;
+  text-align: right;
+  color: #4672d5;
+  display: block;
+  vertical-align: middle;
+}
+
+.change-headphones {
+  font-family: AkkuratPro;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: 0.1px;
+  color: #262931;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.player-body {
+	position: relative;
+	height: 240px;
+}
+
+.player-body .shadow-inset {
+	box-shadow: inset 0 16px 16px 0 rgba(0,0,0,0.25), inset 0 0 0 0 #838996, inset 0 -16px 16px 0 rgba(0,0,0,0.25);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+
+.player-footer {
+	height: 72px;
+	position: relative;
+  margin: 16px 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.player-calibration-info {
+	display: inline-block;
+    border: 2px solid #A4A7AD;
+    border-radius: 50%;
+    padding: 7px 6px;
+    line-height: 0px;
+    font-size: 12px;
+    color: #A4A7AD;
+    margin-right: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.player-calibration-info:hover {
+    border-color: #fff;
+    color: #fff;
+}
+.popover-close {
+    color: #73757B;
+    position: absolute;
+    right: 6px;
+    cursor: pointer;
+}
+.player-calibration .popover-content {
+	color: #73757B;
+    font-size: 14px;
+    line-height: 20px;
+    background-color: #fff;
+    font-family: "Open Sans",open-sans,sans-serif;
+    font-weight: 400;
+    text-align: left;
+}
+
+.player-switch {
+	cursor: pointer;
+  display: inline-block;
+}
+
+.player-switch-container {
+	height: 32px;
+    width: 72px;
+    position: relative;
+    transition: all .4s cubic-bezier(.25,.8,.25,1);
+    border-radius: 48px;
+    background-color: #FF7141;
+    overflow: hidden;
+}
+
+.player-switch.checked .player-switch-container {
+	background-color: #46D59D;
+}
+
+.player-switch .player-switch-thumb {
+	widows: 86px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transition: all .15s linear;
+    transform: translate3d(-25px, -50%, 0px);
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+}
+.player-switch.checked .player-switch-thumb {
+	transform: translate3d(14px, -50%, 0px);
+}
+/*.player-switch.checked .player-switch-thumb .off {
+	opacity: 0;
+}
+.player-switch:not(.checked) .player-switch-thumb .on {
+	opacity: 0;
+}*/
+
+.player-switch .player-switch-thumb .on, .player-switch .player-switch-thumb .off {
+	text-transform: uppercase;
+	color: #424650;
+	font-size: 16px;
+	font-weight: bold;
+}
+.player-switch .player-switch-thumb .thumb {
+	margin: 0 6px;
+	width: 24px;
+    height: 24px;
+	background-color: #FFFFFF;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,.2), 0 1px 1px rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+}
+
+
+.player-switch label {
+	font-family: "Open Sans",open-sans,sans-serif;
+	font-weight: 600;
+	color: #FFFFFF;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0;
+}
+
+.player-tracks {
+	float: right;
+  padding-right: 1px;
+  height: 72px;
+  line-height: 72px;
+  vertical-align: top;
+}
+
+.track-button {
+  margin-left: 16px;
+  vertical-align: middle;
+}
+
+.player-tracks .btn-ghost {
+	font-size: 16px;
+    min-width: 80px;
+    text-transform: capitalize;
+    border-radius: 34px;
+    padding: 4px 16px;
+}
+.player-tracks .btn-ghost.active {
+	background-color: #73757B;
+	color: #fff;
+}
+.player-footer .player-play-toggle {
+	cursor: pointer;
+	position: absolute;
+    left: 50%;
+    margin-left: -33px;
+    top: 13px;
+    width: 66px;
+    height: 66px;
+/*    border-radius: 50%;
+    border: 2px solid #FFFFFF;*/
+}
+
+.player-footer .player-play-toggle.play {
+	background: url(../images/player/play.svg) no-repeat center center;
+	background-size: 100%;
+}
+
+.player-footer .player-play-toggle.pause {
+	background: url(../images/player/pause.svg) no-repeat center center;
+	background-size: 100%;
+}
+
+.headphone-buffering {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    transition: opacity .1;
+}
+.headphone-buffering.buffering {
+    transition-delay: 1s;
+    opacity: 1;
+}
+.headphone-buffering-container {
+    margin: 0 12px;
+    padding: 24px;
+    width: 100%;
+    max-width: 700px;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 8px 0 rgba(0,0,0,0.25);
+}
+
+.headphone-prompt {
+    background: rgba(66,70,80,0.9);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+    top: 0;
+    left: 0;
+	display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+.headphone-prompt {
+    background: rgba(66,70,80,0.7);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+.headphone-prompt-container {
+	margin: 0 12px;
+    padding: 24px;
+    width: 100%;
+    max-width: 700px;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 8px 0 rgba(0,0,0,0.25);
+}
+.headphone-prompt-container .icon-headphones {
+	position: relative;
+    padding-left: 92px;
+}
+.headphone-prompt-container .icon-headphones:before {
+	position: absolute;
+    left: 24px;
+    top: 8px;
+    content: " ";
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: url(../images/player/headphones-white.svg) no-repeat center center #4672D5;
+    background-size: 50%;
+}
+.headphone-prompt h3, .headphone-buffering h3 {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 600;
+	letter-spacing: 0;
+    width: 100%;
+    color: #424650;
+    font-size: 18px;
+    line-height: 18px;
+    margin: 2px 0 12px 0;
+}
+.headphone-buffering h3 {
+    margin: 0;
+}
+.headphone-prompt h4 {
+	width: 100%;
+	color: #73757B;
+	font-size: 14px;
+	font-weight: 300;
+	line-height: 14px;
+	margin: 0;
+}
+.headphone-prompt .btn {
+	width: 100%;
+	max-width: 176px;
+	font-style: 16px;
+}
+
+#player-debug {
+	background: #1B1D1E;
+    color: #E93F5A;
+    border-radius: 4px;
+    margin: 14px 0;
+}
+#player-debug p {
+	padding: 6px;
+	font-size: 13px;
+	margin: 0;
+}
+.player-bottom {
+    text-align: center;
+    margin-top: 58px;
+    color: #4f5666;
+}
+.player-bottom .btn-default {
+    color: #4f5666;
+    border-color: #4f5666;
+    background-color: transparent;
+}
+.player-bottom .chevron::after {
+    background: url(../images/icons/chevron-grey.svg) no-repeat 100% 3px;
+}
+.player-bottom .chevron:hover {
+    text-decoration: none;
+}
+
+@media (max-width: 767px) {
+	.headphone-prompt-container {
+		text-align: center;
+	}
+	.headphone-prompt-container .icon-headphones {
+		padding: 68px 0 0 0;
+	}
+	.headphone-prompt-container .icon-headphones:before {
+		left: 50%;
+	    margin-left: -24px;
+	    top: 0;
+	}
+	.headphone-prompt h3 {
+		line-height: 24px;
+	}
+	.headphone-prompt h4 {
+		padding: 4px 0 22px 0;
+	}
+	.player-footer .player-play-toggle {
+		left: 34px;
+	    margin: 0;
+	}
+}
+@media (max-width: 376px) {
+	.player-footer .player-play-toggle {
+	    left: 12px;
+	}
+}
+/* Headphones player */
+
+/* Collapsible item */
+.collapsible-item .collapsible-item-container {
+	display: none;
+}
+.collapsible-item.open .collapsible-item-container {
+	display: block;
+}
+/* Collapsible item */
+
+@media only screen and (max-width: 600px), only screen and (max-device-width: 600px) {
+  .p-sr-title {
+    display: none;
+  }
+  .p-sr-enable {
+    display: none;
+  }
+  .p-sr-disable {
+    display: none;
+  }
+  .track-button {
+    margin-left: 8px;
+  }
+}
