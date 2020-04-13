@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<!-- saved from url=(0071)http://wyldco.com/blog/2010/11/how-to-capture-touches-over-a-uiwebview/ -->
+<html lang="en-US" prefix="og: http://ogp.me/ns#"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+
+<title>How to capture touches over a uiwebview - WyldCo.com</title>
+
+<!-- This site is optimized with the Yoast SEO plugin v11.0 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="http://wyldco.com/blog/2010/11/how-to-capture-touches-over-a-uiwebview/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to capture touches over a uiwebview - WyldCo.com">
+<meta property="og:description" content="    This post was updated with corrections to work with iOS5. I spent the last few weeks polishing the What They Speak When They Speak to Me (WTS) iOS application I developed with Obx Labs, which I mentioned in a previous post. Developing a working prototype for an iOS application can be done fairly quickly, …">
+<meta property="og:url" content="http://wyldco.com/blog/2010/11/how-to-capture-touches-over-a-uiwebview/">
+<meta property="og:site_name" content="WyldCo.com">
+<script type="application/ld+json" class="yoast-schema-graph yoast-schema-graph--main">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"http://wyldco.com/#website","url":"http://wyldco.com/","name":"WyldCo.com","publisher":{"@id":"http://wyldco.com/#organization"},"potentialAction":{"@type":"SearchAction","target":"http://wyldco.com/?s={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"http://wyldco.com/blog/2010/11/how-to-capture-touches-over-a-uiwebview/#webpage","url":"http://wyldco.com/blog/2010/11/how-to-capture-touches-over-a-uiwebview/","inLanguage":"en-US","name":"How to capture touches over a uiwebview - WyldCo.com","isPartOf":{"@id":"http://wyldco.com/#website"},"datePublished":"2018-06-06T13:35:41+00:00","dateModified":"2018-06-06T14:33:44+00:00"}]}</script>
+<!-- / Yoast SEO plugin. -->
+
+<link rel="dns-prefetch" href="http://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="http://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="WyldCo.com » Feed" href="http://wyldco.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="WyldCo.com » Comments Feed" href="http://wyldco.com/comments/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11.2.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11.2.0\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/wyldco.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.1.1"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./How to capture touches over a uiwebview - WyldCo.com_files/wp-emoji-release.min.js" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="wp-block-library-css" href="./How to capture touches over a uiwebview - WyldCo.com_files/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="contact-form-7-css" href="./How to capture touches over a uiwebview - WyldCo.com_files/styles.css" type="text/css" media="all">
+<link rel="stylesheet" id="fotografo-style-css" href="./How to capture touches over a uiwebview - WyldCo.com_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="fotografo-bootstrap-style-css" href="./How to capture touches over a uiwebview - WyldCo.com_files/bootstrap.css" type="text/css" media="all">
+<link rel="stylesheet" id="elegant-icons-css" href="./How to capture touches over a uiwebview - WyldCo.com_files/style(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="fotografo-fonts-css" href="./How to capture touches over a uiwebview - WyldCo.com_files/css" type="text/css" media="all">
+<script type="text/javascript" src="./How to capture touches over a uiwebview - WyldCo.com_files/jquery.js"></script>
+<script type="text/javascript" src="./How to capture touches over a uiwebview - WyldCo.com_files/jquery-migrate.min.js"></script>
+<link rel="https://api.w.org/" href="http://wyldco.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://wyldco.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://wyldco.com/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 5.1.1">
+<link rel="shortlink" href="http://wyldco.com/?p=40">
+<link rel="alternate" type="application/json+oembed" href="http://wyldco.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwyldco.com%2Fblog%2F2010%2F11%2Fhow-to-capture-touches-over-a-uiwebview%2F">
+<link rel="alternate" type="text/xml+oembed" href="http://wyldco.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwyldco.com%2Fblog%2F2010%2F11%2Fhow-to-capture-touches-over-a-uiwebview%2F&amp;format=xml">
+<script type="text/javascript">
+(function(url){
+	if(/(?:Chrome\/26\.0\.1410\.63 Safari\/537\.31|WordfenceTestMonBot)/.test(navigator.userAgent)){ return; }
+	var addEvent = function(evt, handler) {
+		if (window.addEventListener) {
+			document.addEventListener(evt, handler, false);
+		} else if (window.attachEvent) {
+			document.attachEvent('on' + evt, handler);
+		}
+	};
+	var removeEvent = function(evt, handler) {
+		if (window.removeEventListener) {
+			document.removeEventListener(evt, handler, false);
+		} else if (window.detachEvent) {
+			document.detachEvent('on' + evt, handler);
+		}
+	};
+	var evts = 'contextmenu dblclick drag dragend dragenter dragleave dragover dragstart drop keydown keypress keyup mousedown mousemove mouseout mouseover mouseup mousewheel scroll'.split(' ');
+	var logHuman = function() {
+		if (window.wfLogHumanRan) { return; }
+		window.wfLogHumanRan = true;
+		var wfscr = document.createElement('script');
+		wfscr.type = 'text/javascript';
+		wfscr.async = true;
+		wfscr.src = url + '&r=' + Math.random();
+		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(wfscr);
+		for (var i = 0; i < evts.length; i++) {
+			removeEvent(evts[i], logHuman);
+		}
+	};
+	for (var i = 0; i < evts.length; i++) {
+		addEvent(evts[i], logHuman);
+	}
+})('//wyldco.com/?wordfence_lh=1&hid=06E84FFC6791A7D244F01FD60BB1D9BC');
+</script><link rel="icon" href="http://wyldco.com/wp-content/uploads/2018/06/wyldco-favicon-large-150x150.png" sizes="32x32">
+<link rel="icon" href="http://wyldco.com/wp-content/uploads/2018/06/wyldco-favicon-large-300x300.png" sizes="192x192">
+<link rel="apple-touch-icon-precomposed" href="http://wyldco.com/wp-content/uploads/2018/06/wyldco-favicon-large-300x300.png">
+<meta name="msapplication-TileImage" content="http://wyldco.com/wp-content/uploads/2018/06/wyldco-favicon-large-300x300.png">
+<script type="text/javascript" async="" src="./How to capture touches over a uiwebview - WyldCo.com_files/saved_resource"></script></head>
+
+<body class="page-template-default page page-id-40">
+<div id="page" class="site">
+	
+	<header id="masthead" class="site-header">
+		<div class="site-branding container">	
+			<div class="logo">
+				<a rel="home" href="http://wyldco.com/">WyldCo.com</a>
+			</div>
+						<a id="menu-toogle" class="menu-toogle" href="http://wyldco.com/blog/2010/11/how-to-capture-touches-over-a-uiwebview/#"><span aria-hidden="true" class="icon_menu-square_alt2"></span></a>
+		</div>	
+	</header><!-- #masthead -->
+	<div id="nav-panel" class="nav-panel">
+		<div class="site-branding">
+			<div class="logo">
+				<a rel="home" href="http://wyldco.com/">WyldCo.com</a>
+			</div>
+						
+			
+		</div>
+		
+			<nav id="nav" class="main-nav"><h6 class="widget-title">Menu</h6><ul id="menu-menu" class="menu"><li id="menu-item-95" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-95"><a href="http://wyldco.com/">Main</a></li>
+<li id="menu-item-57" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-57"><a href="http://wyldco.com/services/">Wyld Collective</a></li>
+<li id="menu-item-73" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><a href="http://wyldco.com/aboutus">About Us</a></li>
+<li id="menu-item-58" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-58"><a href="http://wyldco.com/services/softdev">Software Development</a></li>
+<li id="menu-item-62" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-62"><a href="http://wyldco.com/services/eval">Evaluation</a></li>
+<li id="menu-item-63" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-63"><a href="http://wyldco.com/services/intdes">Interaction Design</a></li>
+<li id="menu-item-64" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-64"><a href="http://wyldco.com/services/proto">Prototyping</a></li>
+<li id="menu-item-65" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-65"><a href="http://wyldco.com/services/workshop">Workshop Organization</a></li>
+<li id="menu-item-68" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-68"><a href="http://wyldco.com/blog/2010/11/how-to-capture-touches-over-a-uiwebview/#">Blog</a>
+<ul class="sub-menu">
+	<li id="menu-item-59" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-40 current_page_item menu-item-59"><a href="http://wyldco.com/blog/2010/11/how-to-capture-touches-over-a-uiwebview/" aria-current="page">How to capture touches over a uiwebview</a></li>
+	<li id="menu-item-60" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-60"><a href="http://wyldco.com/blog/2013/03/inside-shenzhens-electronics-markets/">Inside Shenzhen’s electronics markets</a></li>
+	<li id="menu-item-109" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-109"><a href="http://wyldco.com/why-quality-assurance-matters-to-every-site/">Why Quality Assurance Matters to Every Site</a></li>
+</ul>
+</li>
+</ul></nav>			
+		
+<aside id="secondary" class="widget-area" role="complementary">
+	<section id="text-3" class="widget widget_text"><h6 class="widget-title">WHAT WE DO</h6>			<div class="textwidget"><p>At Wyld Collective, we design novel interactive systems. We combine years of experience in design practice and user research with up-to-the-minute knowledge of cutting-edge technologies.</p>
+<p>With digital technology increasingly embedded everywhere, the world is becoming interactive in new and exciting ways: location-based games, mobile payments, open data about your city, participatory museum exhibits, programmable matter, gesture recognition, and more.</p>
+</div>
+		</section></aside><!-- #secondary -->
+		<footer id="colophon" class="site-footer" role="contentinfo">
+			<div class="site-info">
+				<a href="https://wordpress.org/">Proudly powered by WordPress</a><br>
+				Theme: Fotografo by <a href="http://awothemes.pro/" rel="designer">Awothemes</a>.			</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+	</div>
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main container" role="main">
+
+			
+<article id="post-40" class="post-40 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">How to capture touches over a uiwebview</h1>	</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<p>&nbsp;</p>
+<div style="width: 100%; margin: 0 auto;" class="ml-slider-3-12-1 metaslider metaslider-responsive metaslider-16 ml-slider">
+    
+    <div id="metaslider_container_16">
+        <ul id="metaslider_16" class="rslides rslides1">
+            <li id="rslides1_s0" class="rslides1_on" style="display: block; float: left; position: relative; opacity: 1; z-index: 2; transition: opacity 600ms ease-in-out 0s;"><img src="./How to capture touches over a uiwebview - WyldCo.com_files/box_bn.jpg" height="200" width="940" alt="" class="slider-16 slide-21" title="box_bn"></li>
+            <li style="float: none; position: absolute; opacity: 0; z-index: 1; display: list-item; transition: opacity 600ms ease-in-out 0s;" id="rslides1_s1" class=""><img src="./How to capture touches over a uiwebview - WyldCo.com_files/migration_bn.jpg" height="200" width="940" alt="" class="slider-16 slide-22" title="migration_bn"></li>
+            <li style="float: none; position: absolute; opacity: 0; z-index: 1; display: list-item; transition: opacity 600ms ease-in-out 0s;" id="rslides1_s2" class=""><img src="./How to capture touches over a uiwebview - WyldCo.com_files/speak_bn.jpg" height="200" width="940" alt="" class="slider-16 slide-23" title="speak_bn"></li>
+            <li style="float: none; position: absolute; opacity: 0; z-index: 1; display: list-item; transition: opacity 600ms ease-in-out 0s;" id="rslides1_s3" class=""><img src="./How to capture touches over a uiwebview - WyldCo.com_files/treatful_bn.jpg" height="200" width="940" alt="" class="slider-16 slide-24" title="treatful_bn"></li>
+        </ul>
+        
+    </div>
+</div>
+<p>&nbsp;</p>
+<p><strong>This post was updated with corrections to work with iOS5.</strong></p>
+<p>I spent the last few weeks polishing the What They Speak When They Speak to Me (WTS) iOS application I developed with Obx Labs, which I mentioned in a&nbsp;previous post. Developing a working prototype for an iOS application can be done fairly quickly, thanks to the tools provided by Apple and a growing list of libraries and engines, but the more time-consuming part of development takes place later, working with and often against the features embedded in the iOS SDK to polish your product. This how-to is about one specific issue that arose during the development of WTS: capturing touches over a UIWebView without losing its functionality.</p>
+<p>This short tutorial assumes that you know how to place a UIWebView (or other touch swallowing views) in your app and that you are at the frustrating point of trying to catch touch events over the Web View to implement some interactive behavior. In my case, I wanted to swipe the Web View left and right to show or hide<span id="more-61"></span> it, similarly to how the Twitter for iPad app manages its browser tab.</p>
+<p>We’ll start from scratch and go through the following four steps. You can jump to step 4 if you’re looking for the meat of this tutorial.</p>
+<ol>
+<li>Create a new XCode project using the “View-based application” template.</li>
+<li>Add the standard methods to manage touch events.</li>
+<li>Add a UIWebView covering the main view.</li>
+<li>Add a custom class that extends UIWindow to capture touch events.</li>
+</ol>
+<h2><strong>1. Create a new XCode project using the “View-based application” template.</strong></h2>
+<p>This step is self-explanatory. From XCode you select from the main menu: File &gt; New Project, and them “View-based Application” which is under the “Application” template folder. This is here mainly to have a common code base from which to start the tutorial; I named the project “CaptureTouch”.</p>
+<h2><strong>2. Add the standard methods to manage touch events.</strong></h2>
+<p>Before we get to the problematic UIWebView, we want to make sure that touch events get to the application’s main standard view. The new project you created in step 1 should contain a view controller named CaptureTouchViewController. In the implementation file of this view controller, add the four standard touch management methods:</p>
+<div>
+<div id="highlighter_486490" class="syntaxhighlighter objc">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">01</div>
+<div class="line number2 index1 alt1">02</div>
+<div class="line number3 index2 alt2">03</div>
+<div class="line number4 index3 alt1">04</div>
+<div class="line number5 index4 alt2">05</div>
+<div class="line number6 index5 alt1">06</div>
+<div class="line number7 index6 alt2">07</div>
+<div class="line number8 index7 alt1">08</div>
+<div class="line number9 index8 alt2">09</div>
+<div class="line number10 index9 alt1">10</div>
+<div class="line number11 index10 alt2">11</div>
+<div class="line number12 index11 alt1">12</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="objc plain">- (</code><code class="objc datatypes">void</code><code class="objc plain">) touchesBegan:(</code><code class="objc keyword">NSSet</code><code class="objc plain">*)touches withEvent:(UIEvent*)event {</code></div>
+<div class="line number2 index1 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">NSLog</code><code class="objc plain">(</code><code class="objc string">@"Touches began"</code><code class="objc plain">);</code></div>
+<div class="line number3 index2 alt2"><code class="objc plain">}</code></div>
+<div class="line number4 index3 alt1"><code class="objc plain">- (</code><code class="objc datatypes">void</code><code class="objc plain">) touchesMoved:(</code><code class="objc keyword">NSSet</code><code class="objc plain">*)touches withEvent:(UIEvent*)event {</code></div>
+<div class="line number5 index4 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">NSLog</code><code class="objc plain">(</code><code class="objc string">@"Touches moved"</code><code class="objc plain">);</code></div>
+<div class="line number6 index5 alt1"><code class="objc plain">}</code></div>
+<div class="line number7 index6 alt2"><code class="objc plain">- (</code><code class="objc datatypes">void</code><code class="objc plain">) touchesEnded:(</code><code class="objc keyword">NSSet</code><code class="objc plain">*)touches withEvent:(UIEvent*)event {</code></div>
+<div class="line number8 index7 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">NSLog</code><code class="objc plain">(</code><code class="objc string">@"Touches ended"</code><code class="objc plain">);</code></div>
+<div class="line number9 index8 alt2"><code class="objc plain">}</code></div>
+<div class="line number10 index9 alt1"><code class="objc plain">- (</code><code class="objc datatypes">void</code><code class="objc plain">) touchesCancelled:(</code><code class="objc keyword">NSSet</code><code class="objc plain">*)touches withEvent:(UIEvent*)event {</code></div>
+<div class="line number11 index10 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">NSLog</code><code class="objc plain">(</code><code class="objc string">@"Touches cancelled"</code><code class="objc plain">);</code></div>
+<div class="line number12 index11 alt1"><code class="objc plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>At this point, if you build and run the application, you should see a gray background (the view), and clicking anywhere on the background will output “Touch began” to the console.</p>
+<h2><strong>3. Add a UIWebView that covers the main view.</strong></h2>
+<p>As mentioned before, we assume you know how the UIWebView works, so we won’t get into too much detail. All we need is the simplest UIWebView covering the application’s main view. We will add the UIWebView in the .xib file created by XCode, but first, we need to add an attribute and outlet to the CaptureTouchViewController. Your CaptureTouchViewController.h file should then look like the following:</p>
+<div>
+<div id="highlighter_121928" class="syntaxhighlighter objc">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+<div class="line number5 index4 alt2">5</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="objc keyword">@interface</code>&nbsp;<code class="objc plain">CaptureTouchViewController : UIViewController {</code></div>
+<div class="line number2 index1 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">UIWebView* webView;</code></div>
+<div class="line number3 index2 alt2"><code class="objc plain">}</code></div>
+<div class="line number4 index3 alt1"><code class="objc keyword">@property</code>&nbsp;<code class="objc plain">(</code><code class="objc keyword">nonatomic</code><code class="objc plain">, retain)&nbsp;</code><code class="objc keyword">IBOutlet</code>&nbsp;<code class="objc plain">UIWebView *webView;</code></div>
+<div class="line number5 index4 alt2"><code class="objc keyword">@end</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>With the outlet created, you can open the CaptureTouchViewController.xib file in Interface Builder. Open the “View” object, and then drag-and-drop a new Web View into it. The Web View should automatically expand to cover the whole view. Right-click on the Web View, and then link a “New Referencing Outlet” with the “webView” attribute you created above by clicking the “New Referencing Outlet”, dragging to the “File’s Owner” object, and then selecting the “webView” from the list that pops up.</p>
+<p>At this point, you linked the interface to the “webView” attribute, but it is not loading any html. We will need one last bit of code before we get to the core of this tutorial, which will load a url to make sure the Web View is working correctly. After the application’s main view finished loading, the CaptureTouchViewController’s viewDidLoad: method is called. This is where we add the few lines that will load a url into the web view. Your viewDidLoad: method should look like the following after the changes:</p>
+<div>
+<div id="highlighter_766625" class="syntaxhighlighter objc">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+<div class="line number5 index4 alt2">5</div>
+<div class="line number6 index5 alt1">6</div>
+<div class="line number7 index6 alt2">7</div>
+<div class="line number8 index7 alt1">8</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="objc plain">- (</code><code class="objc datatypes">void</code><code class="objc plain">)viewDidLoad {</code></div>
+<div class="line number2 index1 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">[</code><code class="objc keyword">super</code>&nbsp;<code class="objc plain">viewDidLoad];</code></div>
+<div class="line number3 index2 alt2"></div>
+<div class="line number4 index3 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc comment">//Load the request in the UIWebView.</code></div>
+<div class="line number5 index4 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">NSURL</code>&nbsp;<code class="objc plain">*url = [</code><code class="objc keyword">NSURL</code>&nbsp;<code class="objc plain">URLWithString:</code><code class="objc string">@"http://www.wyldco.com"</code><code class="objc plain">];</code></div>
+<div class="line number6 index5 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">NSURLRequest</code>&nbsp;<code class="objc plain">*requestObj = [</code><code class="objc keyword">NSURLRequest</code>&nbsp;<code class="objc plain">requestWithURL:url];</code></div>
+<div class="line number7 index6 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">[webView loadRequest:requestObj];</code></div>
+<div class="line number8 index7 alt1"><code class="objc plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>If you build and run the application, you should see the web page. Everything looks fine, but if you touch anywhere on the screen, you’ll notice that the “Touch began” message from step 2 does not appear in the console anymore. The Web View swallows the touches to manage scrolling and displaying the magnifying glass if you hold down a touch over text, and it blocks touch events from getting to the view. The next step shows how to capture those touch events.</p>
+<h2><strong>4. Add a custom class that extends UIWindow to capture touch events.</strong></h2>
+<p>There are different ways to capture touches over a Web View. One would be to extend the UIWebView class, but Apple says you should not, so we will stay away from that solution in case it causes problem later. Instead, we are going to extend the UIWindow class, and capture touch events before they get propagated to the correct view(s). The first thing you’ll need is a new class, let’s call it TouchCapturingWindow, with the following header and implementation files:</p>
+<div>
+<div id="highlighter_442443" class="syntaxhighlighter objc">
+<table border="0" cellspacing="0" cellpadding="0">
+<caption>&nbsp;</caption>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">01</div>
+<div class="line number2 index1 alt1">02</div>
+<div class="line number3 index2 alt2">03</div>
+<div class="line number4 index3 alt1">04</div>
+<div class="line number5 index4 alt2">05</div>
+<div class="line number6 index5 alt1">06</div>
+<div class="line number7 index6 alt2">07</div>
+<div class="line number8 index7 alt1">08</div>
+<div class="line number9 index8 alt2">09</div>
+<div class="line number10 index9 alt1">10</div>
+<div class="line number11 index10 alt2">11</div>
+<div class="line number12 index11 alt1">12</div>
+<div class="line number13 index12 alt2">13</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="objc preprocessor">#import &lt;Foundation/Foundation.h&gt;</code></div>
+<div class="line number2 index1 alt1"></div>
+<div class="line number3 index2 alt2"><code class="objc keyword">@interface</code>&nbsp;<code class="objc plain">TouchCapturingWindow : UIWindow {</code></div>
+<div class="line number4 index3 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">NSMutableArray</code>&nbsp;<code class="objc plain">*views;</code></div>
+<div class="line number5 index4 alt2"></div>
+<div class="line number6 index5 alt1"><code class="objc keyword">@private</code></div>
+<div class="line number7 index6 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">UIView *touchView;</code></div>
+<div class="line number8 index7 alt1"><code class="objc plain">}</code></div>
+<div class="line number9 index8 alt2"></div>
+<div class="line number10 index9 alt1"><code class="objc plain">- (</code><code class="objc datatypes">void</code><code class="objc plain">)addViewForTouchPriority:(UIView*)view;</code></div>
+<div class="line number11 index10 alt2"><code class="objc plain">- (</code><code class="objc datatypes">void</code><code class="objc plain">)removeViewForTouchPriority:(UIView*)view;</code></div>
+<div class="line number12 index11 alt1"></div>
+<div class="line number13 index12 alt2"><code class="objc keyword">@end</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+</div>
+</div>
+<div>
+<div id="highlighter_33989" class="syntaxhighlighter objc">
+<table border="0" cellspacing="0" cellpadding="0">
+<caption>&nbsp;</caption>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">01</div>
+<div class="line number2 index1 alt1">02</div>
+<div class="line number3 index2 alt2">03</div>
+<div class="line number4 index3 alt1">04</div>
+<div class="line number5 index4 alt2">05</div>
+<div class="line number6 index5 alt1">06</div>
+<div class="line number7 index6 alt2">07</div>
+<div class="line number8 index7 alt1">08</div>
+<div class="line number9 index8 alt2">09</div>
+<div class="line number10 index9 alt1">10</div>
+<div class="line number11 index10 alt2">11</div>
+<div class="line number12 index11 alt1">12</div>
+<div class="line number13 index12 alt2">13</div>
+<div class="line number14 index13 alt1">14</div>
+<div class="line number15 index14 alt2">15</div>
+<div class="line number16 index15 alt1">16</div>
+<div class="line number17 index16 alt2">17</div>
+<div class="line number18 index17 alt1">18</div>
+<div class="line number19 index18 alt2">19</div>
+<div class="line number20 index19 alt1">20</div>
+<div class="line number21 index20 alt2">21</div>
+<div class="line number22 index21 alt1">22</div>
+<div class="line number23 index22 alt2">23</div>
+<div class="line number24 index23 alt1">24</div>
+<div class="line number25 index24 alt2">25</div>
+<div class="line number26 index25 alt1">26</div>
+<div class="line number27 index26 alt2">27</div>
+<div class="line number28 index27 alt1">28</div>
+<div class="line number29 index28 alt2">29</div>
+<div class="line number30 index29 alt1">30</div>
+<div class="line number31 index30 alt2">31</div>
+<div class="line number32 index31 alt1">32</div>
+<div class="line number33 index32 alt2">33</div>
+<div class="line number34 index33 alt1">34</div>
+<div class="line number35 index34 alt2">35</div>
+<div class="line number36 index35 alt1">36</div>
+<div class="line number37 index36 alt2">37</div>
+<div class="line number38 index37 alt1">38</div>
+<div class="line number39 index38 alt2">39</div>
+<div class="line number40 index39 alt1">40</div>
+<div class="line number41 index40 alt2">41</div>
+<div class="line number42 index41 alt1">42</div>
+<div class="line number43 index42 alt2">43</div>
+<div class="line number44 index43 alt1">44</div>
+<div class="line number45 index44 alt2">45</div>
+<div class="line number46 index45 alt1">46</div>
+<div class="line number47 index46 alt2">47</div>
+<div class="line number48 index47 alt1">48</div>
+<div class="line number49 index48 alt2">49</div>
+<div class="line number50 index49 alt1">50</div>
+<div class="line number51 index50 alt2">51</div>
+<div class="line number52 index51 alt1">52</div>
+<div class="line number53 index52 alt2">53</div>
+<div class="line number54 index53 alt1">54</div>
+<div class="line number55 index54 alt2">55</div>
+<div class="line number56 index55 alt1">56</div>
+<div class="line number57 index56 alt2">57</div>
+<div class="line number58 index57 alt1">58</div>
+<div class="line number59 index58 alt2">59</div>
+<div class="line number60 index59 alt1">60</div>
+<div class="line number61 index60 alt2">61</div>
+<div class="line number62 index61 alt1">62</div>
+<div class="line number63 index62 alt2">63</div>
+<div class="line number64 index63 alt1">64</div>
+<div class="line number65 index64 alt2">65</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="objc preprocessor">#import "TouchCapturingWindow.h"</code></div>
+<div class="line number2 index1 alt1"></div>
+<div class="line number3 index2 alt2"><code class="objc keyword">@implementation</code>&nbsp;<code class="objc plain">TouchCapturingWindow</code></div>
+<div class="line number4 index3 alt1"></div>
+<div class="line number5 index4 alt2"><code class="objc plain">- (</code><code class="objc datatypes">void</code><code class="objc plain">)dealloc {</code></div>
+<div class="line number6 index5 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">if</code>&nbsp;<code class="objc plain">( views ) [views release];</code></div>
+<div class="line number7 index6 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">[</code><code class="objc keyword">super</code>&nbsp;<code class="objc plain">dealloc];</code></div>
+<div class="line number8 index7 alt1"><code class="objc plain">}</code></div>
+<div class="line number9 index8 alt2"></div>
+<div class="line number10 index9 alt1"><code class="objc plain">- (</code><code class="objc datatypes">void</code><code class="objc plain">)addViewForTouchPriority:(UIView*)view {</code></div>
+<div class="line number11 index10 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">if</code>&nbsp;<code class="objc plain">( !views ) views = [[</code><code class="objc keyword">NSMutableArray</code>&nbsp;<code class="objc plain">alloc] init];</code></div>
+<div class="line number12 index11 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">[views addObject:view];</code></div>
+<div class="line number13 index12 alt2"><code class="objc plain">}</code></div>
+<div class="line number14 index13 alt1"></div>
+<div class="line number15 index14 alt2"><code class="objc plain">- (</code><code class="objc datatypes">void</code><code class="objc plain">)removeViewForTouchPriority:(UIView*)view {</code></div>
+<div class="line number16 index15 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">if</code>&nbsp;<code class="objc plain">( !views )&nbsp;</code><code class="objc keyword">return</code><code class="objc plain">;</code></div>
+<div class="line number17 index16 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">[views removeObject:view];</code></div>
+<div class="line number18 index17 alt1"><code class="objc plain">}</code></div>
+<div class="line number19 index18 alt2"></div>
+<div class="line number20 index19 alt1"><code class="objc plain">- (</code><code class="objc datatypes">void</code><code class="objc plain">)sendEvent:(UIEvent *)event {</code></div>
+<div class="line number21 index20 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc comment">//we need to send the message to the super for the&nbsp;&nbsp;&nbsp; //text overlay to work (holding touch to show copy/paste)</code></div>
+<div class="line number22 index21 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc comment">//NOTE: this used to be called at the beginning of this method</code></div>
+<div class="line number23 index22 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc comment">//for the copy/paste and magnifying class overlay to work. As</code></div>
+<div class="line number24 index23 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc comment">//of iOS5, it stopped working, and this code needs to go at</code></div>
+<div class="line number25 index24 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc comment">//the end of this method.&nbsp;&nbsp;&nbsp; //[super sendEvent:event];&nbsp;&nbsp;&nbsp;</code></div>
+<div class="line number26 index25 alt1"></div>
+<div class="line number27 index26 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc comment">//get a touch</code></div>
+<div class="line number28 index27 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">UITouch *touch = [[event allTouches] anyObject];</code></div>
+<div class="line number29 index28 alt2"></div>
+<div class="line number30 index29 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc comment">//check which phase the touch is at, and process it</code></div>
+<div class="line number31 index30 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">if</code>&nbsp;<code class="objc plain">(touch.phase == UITouchPhaseBegan) {</code></div>
+<div class="line number32 index31 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">for</code>&nbsp;<code class="objc plain">( UIView *view in views ) {</code></div>
+<div class="line number33 index32 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc comment">//NOTE: I added the isHidden check so that hiding the windows doesn't catch events</code></div>
+<div class="line number34 index33 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc comment">//and changed it checks if the touch is in the frame.</code></div>
+<div class="line number35 index34 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc comment">//if ( CGRectContainsPoint([view frame], [touch locationInView:[view superview]]) ) {</code></div>
+<div class="line number36 index35 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">if</code>&nbsp;<code class="objc plain">( ![view isHidden] &amp;&amp; [view pointInside:[touch locationInView:view] withEvent:event] ) {&nbsp;&nbsp;&nbsp;</code></div>
+<div class="line number37 index36 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">touchView = view;</code></div>
+<div class="line number38 index37 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">[touchView touchesBegan:[event allTouches] withEvent:event];</code></div>
+<div class="line number39 index38 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">break</code><code class="objc plain">;&nbsp;</code><code class="objc comment">//NOTE: this used to be a return in the previous version</code></div>
+<div class="line number40 index39 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">}</code></div>
+<div class="line number41 index40 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">}</code></div>
+<div class="line number42 index41 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">}</code></div>
+<div class="line number43 index42 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">else</code>&nbsp;<code class="objc keyword">if</code>&nbsp;<code class="objc plain">(touch.phase == UITouchPhaseMoved) {</code></div>
+<div class="line number44 index43 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">if</code>&nbsp;<code class="objc plain">( touchView ) {</code></div>
+<div class="line number45 index44 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">[touchView touchesMoved:[event allTouches] withEvent:event];</code></div>
+<div class="line number46 index45 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">}</code></div>
+<div class="line number47 index46 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">}</code></div>
+<div class="line number48 index47 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">else</code>&nbsp;<code class="objc keyword">if</code>&nbsp;<code class="objc plain">(touch.phase == UITouchPhaseCancelled) {</code></div>
+<div class="line number49 index48 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">if</code>&nbsp;<code class="objc plain">( touchView ) {</code></div>
+<div class="line number50 index49 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">[touchView touchesCancelled:[event allTouches] withEvent:event];</code></div>
+<div class="line number51 index50 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">touchView =&nbsp;</code><code class="objc keyword">nil</code><code class="objc plain">;</code></div>
+<div class="line number52 index51 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">}</code></div>
+<div class="line number53 index52 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">}</code></div>
+<div class="line number54 index53 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">else</code>&nbsp;<code class="objc keyword">if</code>&nbsp;<code class="objc plain">(touch.phase == UITouchPhaseEnded) {</code></div>
+<div class="line number55 index54 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">if</code>&nbsp;<code class="objc plain">( touchView ) {</code></div>
+<div class="line number56 index55 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">[touchView touchesEnded:[event allTouches] withEvent:event];</code></div>
+<div class="line number57 index56 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">touchView =&nbsp;</code><code class="objc keyword">nil</code><code class="objc plain">;</code></div>
+<div class="line number58 index57 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">}</code></div>
+<div class="line number59 index58 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">}</code></div>
+<div class="line number60 index59 alt1"></div>
+<div class="line number61 index60 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc comment">//we need to send the message to the super for the</code></div>
+<div class="line number62 index61 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc comment">//text overlay to work (holding touch to show copy/paste)</code></div>
+<div class="line number63 index62 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">[</code><code class="objc keyword">super</code>&nbsp;<code class="objc plain">sendEvent:event];</code></div>
+<div class="line number64 index63 alt1"><code class="objc plain">}</code></div>
+<div class="line number65 index64 alt2"><code class="objc keyword">@end</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This class is heavily inspired by&nbsp;Michael Tyson’s tutorial, with a few changes and some added notes about the implementation. Here’s how it works. The TouchCapturingWindow overrides the sendEvent: method of UIWindow to check if touch events should be sent to certain views instead of only the top view, which is more or less the default behaviour. If you intend to have multiple views in your application, you probably don’t want to have all of them capture touch events, so the TouchCapturingWindow provides methods (i.e. addViewForTouchPriority: and removeViewForTouchPriority:) to add and remove the specific view(s) you want to touch. Once you’ve replaced the standard UIWindow with an instance of this custom class, touch events will go through the sendEvent: method, and allow you to redirect them to the correct view(s) based on any criteria. In the above case, the only criteria is if the touch falls inside the frame of any of the views that were added to the TouchCapturingWindow.</p>
+<p>First, you need to change the default “window” of your application’s delegate to use the new custom class. Open the CaptureTouchAppDelegate.h file, and replace the UIWindow class by TouchCapturingWindow; don’t forget to import the header, which should give you something like this:</p>
+<div>
+<div id="highlighter_691617" class="syntaxhighlighter objc">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">01</div>
+<div class="line number2 index1 alt1">02</div>
+<div class="line number3 index2 alt2">03</div>
+<div class="line number4 index3 alt1">04</div>
+<div class="line number5 index4 alt2">05</div>
+<div class="line number6 index5 alt1">06</div>
+<div class="line number7 index6 alt2">07</div>
+<div class="line number8 index7 alt1">08</div>
+<div class="line number9 index8 alt2">09</div>
+<div class="line number10 index9 alt1">10</div>
+<div class="line number11 index10 alt2">11</div>
+<div class="line number12 index11 alt1">12</div>
+<div class="line number13 index12 alt2">13</div>
+<div class="line number14 index13 alt1">14</div>
+<div class="line number15 index14 alt2">15</div>
+<div class="line number16 index15 alt1">16</div>
+<div class="line number17 index16 alt2">17</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="objc preprocessor">#import &lt;UIKit/UIKit.h&gt;</code></div>
+<div class="line number2 index1 alt1"><code class="objc preprocessor">#import "TouchCapturingWindow.h"</code></div>
+<div class="line number3 index2 alt2"></div>
+<div class="line number4 index3 alt1"><code class="objc keyword">@class</code>&nbsp;<code class="objc plain">CaptureTouchViewController;</code></div>
+<div class="line number5 index4 alt2"></div>
+<div class="line number6 index5 alt1"><code class="objc keyword">@interface</code>&nbsp;<code class="objc plain">CaptureTouchAppDelegate :&nbsp;</code><code class="objc keyword">NSObject</code><code class="objc plain">&lt;UIApplicationDelegate&gt; {</code></div>
+<div class="line number7 index6 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">TouchCapturingWindow *window;</code></div>
+<div class="line number8 index7 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">CaptureTouchViewController *viewController;</code></div>
+<div class="line number9 index8 alt2"><code class="objc plain">}</code></div>
+<div class="line number10 index9 alt1"></div>
+<div class="line number11 index10 alt2"><code class="objc comment">//NOTE: After updating to iOS5 and the latest XCode, this line started showing</code></div>
+<div class="line number12 index11 alt1"><code class="objc comment">//a warning, so to remove it, simply rename TouchCapturingWindow to UIWindow.</code></div>
+<div class="line number13 index12 alt2"><code class="objc comment">//@property (nonatomic, retain) IBOutlet TouchCapturingWindow *window;</code></div>
+<div class="line number14 index13 alt1"><code class="objc keyword">@property</code>&nbsp;<code class="objc plain">(</code><code class="objc keyword">nonatomic</code><code class="objc plain">, retain)&nbsp;</code><code class="objc keyword">IBOutlet</code>&nbsp;<code class="objc plain">UIWindow *window;</code></div>
+<div class="line number15 index14 alt2"><code class="objc keyword">@property</code>&nbsp;<code class="objc plain">(</code><code class="objc keyword">nonatomic</code><code class="objc plain">, retain)&nbsp;</code><code class="objc keyword">IBOutlet</code>&nbsp;<code class="objc plain">CaptureTouchViewController *viewController;</code></div>
+<div class="line number16 index15 alt1"></div>
+<div class="line number17 index16 alt2"><code class="objc keyword">@end</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>After you changed the window in the code, you’ll need to adjust the MainWindow.xib to also reflect this change. Open MainWindow.xib, and change the class of its window object from UIWindow to the new TouchCapturingWindow.</p>
+<p>Now that the window can propagate touch events the way we want, we need to tell it which view to prioritize. In this case, we want the application’s main view to receive the touch events that would normally be blocked by the Web View covering it. To add the view to the priority list, you’ll need to modify the applicationDidFinishLaunchingWithOptions: method of the CaptureTouchAppDelegate. Just after the window is made visible, add the view using the new addViewForTouchPriority: method, which should give you the following:</p>
+<div>
+<div id="highlighter_139190" class="syntaxhighlighter objc">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">01</div>
+<div class="line number2 index1 alt1">02</div>
+<div class="line number3 index2 alt2">03</div>
+<div class="line number4 index3 alt1">04</div>
+<div class="line number5 index4 alt2">05</div>
+<div class="line number6 index5 alt1">06</div>
+<div class="line number7 index6 alt2">07</div>
+<div class="line number8 index7 alt1">08</div>
+<div class="line number9 index8 alt2">09</div>
+<div class="line number10 index9 alt1">10</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="objc plain">- (</code><code class="objc datatypes">BOOL</code><code class="objc plain">)application:(UIApplication *)application didFinishLaunchingWithOptions:(</code><code class="objc keyword">NSDictionary</code>&nbsp;<code class="objc plain">*)launchOptions {</code></div>
+<div class="line number2 index1 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc comment">// Add the view controller's view to the window and display.</code></div>
+<div class="line number3 index2 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">[window addSubview:viewController.view];</code></div>
+<div class="line number4 index3 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc plain">[window makeKeyAndVisible];</code></div>
+<div class="line number5 index4 alt2"></div>
+<div class="line number6 index5 alt1"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc comment">//add the view to the touch priority list</code></div>
+<div class="line number7 index6 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;</code><code class="objc plain">[window addViewForTouchPriority:viewController.view];</code></div>
+<div class="line number8 index7 alt1"></div>
+<div class="line number9 index8 alt2"><code class="objc spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="objc keyword">return</code>&nbsp;<code class="objc keyword">YES</code><code class="objc plain">;</code></div>
+<div class="line number10 index9 alt1"><code class="objc plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h2><strong>Conclusion</strong></h2>
+<p>At this point, if you run the application, you can see that touching anywhere on the Web View outputs the “Touch began” message of step 2. You can now use the touch events to add some touch-based interaction to your application, but be careful not to conflict with the Web View’s features such as scrolling and text selection.</p>
+<p>At the beginning I mentioned that I wanted to keep all the <a href="http://wyldco.com/">Web View’s features</a>. This is accomplished by one short but important line of code. In the sendEvent: method of the new TouchCapturingWindow class, the line [super sendEvent:event] assures that the Web View receives the event before we propagate it to the main view. As of iOS5, placing that line at the beginning of the method stopped working, and it now needs to be at the end of the method. Placing it at the end keeps all the Web View’s features for iOS5, but does not show them for devices with&nbsp;[super sendEvent:event];</p>
+<p>On a final note, if you look at the sendEvent: method, you’ll notice that touch events are propagated to a view only if the location of the touch is inside the frame of the view. This is a common behaviour, but there is no reason why you should always stick to it. You might want to check the state of a view to decide if the view should receive touches, control the view by touching outside its visual frame, or send event to a specific view only after the user tapped around up, up, down, down, left, right, left, right…</p>
+	</div><!-- .entry-content -->
+
+	</article><!-- #post-## -->
+
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+
+	</div><!-- #content -->
+
+<!-- #page -->
+
+<link rel="stylesheet" id="metaslider-responsive-slider-css" href="./How to capture touches over a uiwebview - WyldCo.com_files/responsiveslides.css" type="text/css" media="all" property="stylesheet">
+<link rel="stylesheet" id="metaslider-public-css" href="./How to capture touches over a uiwebview - WyldCo.com_files/public.css" type="text/css" media="all" property="stylesheet">
+<script type="text/javascript">
+/* <![CDATA[ */
+var wpcf7 = {"apiSettings":{"root":"http:\/\/wyldco.com\/wp-json\/contact-form-7\/v1","namespace":"contact-form-7\/v1"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How to capture touches over a uiwebview - WyldCo.com_files/scripts.js"></script>
+<script type="text/javascript" src="./How to capture touches over a uiwebview - WyldCo.com_files/navigation.js"></script>
+<script type="text/javascript" src="./How to capture touches over a uiwebview - WyldCo.com_files/tether.js"></script>
+<script type="text/javascript" src="./How to capture touches over a uiwebview - WyldCo.com_files/bootstrap.js"></script>
+<script type="text/javascript" src="./How to capture touches over a uiwebview - WyldCo.com_files/wp-embed.min.js"></script>
+<script type="text/javascript" src="./How to capture touches over a uiwebview - WyldCo.com_files/responsiveslides.min.js"></script>
+<script type="text/javascript">
+var metaslider_16 = function($) {
+            $('#metaslider_16').responsiveSlides({ 
+                timeout:3000,
+                pager:false,
+                nav:false,
+                pause:true,
+                speed:600,
+                prevText:"Previous",
+                nextText:"Next",
+                auto:true
+            });
+            $(document).trigger('metaslider/initialized', '#metaslider_16');
+        };
+        var timer_metaslider_16 = function() {
+            var slider = !window.jQuery ? window.setTimeout(timer_metaslider_16, 100) : !jQuery.isReady ? window.setTimeout(timer_metaslider_16, 1) : metaslider_16(window.jQuery);
+        };
+        timer_metaslider_16();
+</script>
+<script>
+(function( $ ) {
+    "use strict"; 
+    // javascript code here. i.e.: $(document).ready( function(){} ); 
+	 $( "#menu-toogle" ).click(function() {
+		$( ".nav-panel" ).toggleClass( "active" );
+	});
+})(jQuery);
+</script>
+
+
+</body></html>

@@ -1,0 +1,114 @@
+/*
+Sections that are hidden when printing the page. We only want the content printed.
+*/
+
+/* This affects every tag */
+* {
+border:0 !important; /* again no borders on printouts */
+}
+
+body {
+color: #000 !important; /* we want everything in black */
+background-color:#fff !important; /* on white background */
+font-family:arial; /* arial is nice to read ;) */
+border:0 !important; /* no borders thanks */
+}
+
+#content{overflow:visible;width:auto;float:none;margin:auto;padding:auto;}
+
+/* 
+no need for accessibility on printout. 
+Mark all your elements in content you 
+dont want to get printed with class="noprint"
+*/
+.accessibility,
+.noprint
+ {
+display:none !important; 
+}
+
+/* 
+remove all width constraints from content area
+*/
+div#content,
+div#main {
+display:block !important;
+width:100% !important;
+border:0 !important;
+/*padding:1em !important;*/
+}
+
+/* hide everything else! */
+header,
+div#header,
+div#menuContents,
+div#header h1 a,
+div.breadcrumbs,
+div#search,
+div#footer,
+div#utility,
+div#foot,
+div#menu_vert,
+div#news,
+div.right49,
+div.left49,
+div#sidebar,
+div#leftside,
+div#subone,
+div#subtwobar,
+div#menutop,
+div#menubtm,
+div#headrt,
+div#riteside,
+div#sb-container
+{
+   display: none !important;
+}
+
+h1 {
+	margin: 0 0 15px 0;
+	font-size: 2.45em;
+	line-height: 1em;
+	color: #CC0000;
+	font-family: 'FrutigerLTW01-47LightCn', Arial, Helvetica, sans-serif;
+        font-weight: normal;
+}
+h2 {
+	margin: 1.2em 0 0.4em 0;
+	padding-bottom: 1px;
+	font-size: 1.7em;
+	line-height: 1.4em;
+	text-align: left;
+	color: #CC0000;
+        font-family: 'FrutigerLTW01-47LightCn', Arial, Helvetica, sans-serif;
+        font-weight: normal;
+}
+h1 a, h2 a, h3 a, h4 a, h5 a {color: #cc0000;text-underline:none;}
+img {
+float:none; /* this makes images cause a pagebreak if it doesnt fit on the page */
+}
+div#headlft a {
+background:#FFFFFF url(/uploads/ten/logo_tensilica.gif) no-repeat scroll center left;
+display:block;
+height:78px;
+text-decoration:none;
+text-indent:-999em;
+outline:none;
+}
+
+.tab_content { /* print content within tabs */
+  display:block !important;
+}
+#info-nav {
+  display: none !important;
+}
+
+/*specific styles worth printing */
+
+#colContainer {overflow:hidden;}
+#content .hide.tab_content{display:block !important;}
+.ui-accordion-content {display:block !important;}
+.ui-accordion-header h2 span {display: block;color: #000000 !important;font-family: arial;font-size:.8em;line-height:1.2em;}
+th {text-align: left;}
+.printonly {display: block !important;margin-bottom: 1.5em;}
+/* Stylesheet: Print Modified On 2014-01-24 17:11:10 */

@@ -1,0 +1,326 @@
+.hide-for-medium-up .top-bar .toggle-topbar.menu-icon {
+  top: 50%;
+}
+.hide-for-medium-up .top-bar h1.logo {
+  padding-left: 15px;
+}
+.hide-for-medium-up .top-bar h1.logo a {
+  width: initial !important;
+  display: inline;
+}
+.hide-for-medium-up .top-bar h1.logo img {
+  height: 25px;
+}
+.hide-for-medium-up .top-bar .name h1.logo a {
+  padding: 0 !important;
+}
+
+.row {
+    max-width: 82rem;
+}
+.pageWrap {
+	width: auto !important;
+	max-width: 1020px;
+	}
+	
+header.large {
+	height: 97px;
+	}
+
+.top-bar .toggle-topbar.menu-icon a:after {
+    box-shadow: 0 10px 0 1px #000000, 0 16px 0 1px #000000, 0 22px 0 1px #000000;
+}
+
+.top-bar .toggle-topbar.menu-icon a {
+    color: #000000;
+}
+.top-bar .toggle-topbar.menu-icon {
+    top: 20%;
+}
+.top-bar.expanded {
+    height: 45px;
+}
+.top-bar.expanded .title-area {
+    background: none;
+}
+.top-bar-section ul {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.top-bar-section ul li > a {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.top-bar-section ul li:hover > a {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+	
+div#utility .btn-red.subscribe span {
+	width: 260px;
+	}
+
+table {width:100% !important;border:none;background: inherit;border: inherit;}
+table tr th, table tr td {font-size:inherit}
+
+@media only screen and (max-width: 940px) {
+
+#footmenu li {
+    width: 12.8%;
+}
+
+
+header div#menu {
+    right: 0.5rem;
+}
+#primary-nav a span, #main-nav a span {font-size: 0.9em;}
+
+  #menuContents #menuFrame {width:800px;}
+  .bigMenu {width:800px;}
+
+.bigMenu li.parent span.exp:before {
+    margin-top: 0.3rem;
+}
+
+.bigMenu li a span {
+    line-height: 1.8em;
+}
+.bigMenu li.parent a span {
+    padding: 0 0 0 2.2rem;
+}
+.bigMenu ul ul {
+    margin: 0.3em 0 0.5em 1.5em;
+}
+
+}
+
+@media only screen and (max-width: 767px /*767px (original)*/) {
+
+.pageWrap{padding:0 .6em}
+.landingSections.col3 .childItem, .landingSections.col4 .childItem {
+	float: none;
+	display: block;
+	width: 100%;
+	margin-left: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	}
+
+#footmenu {
+	display: none;
+	}
+	
+div#foothead {
+	border-top: none;
+	}
+
+#content .wboard {
+    width: 100%;
+    border-right:none;
+}
+#content .blogs .col1 {border-right:none;}
+#content .blogs .col1, #content .blogs .col2 {
+    width: auto;
+    padding: 0 1rem 0 0;
+}
+#content .blogs .col2 {
+    margin-top: 1.4rem;
+}
+#content .bodySearch .textin {
+    width: auto;
+}
+
+#content .wboard p {
+    font-size: 1.3rem;
+    left: 3rem;
+    top: 8.5rem;
+    width: auto;
+}
+
+.ls-container .ls-s-1 {margin: 0 0 0 1em !important;}
+.ls-container p.ls-s-1 {
+    font-size: 1.3em !important;
+    line-height: 1.2em !important;
+    margin: 0 0 0 1.5em !important;
+    width: 70% !important;
+}
+.ls-container a.ls-s-1 {
+    font-size: 1.2em !important;
+    margin: 0 0 0 1.8em !important;
+    padding: 0.8em 1.3em !important;
+}
+
+div#foothead {
+    margin: 0;
+    padding: 0;
+}
+
+.socmedia {
+	display: inline-block;
+	position: relative;
+	float: right;
+	}
+
+#content .bottomsection .leftsection .container {
+    width: 100%;
+}
+
+#content .blogs {
+    padding: 14px 0 0 18px;
+    width: 100%;
+}
+#content .bottomsection .rightsection {
+    width: 100%;
+}
+#content img {margin:0 !important;}
+.landingSections .childItem {
+    height: auto;
+}
+#content .ui-accordion .ui-accordion-header .ui-accordion-header-icon {top:0}
+#content .ui-accordion .ui-accordion-header h2 {display:block}
+#submain {padding: 0;}
+
+.heroInner {
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    height: 27rem;
+}
+.heroInner > div {
+    background-color: rgba(255, 255, 255, 0.7);
+    height: 27rem;
+}
+
+#layerslider h2,
+.heroInner h2 {
+    font-size: 3rem;
+    line-height: 1em;
+    margin: 2rem 0 1rem;
+}
+#layerslider h2 span,
+.heroInner h2 span {
+    font-size: 1.5em;
+    line-height: 1em;
+}
+#content #layerslider p,
+#content .heroInner p {
+    font-size: 1.2rem;
+    line-height: 1.2em;
+    margin: 0 0 2rem;
+    width: 32rem;
+}
+table thead tr th, 
+table tfoot tr th, 
+table tbody tr td, 
+table tr td, 
+table tfoot tr td,
+th, td {
+  display:block;
+  text-align: left !important;
+  height:auto !important;
+  /*width:100% !important;*/
+  color: inherit;
+  font-size:inherit;
+}
+td p {
+  text-align:left !important;
+}
+
+.cleanTable thead tr th, .cleanTable tfoot tr th, .cleanTable tbody tr td, .cleanTable tr td, .cleanTable tfoot tr td {
+    color: inherit;
+    font-size: 0.875rem;
+    padding: 0.5625rem 0.625rem;
+    display:table-cell;
+}
+
+/*.cleanTable tr td:first-child {font-weight:bold}*/
+
+table.rowBorders td {
+    margin: 0;
+}
+
+.scrollable td, .pinned td, .scrollable th, .pinned th {
+    height: 35px !important;
+}
+
+}
+
+@media only screen and (max-width: 640px ) {
+
+div#content {
+    padding: 4rem 0 2em;
+}
+
+iframe {
+    height: auto;
+    margin: 0.5rem 0 1.5rem;
+    width: 100%;
+}
+
+#content div.dyk {
+    background: url("/uploads/images/backgrounds/dyk-bg.jpg") no-repeat scroll left top rgba(0, 0, 0, 0);
+    font-size: 0.8em;
+    margin: 2em 0;
+    min-height: 50px;
+    width: 100%;
+}
+
+#content .sitemap li {
+    border: medium none;
+    float: none;
+    height: auto;
+    overflow: inherit;
+    width: 100%;
+}
+
+}
+
+@media only screen and (max-width: 480px ) {
+
+#layerslider h2, .heroInner h2 {
+    font-size: 2.8rem;
+}
+#content #layerslider p, 
+#content .heroInner p {
+    width: 22rem;
+}
+.heroInner,
+.heroInner > div {
+    height: 23rem;
+}
+.socmedia {
+	margin: 1rem auto .5rem;
+	float: none;
+	}
+
+#content .wboard p {
+    bottom: 6.5rem;
+    font-size: 1.1rem;
+}
+
+#content .ui-accordion .ui-accordion-header h2 {
+    display: block;
+    font-size: 0.9rem;
+    line-height: 1.2rem;
+    width: 88%;
+    height:37px;
+}
+.ui-accordion .ui-accordion-header .ui-accordion-header-icon {top:0;}
+
+
+
+#content .blogs .col1 {
+    border-right: none;
+}
+.cms_form input,
+.cms_form select {
+  width:100%;
+}
+.cms_form div.submit {
+    margin: 0;
+}
+form.cms_form .submit input[type="submit"] {
+  width: 100%;
+}
+
+
+
+}
+/* Stylesheet: Edits for Responsive Site Modified On 2019-08-05 14:27:54 */

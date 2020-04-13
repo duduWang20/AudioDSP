@@ -1,0 +1,2215 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)https://www.cnblogs.com/ranson7zop/p/7889272.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="origin">
+    <title>mp4文件格式解析 - nigaopeng - 博客园</title>
+<meta property="og:description" content="目前MP4的概念被炒得很火，也很乱。最开始MP4指的是音频（MP3的升级版），即MPEG-2 AAC标准。随后MP4概念被转移到视频上，对应的是MPEG-4标准。而现在我们流行的叫法，多半是指能播放M">
+    <link type="text/css" rel="stylesheet" href="./mp4文件格式解析 - nigaopeng - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./mp4文件格式解析 - nigaopeng - 博客园_files/bundle-Minyx2_Lite.css">
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./mp4文件格式解析 - nigaopeng - 博客园_files/bundle-Minyx2_Lite-mobile.css">
+    <link title="RSS" type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/ranson7zop/rss">
+    <link title="RSD" type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/ranson7zop/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/ranson7zop/wlwmanifest.xml">
+    <script src="./mp4文件格式解析 - nigaopeng - 博客园_files/amp4ads-host-v0.js"></script><script src="./mp4文件格式解析 - nigaopeng - 博客园_files/pubads_impl_rendering_2019041801.js"></script><script async="" src="./mp4文件格式解析 - nigaopeng - 博客园_files/analytics.js"></script><script src="./mp4文件格式解析 - nigaopeng - 博客园_files/jquery-2.2.0.min.js"></script>
+    <script>var currentBlogId=359581;var currentBlogApp='ranson7zop',cb_enable_mathjax=false;var isLogined=false;</script>
+    <script src="./mp4文件格式解析 - nigaopeng - 博客园_files/blog-common.js" type="text/javascript"></script>
+<script src="./mp4文件格式解析 - nigaopeng - 博客园_files/bundle-Minyx2_Lite.js" language="javascript" type="text/javascript"></script>
+<link rel="preload" href="./mp4文件格式解析 - nigaopeng - 博客园_files/f.txt" as="script"><script type="text/javascript" src="./mp4文件格式解析 - nigaopeng - 博客园_files/f.txt"></script><script src="./mp4文件格式解析 - nigaopeng - 博客园_files/pubads_impl_2019041801.js" async=""></script><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-32/html/container.html"></head>
+<body>
+<a name="top"></a>
+
+
+
+<div id="container">
+    <a class="minyx" href="http://www.cnblogs.com/">代码改变世界</a>
+    <ul id="topMnu">
+        <!-- 统计数据 -->
+        <li>
+            
+                <div id="blog_stats">
+Posts - 177, 
+Articles - 0, 
+Comments - 3
+<!----></div>
+            
+        </li>
+        <!-- 这边可以增加一些链接 -->
+        <!-- 博客园 -->
+        <li><a href="http://www.cnblogs.com/">Cnblogs</a></li>
+        <!-- 管理 -->
+        <li id="topMnu-dashboard">
+            <a id="lnkDashboard" href="https://www.cnblogs.com/ranson7zop/admin/EditPosts.aspx">Dashboard</a></li>
+        <li>
+            <a id="lnkLogin" href="http://passport.cnblogs.com/login.aspx?ReturnUrl=http://www.cnblogs.com/ranson7zop/p/7889272.html">Login</a></li>
+    </ul>
+
+    <script type="text/javascript">
+        var m = window.__blog.topMenuRendered;
+        if (m) { m(__$("topMnu")); }
+    </script>
+
+    <div id="header">
+        <ul id="menu">
+            <!-- 首页，当前section加上current类 -->
+            <li id="menu-home" class="current">
+                <a id="lnkHome" href="https://www.cnblogs.com/ranson7zop/">Home</a></li>
+            <!-- 联系 -->
+            <li id="menu-contact">
+                <a id="lnkContact" href="http://space.cnblogs.com/msg/send/nigaopeng">Contact</a></li>
+            <!-- 相册 -->
+            <li id="menu-gallary">
+                <a id="lnkGallery" href="https://www.cnblogs.com/ranson7zop/gallery.html">Gallery</a></li>
+            <!-- Rss订阅 -->
+            <li id="rss">
+                <a id="lnkRss" href="https://www.cnblogs.com/ranson7zop/rss">RSS</a></li>
+        </ul>
+        <div id="newmsg"></div>
+        <h1>
+            <!-- 主标题 -->
+            <a id="lnkBlogTitle" href="https://www.cnblogs.com/ranson7zop/">nigaopeng</a>
+            <!-- 子标题 -->
+            <small>
+                </small>
+        </h1>
+    </div>
+
+    <script type="text/javascript">
+        var m = window.__blog.headerRendered;
+        if (m) { m(__$("header")); }
+    </script>
+
+    <div id="wrapper">
+        <div id="content">
+            <script type="text/javascript">
+                var m = window.__blog.preRenderPosts;
+                if (m) { m(); }
+            </script>
+            
+        <div id="post_detail">
+<div class="post" id="post">
+    <a name="top"></a>
+    <h2><a id="cb_post_title_url" href="https://www.cnblogs.com/ranson7zop/p/7889272.html">mp4文件格式解析</a></h2>
+    <small>2017-11-24 10:17 by nigaopeng, <span id="post_view_count">12170</span> 阅读, <span id="post_comment_count">0</span> 评论, <a href="https://www.cnblogs.com/ranson7zop/p/7889272.html#" onclick="AddToWz(7889272);return false;">收藏</a>,  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=7889272" rel="nofollow">编辑</a></small>
+    <div class="entry">
+        <div id="cnblogs_post_body" class="blogpost-body"><div id="sina_keyword_ad_area2" class="articalContent   ">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;目前<span lang="EN-US" xml:lang="EN-US">MP4的概念被炒得很火，也很乱。最开始<span lang="EN-US" xml:lang="EN-US">MP4指的是音频（<span lang="EN-US" xml:lang="EN-US">MP3的升级版），即<span lang="EN-US" xml:lang="EN-US">MPEG-2 AAC标准。随后<span lang="EN-US" xml:lang="EN-US">MP4概念被转移到视频上，对应的是<span lang="EN-US" xml:lang="EN-US">MPEG-4标准。而现在我们流行的叫法，多半是指能播放<span lang="EN-US" xml:lang="EN-US">MPEG-4标准编码格式视频的播放器。但是这篇文章介绍的内容跟上面这些都无关，我们要讨论的是<span lang="EN-US" xml:lang="EN-US">MP4文件封装格式，对应的标准为<span lang="EN-US" xml:lang="EN-US">ISO/IEC 14496-12，即信息技术&nbsp;视听对象编码的第<span lang="EN-US" xml:lang="EN-US">12部分：<span lang="EN-US" xml:lang="EN-US">ISO&nbsp;基本媒体文件格式（<span lang="EN-US" xml:lang="EN-US">Information technology Coding of audio-visual objects Part 12: ISO base media file format）。<span lang="EN-US" xml:lang="EN-US">ISO/IEC组织指定的标准一般用数字表示，<span lang="EN-US" xml:lang="EN-US">ISO/IEC 14496即<span lang="EN-US" xml:lang="EN-US">MPEG-4标准。</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<span lang="EN-US" xml:lang="EN-US">MP4视频文件封装格式是基于<span lang="EN-US" xml:lang="EN-US">QuickTime容器格式定义的，因此参考<span lang="EN-US" xml:lang="EN-US">QuickTime的格式定义对理解<span lang="EN-US" xml:lang="EN-US">MP4文件格式很有帮助。<span lang="EN-US" xml:lang="EN-US">MP4文件格式是一个十分开放的容器，几乎可以用来描述所有的媒体结构，<span lang="EN-US" xml:lang="EN-US">MP4文件中的媒体描述与媒体数据是分开的，并且媒体数据的组织也很自由，不一定要按照时间顺序排列，甚至媒体数据可以直接引用其他文件。同时，<span lang="EN-US" xml:lang="EN-US">MP4也支持流媒体。<span lang="EN-US" xml:lang="EN-US">MP4目前被广泛用于封装<span lang="EN-US" xml:lang="EN-US">h.264视频和<span lang="EN-US" xml:lang="EN-US">AAC音频，是高清视频的代表。</span></span></span></span></span></span></span></span></span></span></p>
+<p>&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;现在我们就来看看MP4文件格式到底是什么样的。</p>
+<p><strong>1、概述</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;MP4文件中的所有数据都装在box（QuickTime中为atom）中，也就是说MP4文件由若干个box组成，每个box有类型和长度，可以将box理解为一个数据对象块。box中可以包含另一个box，这种box称为container box。一个MP4文件首先会有且只有一个“ftyp”类型的box，作为MP4格式的标志并包含关于文件的一些信息；之后会有且只有一个“moov”类型的box（Movie Box），它是一种container box，子box包含了媒体的metadata信息；MP4文件的媒体数据包含在“mdat”类型的box（Midia Data Box）中，该类型的box也是container box，可以有多个，也可以没有（当媒体数据全部引用其他文件时），媒体数据的结构由metadata进行描述。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;下面是一些概念：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>track</strong></em>&nbsp;&nbsp;表示一些sample的集合，对于媒体数据来说，track表示一个视频或音频序列。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>hint track</strong></em>&nbsp;&nbsp;这个特殊的track并不包含媒体数据，而是包含了一些将其他数据track打包成流媒体的指示信息。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>sample</strong></em>&nbsp;&nbsp;对于非hint track来说，video sample即为一帧视频，或一组连续视频帧，audio sample即为一段连续的压缩音频，它们统称sample。对于hint track，sample定义一个或多个流媒体包的格式。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>sample table</strong></em>&nbsp;&nbsp;指明sampe时序和物理布局的表。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>chunk</strong></em>&nbsp;一个track的几个sample组成的单元。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在本文中，我们不讨论涉及hint的内容，只关注包含媒体数据的本地MP4文件。下图为一个典型的MP4文件的结构树。</p>
+<p><span lang="EN-US" xml:lang="EN-US">&nbsp;</span></p>
+<p align="center"><img src="./mp4文件格式解析 - nigaopeng - 博客园_files/1177848-20171124103255828-809042371.jpg" alt="">&nbsp;</p>
+<p align="left"><strong>2、Box</strong></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先需要说明的是，box中的字节序为网络字节序，也就是大端字节序（Big-Endian），简单的说，就是一个32位的4字节整数存储方式为高位字节在内存的低端。Box由header和body组成，其中header统一指明box的大小和类型，body根据类型有不同的意义和格式。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;标准的box开头的4个字节（32位）为box size，该大小包括box header和box body整个box的大小，这样我们就可以在文件中定位各个box。如果size为1，则表示这个box的大小为large size，真正的size值要在largesize域上得到。（实际上只有“mdat”类型的box才有可能用到large size。）如果size为0，表示该box为文件的最后一个box，文件结尾即为该box结尾。（同样只存在于“mdat”类型的box中。）</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size后面紧跟的32位为box type，一般是4个字符，如“ftyp”、“moov”等，这些box type都是已经预定义好的，分别表示固定的意义。如果是“uuid”，表示该box为用户扩展类型。如果box type是未定义的，应该将其忽略。</p>
+<p><strong><span lang="EN-US" xml:lang="EN-US">3、<span lang="EN-US" xml:lang="EN-US">File Type Box（<span lang="EN-US" xml:lang="EN-US">ftyp）</span></span></span></strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该box有且只有1个，并且只能被包含在文件层，而不能被其他box包含。该box应该被放在文件的最开始，指示该MP4文件应用的相关信息。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;“ftyp” body依次包括1个32位的major brand（4个字符），1个32位的minor version（整数）和1个以32位（4个字符）为单位元素的数组compatible brands。这些都是用来指示文件应用级别的信息。该box的字节实例如下：</p>
+<p align="center"><img src="./mp4文件格式解析 - nigaopeng - 博客园_files/1177848-20171124103308953-79513465.jpg" alt=""></p>
+<p><span lang="EN-US" xml:lang="EN-US">4、<span lang="EN-US" xml:lang="EN-US">Movie Box（<span lang="EN-US" xml:lang="EN-US">moov）<br></span></span></span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该box包含了文件媒体的metadata信息，“moov”是一个container box，具体内容信息由子box诠释。同File Type Box一样，该box有且只有一个，且只被包含在文件层。一般情况下，“moov”会紧随“ftyp”出现。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一般情况下（限于篇幅，本文只讲解常见的MP4文件结构），“moov”中会包含1个“mvhd”和若干个“trak”。其中“mvhd”为header box，一般作为“moov”的第一个子box出现（对于其他container box来说，header box都应作为首个子box出现）。“trak”包含了一个track的相关信息，是一个container box。下图为部分“moov”的字节实例，其中红色部分为box header，绿色为“mvhd”，黄色为一部分“trak”。</p>
+<p align="center"><img src="./mp4文件格式解析 - nigaopeng - 博客园_files/1177848-20171124103319000-1662662916.jpg" alt=""></p>
+<p><strong><span lang="EN-US" xml:lang="EN-US">4.1 Movie Header Box（<span lang="EN-US" xml:lang="EN-US">mvhd）</span></span></strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;“<span lang="EN-US" xml:lang="EN-US">mvhd”结构如下表。</span></p>
+<p align="center">&nbsp;</p>
+<div align="center">
+<table border="1" cellspacing="0" cellpadding="0" align="center">
+<tbody>
+<tr>
+<td valign="top" width="121">
+<p>字段</p>
+
+
+
+
+</td>
+<td valign="top" width="57">
+<p>字节数</p>
+
+
+
+
+</td>
+<td valign="top" width="391">
+<p>意义</p>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>box size</p>
+
+
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+
+
+</td>
+<td valign="top" width="391">
+<p>box大小</p>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>box type</p>
+
+
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+
+
+</td>
+<td valign="top" width="391">
+<p>box类型</p>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>version</p>
+
+
+
+
+</td>
+<td valign="top" width="57">
+<p>1</p>
+
+
+
+
+</td>
+<td valign="top" width="391">
+<p>box版本，0或1，一般为0。（以下字节数均按version=0）</p>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>flags</p>
+
+
+
+
+</td>
+<td valign="top" width="57">
+<p>3</p>
+
+
+
+
+</td>
+<td valign="top" width="391">
+<p>&nbsp;</p>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>creation time</p>
+
+
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+
+
+</td>
+<td valign="top" width="391">
+<p>创建时间（相对于UTC时间1904-01-01零点的秒数）</p>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>modification time</p>
+
+
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+
+
+</td>
+<td valign="top" width="391">
+<p>修改时间</p>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>time scale</p>
+
+
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+
+
+</td>
+<td valign="top" width="391">
+<p>文件媒体在1秒时间内的刻度值，可以理解为1秒长度的时间单元数</p>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>duration</p>
+
+
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+
+
+</td>
+<td valign="top" width="391">
+<p>该track的时间长度，用duration和time scale值可以计算track时长，比如audio track的time scale = 8000, duration = 560128，时长为70.016，video track的time scale = 600, duration = 42000，时长为70</p>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>rate</p>
+
+
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+
+
+</td>
+<td valign="top" width="391">
+<p>推荐播放速率，高16位和低16位分别为小数点整数部分和小数部分，即[16.16] 格式，该值为1.0（0x00010000）表示正常前向播放</p>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>volume</p>
+
+
+
+
+</td>
+<td valign="top" width="57">
+<p>2</p>
+
+
+
+
+</td>
+<td valign="top" width="391">
+<p>与rate类似，[8.8] 格式，1.0（0x0100）表示最大音量</p>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>reserved</p>
+
+
+
+
+</td>
+<td valign="top" width="57">
+<p>10</p>
+
+
+
+
+</td>
+<td valign="top" width="391">
+<p>保留位</p>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>matrix</p>
+
+
+
+
+</td>
+<td valign="top" width="57">
+<p>36</p>
+
+
+
+
+</td>
+<td valign="top" width="391">
+<p>视频变换矩阵</p>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>pre-defined</p>
+
+
+
+
+</td>
+<td valign="top" width="57">
+<p>24</p>
+
+
+
+
+</td>
+<td valign="top" width="391">
+<p>&nbsp;</p>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>next track id</p>
+
+
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+
+
+</td>
+<td valign="top" width="391">
+<p>下一个track使用的id号</p>
+
+
+
+
+</td>
+
+
+
+
+</tr>
+
+
+
+
+</tbody>
+
+
+
+
+</table>
+
+
+
+
+</div>
+<p>&nbsp;</p>
+<p align="left">&nbsp;&nbsp;&nbsp;</p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;“<span lang="EN-US" xml:lang="EN-US">mvhd”的字节实例如下图，各字段已经用颜色区分开：</span></p>
+<p align="center"><img src="./mp4文件格式解析 - nigaopeng - 博客园_files/1177848-20171124103340343-505155072.jpg" alt=""></p>
+<p align="left"><strong><span lang="EN-US" xml:lang="EN-US">4.2 Track Box（<span lang="EN-US" xml:lang="EN-US">trak）</span></span></strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;“trak”也是一个container box，其子box包含了该track的媒体数据引用和描述（hint track除外）。一个MP4文件中的媒体可以包含多个track，且至少有一个track，这些track之间彼此独立，有自己的时间和空间信息。“trak”必须包含一个“tkhd”和一个“mdia”，此外还有很多可选的box（略）。其中“tkhd”为track header box，“mdia”为media box，该box是一个包含一些track媒体数据信息box的container box。</p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;“trak”的部分字节实例如下图，其中黄色为“trak”box的头，绿色为“tkhd”，蓝色为“edts”（一个可选box），红色为一部分“mdia”。</p>
+<p align="center"><img src="./mp4文件格式解析 - nigaopeng - 博客园_files/1177848-20171124103352140-1758822429.jpg" alt=""></p>
+<p align="center">&nbsp;</p>
+<p><strong><span lang="EN-US" xml:lang="EN-US">4.2.1 Track Header Box（<span lang="EN-US" xml:lang="EN-US">tkhd）</span></span></strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;“<span lang="EN-US" xml:lang="EN-US">tkhd”结构如下表。&nbsp;</span></p>
+<div align="center">
+<table border="1" cellspacing="0" cellpadding="0" align="center">
+<tbody>
+<tr>
+<td valign="top" width="121">
+<p align="left">字段</p>
+
+
+</td>
+<td valign="top" width="57">
+<p>字节数</p>
+
+
+</td>
+<td valign="top" width="391">
+<p>意义</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>box size</p>
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+</td>
+<td valign="top" width="391">
+<p>box大小</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>box type</p>
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+</td>
+<td valign="top" width="391">
+<p>box类型</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>version</p>
+
+
+</td>
+<td valign="top" width="57">
+<p>1</p>
+
+
+</td>
+<td valign="top" width="391">
+<p>box版本，0或1，一般为0。（以下字节数均按version=0）</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>flags</p>
+
+
+</td>
+<td valign="top" width="57">
+<p>3</p>
+
+
+</td>
+<td valign="top" width="391">
+<p>按位或操作结果值，预定义如下：</p>
+<p>0x000001 track_enabled，否则该track不被播放；</p>
+<p>0x000002 track_in_movie，表示该track在播放中被引用；</p>
+<p>0x000004 track_in_preview，表示该track在预览时被引用。</p>
+<p>一般该值为7，如果一个媒体所有track均未设置track_in_movie和track_in_preview，将被理解为所有track均设置了这两项；对于hint track，该值为0</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>creation time</p>
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+</td>
+<td valign="top" width="391">
+<p>创建时间（相对于UTC时间1904-01-01零点的秒数）</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>modification time</p>
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+</td>
+<td valign="top" width="391">
+<p>修改时间</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>track id</p>
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+</td>
+<td valign="top" width="391">
+<p>id号，不能重复且不能为0</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>reserved</p>
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+</td>
+<td valign="top" width="391">
+<p>保留位</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>duration</p>
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+</td>
+<td valign="top" width="391">
+<p>track的时间长度</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>reserved</p>
+
+
+</td>
+<td valign="top" width="57">
+<p>8</p>
+
+
+</td>
+<td valign="top" width="391">
+<p>保留位</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>layer</p>
+
+
+</td>
+<td valign="top" width="57">
+<p>2</p>
+
+
+</td>
+<td valign="top" width="391">
+<p>视频层，默认为0，值小的在上层</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>alternate group</p>
+
+
+</td>
+<td valign="top" width="57">
+<p>2</p>
+
+
+</td>
+<td valign="top" width="391">
+<p>track分组信息，默认为0表示该track未与其他track有群组关系</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>volume</p>
+
+
+</td>
+<td valign="top" width="57">
+<p>2</p>
+
+
+</td>
+<td valign="top" width="391">
+<p>[8.8] 格式，如果为音频track，1.0（0x0100）表示最大音量；否则为0</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>reserved</p>
+
+
+</td>
+<td valign="top" width="57">
+<p>2</p>
+
+
+</td>
+<td valign="top" width="391">
+<p>保留位</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>matrix</p>
+
+
+</td>
+<td valign="top" width="57">
+<p>36</p>
+
+
+</td>
+<td valign="top" width="391">
+<p>视频变换矩阵</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>width</p>
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+</td>
+<td valign="top" width="391">
+<p>宽</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>height</p>
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+</td>
+<td valign="top" width="391">
+<p>高，均为 [16.16] 格式值，与sample描述中的实际画面大小比值，用于播放时的展示宽高</p>
+
+
+</td>
+
+
+</tr>
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+<p align="center">&nbsp;</p>
+<p align="left">&nbsp;</p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;“<span lang="EN-US" xml:lang="EN-US">tkhd”的字节实例如下图，各字段已经用颜色区分开：</span></p>
+<p align="center"><img src="./mp4文件格式解析 - nigaopeng - 博客园_files/1177848-20171124105632828-1690291173.jpg" alt=""></p>
+<p align="left"><br><strong><span lang="EN-US" xml:lang="EN-US">4.2.2 Media Box（<span lang="EN-US" xml:lang="EN-US">mdia）</span></span></strong></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;“<span lang="EN-US" xml:lang="EN-US">mdia”也是个<span lang="EN-US" xml:lang="EN-US">container box，其子<span lang="EN-US" xml:lang="EN-US">box的结构和种类还是比较复杂的。先来看一个“<span lang="EN-US" xml:lang="EN-US">mdia”的实例结构树图。</span></span></span></span></p>
+<p align="center"><img src="./mp4文件格式解析 - nigaopeng - 博客园_files/1177848-20171124105617750-494904833.jpg" alt=""><img src="./mp4文件格式解析 - nigaopeng - 博客园_files/1177848-20171124103840531-577416768.jpg" alt=""></p>
+<p align="left"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总体来说，“<span lang="EN-US" xml:lang="EN-US">mdia”定义了<span lang="EN-US" xml:lang="EN-US">track媒体类型以及<span lang="EN-US" xml:lang="EN-US">sample数据，描述<span lang="EN-US" xml:lang="EN-US">sample信息。一般“<span lang="EN-US" xml:lang="EN-US">mdia”包含一个“<span lang="EN-US" xml:lang="EN-US">mdhd”，一个“<span lang="EN-US" xml:lang="EN-US">hdlr”和一个“<span lang="EN-US" xml:lang="EN-US">minf”，其中“<span lang="EN-US" xml:lang="EN-US">mdhd”为<span lang="EN-US" xml:lang="EN-US">media header box，“<span lang="EN-US" xml:lang="EN-US">hdlr”为<span lang="EN-US" xml:lang="EN-US">handler reference box，“<span lang="EN-US" xml:lang="EN-US">minf”为<span lang="EN-US" xml:lang="EN-US">media information box。下面依次看一下这几个<span lang="EN-US" xml:lang="EN-US">box的结构。</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p align="left"><strong><span lang="EN-US" xml:lang="EN-US">4.2.2.1 Media Header Box（<span lang="EN-US" xml:lang="EN-US">mdhd）</span></span></strong></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;“<span lang="EN-US" xml:lang="EN-US">mdhd”结构如下表。&nbsp;</span></p>
+<div align="center">
+<table border="1" cellspacing="0" cellpadding="0" align="center">
+<tbody>
+<tr>
+<td valign="top" width="121">
+<p>字段</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>字节数</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>意义</p>
+
+
+
+</td>
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>box size</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>box大小</p>
+
+
+
+</td>
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>box type</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>box类型</p>
+
+
+
+</td>
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>version</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>1</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>box版本，0或1，一般为0。（以下字节数均按version=0）</p>
+
+
+
+</td>
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>flags</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>3</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>&nbsp;</p>
+
+
+
+</td>
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>creation time</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>创建时间（相对于UTC时间1904-01-01零点的秒数）</p>
+
+
+
+</td>
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>modification time</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>修改时间</p>
+
+
+
+</td>
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>time scale</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>同前表</p>
+
+
+
+</td>
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>duration</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>track的时间长度</p>
+
+
+
+</td>
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>language</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>2</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>媒体语言码。最高位为0，后面15位为3个字符（见ISO 639-2/T标准中定义）</p>
+
+
+
+</td>
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>pre-defined</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>2</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>&nbsp;</p>
+
+
+
+</td>
+
+
+
+</tr>
+
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;“<span lang="EN-US" xml:lang="EN-US">mdhd”的字节实例如下图，各字段已经用颜色区分开：</span></p>
+<p align="center"><img src="./mp4文件格式解析 - nigaopeng - 博客园_files/1177848-20171124105548187-1453820539.jpg" alt=""></p>
+<p align="left"><strong><span lang="EN-US" xml:lang="EN-US">4.2.2.2 Handler Reference Box（<span lang="EN-US" xml:lang="EN-US">hdlr）</span></span></strong></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;“<span lang="EN-US" xml:lang="EN-US">hdlr”解释了媒体的播放过程信息，该<span lang="EN-US" xml:lang="EN-US">box也可以被包含在<span lang="EN-US" xml:lang="EN-US">meta box（<span lang="EN-US" xml:lang="EN-US">meta）中。“<span lang="EN-US" xml:lang="EN-US">hdlr”结构如下表。</span></span></span></span></span></p>
+<p align="center">&nbsp;</p>
+<div align="center">
+<table border="1" cellspacing="0" cellpadding="0" align="center">
+<tbody>
+<tr>
+<td valign="top" width="121">
+<p>字段</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>字节数</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>意义</p>
+
+
+
+</td>
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>box size</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>box大小</p>
+
+
+
+</td>
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>box type</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>box类型</p>
+
+
+
+</td>
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>version</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>1</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>box版本，0或1，一般为0。（以下字节数均按version=0）</p>
+
+
+
+</td>
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>flags</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>3</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>&nbsp;</p>
+
+
+
+</td>
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>pre-defined</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>&nbsp;</p>
+
+
+
+</td>
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>handler type</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>在media box中，该值为4个字符：</p>
+<p>“vide”— video track</p>
+<p>“soun”— audio track</p>
+<p>“hint”— hint track</p>
+
+
+
+</td>
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>reserved</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>12</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>&nbsp;</p>
+
+
+
+</td>
+
+
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>name</p>
+
+
+
+</td>
+<td valign="top" width="57">
+<p>不定</p>
+
+
+
+</td>
+<td valign="top" width="391">
+<p>track type name，以‘\0’结尾的字符串</p>
+
+
+
+</td>
+
+
+
+</tr>
+
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;“<span lang="EN-US" xml:lang="EN-US">hdlr”的字节实例如下图，各字段已经用颜色区分开：</span></p>
+<p align="center"><img src="./mp4文件格式解析 - nigaopeng - 博客园_files/1177848-20171124105534562-2004584065.jpg" alt=""></p>
+<p align="left"><br><strong><span lang="EN-US" xml:lang="EN-US">4.2.2.3 Media Information Box（<span lang="EN-US" xml:lang="EN-US">minf）</span></span></strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;“minf”存储了解释track媒体数据的handler-specific信息，media handler用这些信息将媒体时间映射到媒体数据并进行处理。“minf”中的信息格式和内容与媒体类型以及解释媒体数据的media handler密切相关，其他media handler不知道如何解释这些信息。“minf”是一个container box，其实际内容由子box说明。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;一般情况下，“minf”包含一个header box，一个“dinf”和一个“stbl”，其中，header box根据track type（即media handler type）分为“vmhd”、“smhd”、“hmhd”和“nmhd”，“dinf”为data information box，“stbl”为sample table box。下面分别介绍。</p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;下图为“minf”部分字节实例，其中红色为box header，蓝色为“smhd”，绿色为“dinf”，黄色为一部分“stbl”。</p>
+<p align="center"><img src="./mp4文件格式解析 - nigaopeng - 博客园_files/1177848-20171124105523765-1396178666.jpg" alt="">&nbsp;</p>
+<p>&nbsp;</p>
+<p align="left"><strong><span lang="EN-US" xml:lang="EN-US">4.2.2.3.1 Media Information Header Box（<span lang="EN-US" xml:lang="EN-US">vmhd、<span lang="EN-US" xml:lang="EN-US">smhd、<span lang="EN-US" xml:lang="EN-US">hmhd、<span lang="EN-US" xml:lang="EN-US">nmhd）</span></span></span></span></span></strong></p>
+<p align="left"><strong><em><span lang="EN-US" xml:lang="EN-US">Video Media Header Box（<span lang="EN-US" xml:lang="EN-US">vmhd）</span></span></em></strong>&nbsp;</p>
+<div align="center">
+<table border="1" cellspacing="0" cellpadding="0" align="center">
+<tbody>
+<tr>
+<td valign="top" width="121">
+<p>字段</p>
+
+</td>
+<td valign="top" width="57">
+<p>字节数</p>
+
+</td>
+<td valign="top" width="391">
+<p>意义</p>
+
+</td>
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>box size</p>
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+</td>
+<td valign="top" width="391">
+<p>box大小</p>
+
+</td>
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>box type</p>
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+</td>
+<td valign="top" width="391">
+<p>box类型</p>
+
+</td>
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>version</p>
+
+</td>
+<td valign="top" width="57">
+<p>1</p>
+
+</td>
+<td valign="top" width="391">
+<p>box版本，0或1，一般为0。（以下字节数均按version=0）</p>
+
+</td>
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>flags</p>
+
+</td>
+<td valign="top" width="57">
+<p>3</p>
+
+</td>
+<td valign="top" width="391">
+<p>&nbsp;</p>
+
+</td>
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>graphics mode</p>
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+</td>
+<td valign="top" width="391">
+<p>视频合成模式，为0时拷贝原始图像，否则与opcolor进行合成</p>
+
+</td>
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>opcolor</p>
+
+</td>
+<td valign="top" width="57">
+<p>2×3</p>
+
+</td>
+<td valign="top" width="391">
+<p>｛red，green，blue｝</p>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+&nbsp;</div>
+<p align="left">&nbsp;</p>
+<p align="left"><strong><em><span lang="EN-US" xml:lang="EN-US">Sound Media Header Box（<span lang="EN-US" xml:lang="EN-US">smhd）</span></span></em></strong>&nbsp;</p>
+<div align="center">
+<table border="1" cellspacing="0" cellpadding="0" align="center">
+<tbody>
+<tr>
+<td valign="top" width="121">
+<p>字段</p>
+
+</td>
+<td valign="top" width="57">
+<p>字节数</p>
+
+</td>
+<td valign="top" width="391">
+<p>意义</p>
+
+</td>
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>box size</p>
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+</td>
+<td valign="top" width="391">
+<p>box大小</p>
+
+</td>
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>box type</p>
+
+</td>
+<td valign="top" width="57">
+<p>4</p>
+
+</td>
+<td valign="top" width="391">
+<p>box类型</p>
+
+</td>
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>version</p>
+
+</td>
+<td valign="top" width="57">
+<p>1</p>
+
+</td>
+<td valign="top" width="391">
+<p>box版本，0或1，一般为0。（以下字节数均按version=0）</p>
+
+</td>
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>flags</p>
+
+</td>
+<td valign="top" width="57">
+<p>3</p>
+
+</td>
+<td valign="top" width="391">
+<p>&nbsp;</p>
+
+</td>
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>balance</p>
+
+</td>
+<td valign="top" width="57">
+<p>2</p>
+
+</td>
+<td valign="top" width="391">
+<p>立体声平衡，[8.8] 格式值，一般为0，-1.0表示全部左声道，1.0表示全部右声道</p>
+
+</td>
+
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>reserved</p>
+
+</td>
+<td valign="top" width="57">
+<p>2</p>
+
+</td>
+<td valign="top" width="391">
+<p>&nbsp;</p>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+<p>&nbsp;</p>
+<p><strong><em>Hint Media Header Box（hmhd）</em></strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;略</p>
+<p><strong><em>Null Media Header Box（nmhd）</em></strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;非视音频媒体使用该box，略。</p>
+<p><strong><span lang="EN-US" xml:lang="EN-US">4.2.2.3.2 Data Information Box（<span lang="EN-US" xml:lang="EN-US">dinf）</span></span></strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;“dinf”解释如何定位媒体信息，是一个container box。“dinf”一般包含一个“dref”，即data reference box；“dref”下会包含若干个“url”或“urn”，这些box组成一个表，用来定位track数据。简单的说，track可以被分成若干段，每一段都可以根据“url”或“urn”指向的地址来获取数据，sample描述中会用这些片段的序号将这些片段组成一个完整的track。一般情况下，当数据被完全包含在文件中时，“url”或“urn”中的定位字符串是空的。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;“dref”的字节结构如下表。&nbsp;</p>
+<div align="center">
+<table border="1" cellspacing="0" cellpadding="0" align="center">
+<tbody>
+<tr>
+<td valign="top" width="158">
+<p>字段</p>
+
+</td>
+<td valign="top" width="66">
+<p>字节数</p>
+
+</td>
+<td valign="top" width="344">
+<p>意义</p>
+
+</td>
+
+</tr>
+<tr>
+<td valign="top" width="158">
+<p>box size</p>
+
+</td>
+<td valign="top" width="66">
+<p>4</p>
+
+</td>
+<td valign="top" width="344">
+<p>box大小</p>
+
+</td>
+
+</tr>
+<tr>
+<td valign="top" width="158">
+<p>box type</p>
+
+</td>
+<td valign="top" width="66">
+<p>4</p>
+
+</td>
+<td valign="top" width="344">
+<p>box类型</p>
+
+</td>
+
+</tr>
+<tr>
+<td valign="top" width="158">
+<p>version</p>
+
+</td>
+<td valign="top" width="66">
+<p>1</p>
+
+</td>
+<td valign="top" width="344">
+<p>box版本，0或1，一般为0。（以下字节数均按version=0）</p>
+
+</td>
+
+</tr>
+<tr>
+<td valign="top" width="158">
+<p>flags</p>
+
+</td>
+<td valign="top" width="66">
+<p>3</p>
+
+</td>
+<td valign="top" width="344">
+<p>&nbsp;</p>
+
+</td>
+
+</tr>
+<tr>
+<td valign="top" width="158">
+<p>entry count</p>
+
+</td>
+<td valign="top" width="66">
+<p>4</p>
+
+</td>
+<td valign="top" width="344">
+<p>“url”或“urn”表的元素个数</p>
+
+</td>
+
+</tr>
+<tr>
+<td valign="top" width="158">
+<p>“url”或“urn”列表</p>
+
+</td>
+<td valign="top" width="66">
+<p>不定</p>
+
+</td>
+<td valign="top" width="344">
+<p>&nbsp;</p>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;“<span lang="EN-US" xml:lang="EN-US"><span style="font-family: &#39;Times New Roman&#39;;">url</span>”或“<span lang="EN-US" xml:lang="EN-US"><span style="font-family: &#39;Times New Roman&#39;;">urn</span>”都是<span lang="EN-US" xml:lang="EN-US"><span style="font-family: &#39;Times New Roman&#39;;">box</span>，“<span lang="EN-US" xml:lang="EN-US"><span style="font-family: &#39;Times New Roman&#39;;">url</span>”的内容为字符串（<span lang="EN-US" xml:lang="EN-US"><span style="font-family: &#39;Times New Roman&#39;;">location string</span>），“<span lang="EN-US" xml:lang="EN-US"><span style="font-family: &#39;Times New Roman&#39;;">urn</span>”的内容为一对字符串（<span lang="EN-US" xml:lang="EN-US"><span style="font-family: &#39;Times New Roman&#39;;">name string and location string</span>）。当“<span lang="EN-US" xml:lang="EN-US"><span style="font-family: &#39;Times New Roman&#39;;">url</span>”或“<span lang="EN-US" xml:lang="EN-US"><span style="font-family: &#39;Times New Roman&#39;;">urn</span>”的<span lang="EN-US" xml:lang="EN-US"><span style="font-family: &#39;Times New Roman&#39;;">box flag</span>为<span lang="EN-US" xml:lang="EN-US"><span style="font-family: &#39;Times New Roman&#39;;">1</span>时，字符串均为空。</span></span></span></span></span></span></span></span></span></span></span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;下面是一个“<span lang="EN-US" xml:lang="EN-US">dinf”的字节实例图。其中黄色为“<span lang="EN-US" xml:lang="EN-US">dinf”的<span lang="EN-US" xml:lang="EN-US">box header，由红色部分我们知道包含的“<span lang="EN-US" xml:lang="EN-US">url”或“<span lang="EN-US" xml:lang="EN-US">urn”个数为<span lang="EN-US" xml:lang="EN-US">1，红色后面为“<span lang="EN-US" xml:lang="EN-US">url”<span lang="EN-US" xml:lang="EN-US">box的内容。紫色为“<span lang="EN-US" xml:lang="EN-US">url”的<span lang="EN-US" xml:lang="EN-US">box header（根据<span lang="EN-US" xml:lang="EN-US">box type我们知道是个“<span lang="EN-US" xml:lang="EN-US">url”），绿色为<span lang="EN-US" xml:lang="EN-US">box flag，值为<span lang="EN-US" xml:lang="EN-US">1，说明“<span lang="EN-US" xml:lang="EN-US">url”中的字符串为空，表示<span lang="EN-US" xml:lang="EN-US">track数据已包含在文件中。</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p align="center"><img src="./mp4文件格式解析 - nigaopeng - 博客园_files/1177848-20171124105445453-359347705.jpg" alt=""></p>
+<p align="left"><span lang="EN-US" xml:lang="EN-US">4.2.2.3.3 Sample Table Box（<span lang="EN-US" xml:lang="EN-US">stbl）</span></span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;“<span lang="EN-US" xml:lang="EN-US">stbl”几乎是普通的<span lang="EN-US" xml:lang="EN-US">MP4文件中最复杂的一个<span lang="EN-US" xml:lang="EN-US">box了，首先需要回忆一下<span lang="EN-US" xml:lang="EN-US">sample的概念。<span lang="EN-US" xml:lang="EN-US">sample是媒体数据存储的单位，存储在<span lang="EN-US" xml:lang="EN-US">media的<span lang="EN-US" xml:lang="EN-US">chunk中，<span lang="EN-US" xml:lang="EN-US">chunk和<span lang="EN-US" xml:lang="EN-US">sample的长度均可互不相同，如下图所示。</span></span></span></span></span></span></span></span></span></p>
+<p align="center"><img src="./mp4文件格式解析 - nigaopeng - 博客园_files/1177848-20171124105430750-1558311660.jpg" alt=""></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;“stbl”包含了关于track中sample所有时间和位置的信息，以及sample的编解码等信息。利用这个表，可以解释sample的时序、类型、大小以及在各自存储容器中的位置。“stbl”是一个container box，其子box包括：sample description box（stsd）、time to sample box（stts）、sample size box（stsz或stz2）、sample to chunk box（stsc）、chunk offset box（stco或co64）、composition time to sample box（ctts）、sync sample box（stss）等。</p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;“stsd”必不可少，且至少包含一个条目，该box包含了data reference box进行sample数据检索的信息。没有“stsd”就无法计算media sample的存储位置。“stsd”包含了编码的信息，其存储的信息随媒体类型不同而不同。</p>
+<p><strong><em>Sample Description Box（stsd）</em></strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;box header和version字段后会有一个entry count字段，根据entry的个数，每个entry会有type信息，如“vide”、“sund”等，根据type不同sample description会提供不同的信息，例如对于video track，会有“VisualSampleEntry”类型信息，对于audio track会有“AudioSampleEntry”类型信息。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;视频的编码类型、宽高、长度，音频的声道、采样等信息都会出现在这个box中。</p>
+<p><strong><em>Time To Sample Box（stts）</em></strong></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;“stts”存储了sample的duration，描述了sample时序的映射方法，我们通过它可以找到任何时间的sample。“stts”可以包含一个压缩的表来映射时间和sample序号，用其他的表来提供每个sample的长度和指针。表中每个条目提供了在同一个时间偏移量里面连续的sample序号，以及samples的偏移量。递增这些偏移量，就可以建立一个完整的time to sample表。</p>
+<p><strong><em>Sample Size Box（stsz）</em></strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;“stsz” 定义了每个sample的大小，包含了媒体中全部sample的数目和一张给出每个sample大小的表。这个box相对来说体积是比较大的。</p>
+<p><strong><em>Sample To Chunk Box（stsc）</em></strong></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;用chunk组织sample可以方便优化数据获取，一个thunk包含一个或多个sample。“stsc”中用一个表描述了sample与chunk的映射关系，查看这张表就可以找到包含指定sample的thunk，从而找到这个sample。</p>
+<p><strong><em>Sync Sample Box（stss）</em></strong></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;“stss”确定media中的关键帧。对于压缩媒体数据，关键帧是一系列压缩序列的开始帧，其解压缩时不依赖以前的帧，而后续帧的解压缩将依赖于这个关键帧。“stss”可以非常紧凑的标记媒体内的随机存取点，它包含一个sample序号表，表内的每一项严格按照sample的序号排列，说明了媒体中的哪一个sample是关键帧。如果此表不存在，说明每一个sample都是一个关键帧，是一个随机存取点。</p>
+<p><strong><em>Chunk Offset Box（stco）</em></strong></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;“stco”定义了每个thunk在媒体流中的位置。位置有两种可能，32位的和64位的，后者对非常大的电影很有用。在一个表中只会有一种可能，这个位置是在整个文件中的，而不是在任何box中的，这样做就可以直接在文件中找到媒体数据，而不用解释box。需要注意的是一旦前面的box有了任何改变，这张表都要重新建立，因为位置信息已经改变了。</p>
+<p align="left"><strong><span lang="EN-US" xml:lang="EN-US">5、<span lang="EN-US" xml:lang="EN-US">Free Space Box（<span lang="EN-US" xml:lang="EN-US">free或<span lang="EN-US" xml:lang="EN-US">skip）</span></span></span></span></strong></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;“<span lang="EN-US" xml:lang="EN-US">free”中的内容是无关紧要的，可以被忽略。该<span lang="EN-US" xml:lang="EN-US">box被删除后，不会对播放产生任何影响。</span></span></p>
+<p align="left"><strong><span lang="EN-US" xml:lang="EN-US">6、<span lang="EN-US" xml:lang="EN-US">Meida Data Box（<span lang="EN-US" xml:lang="EN-US">mdat）</span></span></span></strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;该box包含于文件层，可以有多个，也可以没有（当媒体数据全部为外部文件引用时），用来存储媒体数据。数据直接跟在box type字段后面，具体数据结构的意义需要参考metadata（主要在sample table中描述）。</p>
+<p>&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;普通MP4文件的结构就讲完了，可能会比较乱，下面这张图是常见的box的树结构图，可以用来大致了解MP4文件的构造。</p>
+<p align="center"><img src="./mp4文件格式解析 - nigaopeng - 博客园_files/1177848-20171124105354187-597951417.jpg" alt=""></p>
+<p>&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;这篇文章主要面向一些对<span lang="EN-US" xml:lang="EN-US">MP4文件结构没有太多了解的初学者，算是篇比较初级的文章，本人也是参考了一些资料写出来的，对于<span lang="EN-US" xml:lang="EN-US">MP4文件中涉及的一些概念没有太深入的了解，因此其中应该是有一些错误理解，希望大家抱着批判的眼光读这篇文章。如果有错误的地方，还请大家不吝赐教。</span></span></p>
+<p><span lang="EN-US" xml:lang="EN-US"><span lang="EN-US" xml:lang="EN-US">该文主要参考了标准和网友<span lang="EN-US" xml:lang="EN-US">wqyuwss的<span lang="EN-US" xml:lang="EN-US">blog系列文章：<a href="http://www.52rd.com/blog/Blog.asp?Name=wqyuwss&amp;Subjectid=559" target="_blank">mp4文件格式</a></span></span></span></span></p>
+
+
+
+
+</div>
+<div id="share" class="shareUp">&nbsp;</div>
+<div class="shareUp">原文链接:&nbsp;http://blog.sina.com.cn/s/blog_48f93b530100jz4x.html</div></div><div id="MySignature"></div>
+        <div class="clear"></div>
+        <div id="blog_post_info_block">
+        <div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(7889272,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;2f7f961e-a805-4865-ded0-08d49c352df2&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./mp4文件格式解析 - nigaopeng - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./mp4文件格式解析 - nigaopeng - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/ranson7zop/" target="_blank"><img src="./mp4文件格式解析 - nigaopeng - 博客园_files/20171012152422.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/ranson7zop/">nigaopeng</a><br>
+            <a href="http://home.cnblogs.com/u/ranson7zop/followees">关注 - 5</a><br>
+            <a href="http://home.cnblogs.com/u/ranson7zop/followers">粉丝 - 7</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;2f7f961e-a805-4865-ded0-08d49c352df2&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(7889272,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">0</span>
+    </div>
+    <div class="buryit" onclick="votePost(7889272,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+        <div class="clear"></div>
+        <div id="post_next_prev"><a href="https://www.cnblogs.com/ranson7zop/p/7878384.html" class="p_n_p_prefix">« </a> 上一篇：<a href="https://www.cnblogs.com/ranson7zop/p/7878384.html" title="发布于2017-11-22 11:31">傅里叶分析之掐死教程（完整版）更新于2014.06.06</a><br><a href="https://www.cnblogs.com/ranson7zop/p/7904811.html" class="p_n_p_prefix">» </a> 下一篇：<a href="https://www.cnblogs.com/ranson7zop/p/7904811.html" title="发布于2017-11-27 16:36">Live555类结构</a><br></div>
+    </div>
+</div>
+    <ul class="postmetadata">
+        <li class="icon_cat" id="BlogPostCategory">分类: <a href="https://www.cnblogs.com/ranson7zop/category/1088372.html" target="_blank">Container</a></li>
+        <li class="icon_bullet" id="EntryTag"></li>
+    </ul>
+</div>
+<script type="text/javascript">var allowComments=true,cb_blogId=359581,cb_entryId=7889272,cb_blogApp=currentBlogApp,cb_blogUserGuid='2f7f961e-a805-4865-ded0-08d49c352df2',cb_entryCreatedDate='2017/11/24 10:17:00';loadViewCount(cb_entryId);var cb_postType=1;var isMarkdown=false;</script>
+<script type="text/javascript">
+    var m = window.__blog.postRendered;
+    if (m) { m(__$("post")); }
+</script>
+<script type="text/javascript">
+    var m = window.__blog.postRenderPosts;
+    if (m) { m(); }
+</script>
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/ranson7zop/p/7889272.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/ranson7zop/p/7889272.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-工控&#39;)">【推荐】超50万C++/C#源码: 大型实时仿真组态图形源码</a><br><a href="https://ke.qq.com/adActivity.html?name=xiangxueketang2" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-享学&#39;)">【培训】IT职业生涯指南，Java程序员薪资翻3倍的秘密</a><br><a href="https://gitee.com/enterprises?from=bky-2" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-gitee&#39;)">【推荐】专业便捷的企业级代码托管服务 - Gitee 码云</a><br></div>
+<div id="opt_under_post"></div>
+<script async="async" src="./mp4文件格式解析 - nigaopeng - 博客园_files/gpt.js"></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+<script>
+  googletag.cmd.push(function() {
+        googletag.defineSlot('/1090369/C1', [300, 250], 'div-gpt-ad-1546353474406-0').addService(googletag.pubads());
+        googletag.defineSlot('/1090369/C2', [468, 60], 'div-gpt-ad-1539008685004-0').addService(googletag.pubads());
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+  });
+</script>
+<div id="cnblogs_c1" class="c_ad_block">
+    <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;" data-google-query-id="CMKdtp779OECFV5svQodGhML-g"><div id="google_ads_iframe_/1090369/C1_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/C1_0" title="3rd party ad content" name="google_ads_iframe_/1090369/C1_0" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border: 0px; vertical-align: bottom;" data-google-container-id="1" data-load-complete="true" src="./mp4文件格式解析 - nigaopeng - 博客园_files/saved_resource.html"></iframe></div></div>
+</div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>相关博文：</b><br>·  <a href="https://www.cnblogs.com/bude/p/6304915.html" target="_blank" onclick="clickRecomItmem(6304915)">MP4文件格式的解析</a><br>·  <a href="https://www.cnblogs.com/haibindev/archive/2011/10/17/2214518.html" target="_blank" onclick="clickRecomItmem(2214518)">MP4文件格式的解析，以及MP4文件的分割算法</a><br>·  <a href="https://www.cnblogs.com/jzdwajue/p/7382409.html" target="_blank" onclick="clickRecomItmem(7382409)">MP4文件格式的解析</a><br>·  <a href="https://www.cnblogs.com/alexhg/p/6546987.html" target="_blank" onclick="clickRecomItmem(6546987)">mp4文件格式解析</a><br>·  <a href="https://www.cnblogs.com/luyiba/p/6303748.html" target="_blank" onclick="clickRecomItmem(6303748)">MP4文件格式的解析</a><br></div></div>
+<div id="cnblogs_c2" class="c_ad_block">
+    <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;" data-google-query-id="CICStZ779OECFV5svQodGhML-g"><div id="google_ads_iframe_/1090369/C2_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/C2_0" title="3rd party ad content" name="google_ads_iframe_/1090369/C2_0" width="468" height="60" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border: 0px; vertical-align: bottom;" data-google-container-id="2" data-load-complete="true" src="./mp4文件格式解析 - nigaopeng - 博客园_files/saved_resource(1).html"></iframe></div></div>
+</div>
+<div id="under_post_kb"><div class="itnews c_ad_block"><b>最新新闻</b>：<br> ·  <a href="https://news.cnblogs.com/n/624600/" target="_blank">南开大学研获耐高温抗极寒的石墨烯材料</a><br> ·  <a href="https://news.cnblogs.com/n/624599/" target="_blank">敦促与华为共建5G，我驻英大使再发声</a><br> ·  <a href="https://news.cnblogs.com/n/624597/" target="_blank">科技圈开特斯拉的人</a><br> ·  <a href="https://news.cnblogs.com/n/624596/" target="_blank">程序员“福音”来了：AI辅助人类写代码 靠谱吗？</a><br> ·  <a href="https://news.cnblogs.com/n/624595/" target="_blank">电视可以竖着看？三星下月将推出竖版QLED电视</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+ if(enablePostBottom()) {
+    codeHighlight();
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverT2();
+    deliverC1();
+    deliverC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);  
+}
+</script>
+</div>
+
+    
+        </div>
+
+        <script type="text/javascript">
+            var m = window.__blog.contentRendered;
+            if (m) { m(__$("content")); }
+        </script>
+
+        <div id="sidebar">
+            
+<div id="about">
+<div>
+<h2 id="about_title">About</h2>
+<div id="about_body">
+<div id="blog-news"><div id="profile_block">昵称：<a href="https://home.cnblogs.com/u/ranson7zop/">nigaopeng</a><br>园龄：<a href="https://home.cnblogs.com/u/ranson7zop/" title="入园时间：2017-06-06">1年10个月</a><br>粉丝：<a href="https://home.cnblogs.com/u/ranson7zop/followers/">7</a><br>关注：<a href="https://home.cnblogs.com/u/ranson7zop/followees/">5</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;2f7f961e-a805-4865-ded0-08d49c352df2&#39;)">+加关注</a></div><script>getFollowStatus('2f7f961e-a805-4865-ded0-08d49c352df2')</script></div></div>
+<script type="text/javascript">loadBlogNews();</script>
+</div>
+</div>
+</div>
+
+            <script type="text/javascript">
+                var m = window.__blog.aboutRendered;
+                if (m) { m(__$("about")); }
+            </script>
+            
+<div id="mySearchWrapper">
+    <div id="mySearch">
+        <input type="image" src="./mp4文件格式解析 - nigaopeng - 博客园_files/btnsearch.gif" id="btnZzk" class="submit" onclick="zzk_go();return false;">
+        <label class="lb_search"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="keyword"></label>
+    </div>
+</div>
+
+            <script type="text/javascript">
+                var m = window.__blog.searchFormRendered;
+                if (m) { m(__$("searchform")); }
+            </script>
+            <div id="sideMain">
+            <div id="side-recent-comments">
+        <h2>最新评论</h2>
+        <ul class="voice">
+                <li>
+                    <a href="https://www.cnblogs.com/ranson7zop/p/8039676.html#4074306">Re:visual studio 调试时提示 已加载“C:\Windows\SysWOW64\ntdll.dll”。无法查找或打开 PDB 文件。</a>
+                    <br>
+                    <a class="child" href="https://www.cnblogs.com/ranson7zop/p/8039676.html#4074306">
+                        学习了
+                        -- 王义强
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.cnblogs.com/ranson7zop/p/7657874.html#4042277">Re:wav文件格式分析与详解</a>
+                    <br>
+                    <a class="child" href="https://www.cnblogs.com/ranson7zop/p/7657874.html#4042277">
+                        晕   我从（1）开始数的，不好意思
+                        -- 搁了个浅
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.cnblogs.com/ranson7zop/p/7657874.html#4042276">Re:wav文件格式分析与详解</a>
+                    <br>
+                    <a class="child" href="https://www.cnblogs.com/ranson7zop/p/7657874.html#4042276">
+                        我数了一下，从（2）到（13）是54个字节
+                        -- 搁了个浅
+                    </a>
+                </li>
+        </ul>
+    </div></div>
+            <div id="sideRight">
+            <div id="side-archives">
+        <h2>随笔档案</h2>
+        <ul class="date">
+                <li><a href="https://www.cnblogs.com/ranson7zop/archive/2018/06.html">2018年6月(7)</a></li>
+                <li><a href="https://www.cnblogs.com/ranson7zop/archive/2018/04.html">2018年4月(7)</a></li>
+                <li><a href="https://www.cnblogs.com/ranson7zop/archive/2018/03.html">2018年3月(5)</a></li>
+                <li><a href="https://www.cnblogs.com/ranson7zop/archive/2018/02.html">2018年2月(11)</a></li>
+                <li><a href="https://www.cnblogs.com/ranson7zop/archive/2018/01.html">2018年1月(20)</a></li>
+                <li><a href="https://www.cnblogs.com/ranson7zop/archive/2017/12.html">2017年12月(23)</a></li>
+                <li><a href="https://www.cnblogs.com/ranson7zop/archive/2017/11.html">2017年11月(23)</a></li>
+                <li><a href="https://www.cnblogs.com/ranson7zop/archive/2017/10.html">2017年10月(10)</a></li>
+                <li><a href="https://www.cnblogs.com/ranson7zop/archive/2017/09.html">2017年9月(55)</a></li>
+                <li><a href="https://www.cnblogs.com/ranson7zop/archive/2017/08.html">2017年8月(5)</a></li>
+                <li><a href="https://www.cnblogs.com/ranson7zop/archive/2017/07.html">2017年7月(5)</a></li>
+                <li><a href="https://www.cnblogs.com/ranson7zop/archive/2017/06.html">2017年6月(6)</a></li>
+        </ul>
+    </div>    
+    
+
+    
+
+    
+    
+
+
+</div>
+            <div id="sideLeft">
+            <div id="side-calendar">
+        <h2>日历</h2>
+        <div id="blog-calendar"><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2019/03/01&#39;);return false;">&lt;</a></td><td align="center">2019年4月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2019/05/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">31</td><td align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center">4</td><td align="center">5</td><td class="CalWeekendDay" align="center">6</td></tr><tr><td class="CalWeekendDay" align="center">7</td><td align="center">8</td><td align="center">9</td><td align="center">10</td><td align="center">11</td><td align="center">12</td><td class="CalWeekendDay" align="center">13</td></tr><tr><td class="CalWeekendDay" align="center">14</td><td align="center">15</td><td align="center">16</td><td align="center">17</td><td align="center">18</td><td align="center">19</td><td class="CalWeekendDay" align="center">20</td></tr><tr><td class="CalWeekendDay" align="center">21</td><td align="center">22</td><td align="center">23</td><td align="center">24</td><td align="center">25</td><td align="center">26</td><td class="CalWeekendDay" align="center">27</td></tr><tr><td class="CalWeekendDay" align="center">28</td><td class="CalTodayDay" align="center">29</td><td align="center">30</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td></tr><tr><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td><td class="CalOtherMonthDay" align="center">8</td><td class="CalOtherMonthDay" align="center">9</td><td class="CalOtherMonthDay" align="center">10</td><td class="CalOtherMonthDay" align="center">11</td></tr>
+</tbody></table></div>
+    </div><div id="side-hottags">
+        <h2>我的标签</h2>
+        <ul class="folder">
+            <li><a href="https://www.cnblogs.com/ranson7zop/tag/QT/">QT</a>(10)</li><li><a href="https://www.cnblogs.com/ranson7zop/tag/%E5%A4%9A%E5%AA%92%E4%BD%93/">多媒体</a>(2)</li><li><a href="https://www.cnblogs.com/ranson7zop/tag/Linux%E7%B3%BB%E7%BB%9F/">Linux系统</a>(2)</li><li><a href="https://www.cnblogs.com/ranson7zop/tag/c%2B%2B/">c++</a>(1)</li>
+        </ul>
+    </div><div id="side-categories">
+        <h2>随笔分类</h2>
+        <ul class="folder">
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1084228.html">ARM(4)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1120480.html">Audio(4)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1088143.html">AVS_Codec(1)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1078035.html">c/c++(11)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1088371.html">Codec(3)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1088372.html">Container(5)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1119619.html">FFMPEG(8)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1088132.html">H264_Codec(25)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1126279.html">H265(7)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1094613.html">Linux Shell(7)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1083521.html">Linux内核(19)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1075107.html">Linux系统(6)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1088140.html">MPEG4_Codec(3)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1201486.html">OpenCV(2)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1078040.html">python(8)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1075105.html">QT(17)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1077931.html">Windows(5)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1114518.html">编译工具(16)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1095492.html">流媒体(9)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1146877.html">嵌入式(7)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1138377.html">人工智能(3)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1138289.html">随笔(3)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1134316.html">投资(1)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1124261.html">图像处理(6)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1078041.html">图形开发(3)</a>
+                </li>
+                <li>
+                    
+                    <a href="https://www.cnblogs.com/ranson7zop/category/1120487.html">未完成(50)</a>
+                </li>
+        </ul>
+    </div><div id="side-top-posts-custom">
+    <h2>推荐排行榜</h2>
+    <div id="TopDiggPostsBlock"><ul><li><a href="https://www.cnblogs.com/ranson7zop/p/7657874.html">1. wav文件格式分析与详解(1)</a></li><li><a href="https://www.cnblogs.com/ranson7zop/p/7567161.html">2. request_irq() | 注册中断服务(1)</a></li><li><a href="https://www.cnblogs.com/ranson7zop/p/7941319.html">3. CMOS Sensor的调试经验分享(1)</a></li></ul></div>
+</div><div id="side-top-posts">
+    <h2>阅读排行榜</h2>
+    <div id="TopViewPostsBlock"><ul><li><a href="https://www.cnblogs.com/ranson7zop/p/7657874.html">1. wav文件格式分析与详解(16642)</a></li><li><a href="https://www.cnblogs.com/ranson7zop/p/7889272.html">2. mp4文件格式解析(12166)</a></li><li><a href="https://www.cnblogs.com/ranson7zop/p/7567161.html">3. request_irq() | 注册中断服务(7967)</a></li><li><a href="https://www.cnblogs.com/ranson7zop/p/7655474.html">4. MP3格式音频文件结构解析(6450)</a></li><li><a href="https://www.cnblogs.com/ranson7zop/p/8023306.html">5. 监控摄像机常识：宽动态 (WDR)介绍和理解(6126)</a></li></ul></div>
+</div></div>
+            
+                <div id="sideContainer"></div>
+                <script type="text/javascript">
+                    $.ajax({
+                        url: '/' + currentBlogApp + '/mvc/blog/Minyx2_Lite_SideColumn.aspx',
+                        data: '{}',
+                        type: 'post',
+                        dataType: 'text',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            if (data) {
+                                $("#sideContainer").html(data);
+                                loadBlogDefaultCalendar();
+                                loadBlogSideBlocks();
+                                var m = window.__blog.sideContainerRendered;
+                                if (m) { m(__$("sideContainer")); }
+                                window.__blog.sidebar.__layout();
+                            }
+                        }
+                    });
+
+                </script>
+            
+        </div>
+
+        <script type="text/javascript">
+            var m = window.__blog.sidebarRendered;
+            if (m) { m(__$("sidebar")); }
+        </script>
+
+        <div id="footer">
+            
+<p id="logoFoot">
+    <a href="http://www.spiga.com.mx/" title="Agencia Interactiva Spiga">www.spiga.com.mx</a>
+</p>
+<div class="footText">
+<p>
+Copyright ©2019 nigaopeng
+</p>
+<p>
+<a href="http://www.cnblogs.com/">博客园</a>
+</p>
+</div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var m = window.__blog.wrapperRendered;
+        if (m) { m(__$("wrapper")); }
+    </script>
+
+</div>
+<script type="text/javascript">
+    var m = window.__blog.containerRendered;
+    if (m) { m(__$("container")); }
+</script>
+
+
+
+</body></html>
