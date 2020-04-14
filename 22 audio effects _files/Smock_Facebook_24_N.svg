@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="24" id="S_Facebook_24_N" viewBox="0 0 24 24" width="24">
+  <defs>
+    <style>
+      .fill {
+        fill: #707070;
+      }
+
+      
+    </style>
+  </defs>
+  <rect id="Canvas" fill="#ff13dc" opacity="0" width="24" height="24" /><path class="fill" d="M2,3V21a1,1,0,0,0,1,1H13V14.018H10.394V11H13V9.014c0-2.156,1.139-3.781,3.138-3.981a21.569,21.569,0,0,1,2.96.11v2.7H17.5c-.635,0-1.491.265-1.491.957,0,.555,0,2.2,0,2.2h2.989L18.6,14.019H16V22h5a1,1,0,0,0,1-1V3a1,1,0,0,0-1-1H3A1,1,0,0,0,2,3Z" />
+  </svg>

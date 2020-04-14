@@ -1,0 +1,1 @@
+(function () { /*China*/	var country = {'code':'cn','id':10,'defaultLangauge':'zh-cn'};	if (!window.evidon) window.evidon = {};	if (window.evidon.notice) window.evidon.notice.setLocation(country);	else window.evidon.location = country;})(); 
