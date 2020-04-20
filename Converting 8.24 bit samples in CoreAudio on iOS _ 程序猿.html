@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://www.jmpcrash.com/?p=384&replytocom=4952 -->
+<html lang="zh-CN"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta name="baidu_union_verify" content="59f115aca576ec772c270a42fbd341fa">
+	<title>Converting 8.24 bit samples in CoreAudio on iOS   | 程序猿</title> 
+	<link rel="pingback" href="http://www.jmpcrash.com/xmlrpc.php">
+	<link rel="stylesheet" href="./Converting 8.24 bit samples in CoreAudio on iOS _ 程序猿_files/style.css" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="程序猿 » Feed" href="http://www.jmpcrash.com/?feed=rss2">
+<link rel="alternate" type="application/rss+xml" title="程序猿 » 评论Feed" href="http://www.jmpcrash.com/?feed=comments-rss2">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.jmpcrash.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.5.20"}};
+			!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="crayon-css" href="./Converting 8.24 bit samples in CoreAudio on iOS _ 程序猿_files/crayon.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-theme-feeldesign-css" href="./Converting 8.24 bit samples in CoreAudio on iOS _ 程序猿_files/feeldesign.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-font-monaco-css" href="./Converting 8.24 bit samples in CoreAudio on iOS _ 程序猿_files/monaco.css" type="text/css" media="all">
+<script type="text/javascript" src="./Converting 8.24 bit samples in CoreAudio on iOS _ 程序猿_files/jquery.js"></script>
+<script type="text/javascript" src="./Converting 8.24 bit samples in CoreAudio on iOS _ 程序猿_files/jquery-migrate.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"2.5.0","is_admin":"0","ajaxurl":"http:\/\/www.jmpcrash.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"\u4f7f\u7528 %s \u590d\u5236\uff0c\u4f7f\u7528 %s \u7c98\u8d34\u3002","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Converting 8.24 bit samples in CoreAudio on iOS _ 程序猿_files/crayon.min.js"></script>
+<script type="text/javascript" src="./Converting 8.24 bit samples in CoreAudio on iOS _ 程序猿_files/scripts.js"></script>
+<link rel="https://api.w.org/" href="http://www.jmpcrash.com/?rest_route=/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.jmpcrash.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.jmpcrash.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="UML建模之时序图（Sequence Diagram）" href="http://www.jmpcrash.com/?p=380">
+<link rel="next" title="Goertzel算法解析" href="http://www.jmpcrash.com/?p=386">
+<meta name="generator" content="WordPress 4.5.20">
+<link rel="canonical" href="http://www.jmpcrash.com/?p=384">
+<link rel="shortlink" href="http://www.jmpcrash.com/?p=384">
+<meta name="robots" content="noindex,follow">
+<link rel="alternate" type="application/json+oembed" href="http://www.jmpcrash.com/?rest_route=%2Foembed%2F1.0%2Fembed&amp;url=http%3A%2F%2Fwww.jmpcrash.com%2F%3Fp%3D384">
+<link rel="alternate" type="text/xml+oembed" href="http://www.jmpcrash.com/?rest_route=%2Foembed%2F1.0%2Fembed&amp;url=http%3A%2F%2Fwww.jmpcrash.com%2F%3Fp%3D384&amp;format=xml">
+		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+		
+</head>
+<body class="single single-post postid-384 single-format-standard">
+	
+	<header>
+		<div>
+			
+			<div class="head-area">
+            	<p class="title"><a href="http://www.jmpcrash.com/">程序猿</a></p>
+           		<p class="tagline">编程的人都怀揣着一个改变世界的梦想</p>
+            </div>
+            <form method="get" class="searchform" action="http://www.jmpcrash.com/">
+<fieldset>
+	<input type="text" value="" name="s"><button type="submit" name="searchsubmit" value="Search"><span></span></button>
+</fieldset>
+</form>			
+		</div>
+	</header>
+	<nav>
+		<ul id="menu-menu1" class="menu"><li id="menu-item-65" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-65"><a href="http://www.jmpcrash.com/">首页</a></li>
+<li id="menu-item-19" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-19"><a href="http://www.jmpcrash.com/?cat=7">语言脚本协议</a>
+<ul class="sub-menu">
+	<li id="menu-item-30" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-30"><a href="http://www.jmpcrash.com/?cat=8">C/C++/C#</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-31"><a href="http://www.jmpcrash.com/?cat=9">JAVA</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-32"><a href="http://www.jmpcrash.com/?cat=10">JS</a></li>
+	<li id="menu-item-762" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-762"><a href="http://www.jmpcrash.com/?cat=34">OpenGL</a></li>
+	<li id="menu-item-763" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-763"><a href="http://www.jmpcrash.com/?cat=33">Python</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-33"><a href="http://www.jmpcrash.com/?cat=11">OTHER Lang</a></li>
+	<li id="menu-item-1051" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1051"><a href="http://www.jmpcrash.com/?cat=35">协议</a></li>
+</ul>
+</li>
+<li id="menu-item-21" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-21"><a href="http://www.jmpcrash.com/?cat=12">LINUX</a>
+<ul class="sub-menu">
+	<li id="menu-item-29" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-29"><a href="http://www.jmpcrash.com/?cat=13">应用开发</a></li>
+	<li id="menu-item-27" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-27"><a href="http://www.jmpcrash.com/?cat=14">Bootloader</a></li>
+	<li id="menu-item-28" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-28"><a href="http://www.jmpcrash.com/?cat=15">Kernel</a></li>
+</ul>
+</li>
+<li id="menu-item-18" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-18"><a href="http://www.jmpcrash.com/?cat=2">ANDROID</a>
+<ul class="sub-menu">
+	<li id="menu-item-24" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-24"><a href="http://www.jmpcrash.com/?cat=3">基础知识</a></li>
+	<li id="menu-item-26" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-26"><a href="http://www.jmpcrash.com/?cat=18">解BUG</a></li>
+	<li id="menu-item-22" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-22"><a href="http://www.jmpcrash.com/?cat=16">android应用开发</a></li>
+	<li id="menu-item-25" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-25"><a href="http://www.jmpcrash.com/?cat=17">框架分析</a></li>
+	<li id="menu-item-23" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-23"><a href="http://www.jmpcrash.com/?cat=19">DIY修改</a></li>
+</ul>
+</li>
+<li id="menu-item-573" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-573"><a href="http://www.jmpcrash.com/?cat=26">学习</a>
+<ul class="sub-menu">
+	<li id="menu-item-574" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-574"><a href="http://www.jmpcrash.com/?cat=27">数学</a></li>
+	<li id="menu-item-575" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-575"><a href="http://www.jmpcrash.com/?cat=28">算法</a></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-576"><a href="http://www.jmpcrash.com/?cat=29">读后感</a></li>
+</ul>
+</li>
+<li id="menu-item-20" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-20"><a href="http://www.jmpcrash.com/?cat=20">大杂烩</a>
+<ul class="sub-menu">
+	<li id="menu-item-208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-208"><a href="http://www.jmpcrash.com/?cat=25">硬件芯片</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-35"><a href="http://www.jmpcrash.com/?cat=21">命令使用</a></li>
+	<li id="menu-item-36" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-36"><a href="http://www.jmpcrash.com/?cat=22">工具使用</a></li>
+	<li id="menu-item-654" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-654"><a href="http://www.jmpcrash.com/?cat=30">音频</a></li>
+	<li id="menu-item-655" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-655"><a href="http://www.jmpcrash.com/?cat=31">IT杂文</a></li>
+	<li id="menu-item-108" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-108"><a href="http://www.jmpcrash.com/?cat=24">专题</a></li>
+	<li id="menu-item-656" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-656"><a href="http://www.jmpcrash.com/?cat=32">内容</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-34"><a href="http://www.jmpcrash.com/?cat=23">其它</a></li>
+</ul>
+</li>
+<li id="menu-item-231" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-231"><a href="http://www.jmpcrash.com/?p=228">关于</a></li>
+</ul>		<div class="clear"><!-- --></div>
+	<select><option selected="selected" value="">Go to...</option><option value="http://www.jmpcrash.com">首页</option><option value="http://www.jmpcrash.com/?cat=7">语言脚本协议</option><option value="http://www.jmpcrash.com/?cat=8">C/C++/C#</option><option value="http://www.jmpcrash.com/?cat=9">JAVA</option><option value="http://www.jmpcrash.com/?cat=10">JS</option><option value="http://www.jmpcrash.com/?cat=34">OpenGL</option><option value="http://www.jmpcrash.com/?cat=33">Python</option><option value="http://www.jmpcrash.com/?cat=11">OTHER Lang</option><option value="http://www.jmpcrash.com/?cat=35">协议</option><option value="http://www.jmpcrash.com/?cat=12">LINUX</option><option value="http://www.jmpcrash.com/?cat=13">应用开发</option><option value="http://www.jmpcrash.com/?cat=14">Bootloader</option><option value="http://www.jmpcrash.com/?cat=15">Kernel</option><option value="http://www.jmpcrash.com/?cat=2">ANDROID</option><option value="http://www.jmpcrash.com/?cat=3">基础知识</option><option value="http://www.jmpcrash.com/?cat=18">解BUG</option><option value="http://www.jmpcrash.com/?cat=16">android应用开发</option><option value="http://www.jmpcrash.com/?cat=17">框架分析</option><option value="http://www.jmpcrash.com/?cat=19">DIY修改</option><option value="http://www.jmpcrash.com/?cat=26">学习</option><option value="http://www.jmpcrash.com/?cat=27">数学</option><option value="http://www.jmpcrash.com/?cat=28">算法</option><option value="http://www.jmpcrash.com/?cat=29">读后感</option><option value="http://www.jmpcrash.com/?cat=20">大杂烩</option><option value="http://www.jmpcrash.com/?cat=25">硬件芯片</option><option value="http://www.jmpcrash.com/?cat=21">命令使用</option><option value="http://www.jmpcrash.com/?cat=22">工具使用</option><option value="http://www.jmpcrash.com/?cat=30">音频</option><option value="http://www.jmpcrash.com/?cat=31">IT杂文</option><option value="http://www.jmpcrash.com/?cat=24">专题</option><option value="http://www.jmpcrash.com/?cat=32">内容</option><option value="http://www.jmpcrash.com/?cat=23">其它</option><option value="http://www.jmpcrash.com/?p=228">关于</option></select></nav>
+	<section class="content"><div>
+		<div class="main">
+			<article class="post">
+			<p class="post-date"><span>29</span> 09 2013</p>
+				<div class="post-head">
+					<h1>Converting 8.24 bit samples in CoreAudio on iOS </h1>
+					<p class="post-meta"><span><span class="icon author"></span> su</span> | <span><span class="icon cats"></span><a href="http://www.jmpcrash.com/?cat=20">大杂烩</a>, <a href="http://www.jmpcrash.com/?cat=30">音频</a></span>  </p>
+				</div>
+			<div>
+<p><img title="binary" alt="" src="./Converting 8.24 bit samples in CoreAudio on iOS _ 程序猿_files/binary.jpeg" width="800" height="600"></p>
+<p>When working with CoreAudio on iOS many of the sample applications use the iPhones canonical audio format which is 32 bit 8.24 fixed-point audio. This is&nbsp;because&nbsp;it is the hardwares ‘native’ format.</p>
+<p>You end up with a buffer of fixed point data, which is a bit of a pain to deal with.</p>
+<p>Other libraries and source code tend to work with floating point samples between 0 and +/-1.0 or&nbsp;signed 16 bit integer samples…so this fixed point stuff is a bit of a pain.&nbsp;You could force CoreAudio to give you 16 bit integer samples to start with (which means it does the conversion for you before giving you the audio buffer) or you could do the conversion yourself, as and when you need to. This <em>can be</em>&nbsp;a more efficient way of doing things, depending on your needs.</p>
+<p>In this post I want to show you how you can convert the native 8.24 fixed point sample data into 16 bit integer and/or floating point sample data…and give you an explanation of how it works. But first, I need to de-mystify some stuff to do with bits and bytes.</p>
+<p><strong>Bit Order != Byte Order</strong></p>
+<p>In Objective-C you can think of the bits of a binary number going from left to right. Just as in base 10, the most&nbsp;significant&nbsp;digit is the left most digit</p><!-- Crayon Syntax Highlighter v2.5.0 -->
+
+		<div id="crayon-5e9ae226c123f338831225" class="crayon-syntax crayon-theme-feeldesign crayon-font-monaco crayon-os-mac print-yes notranslate crayon-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important; height: 18px !important; line-height: 18px !important; margin-top: -19px; display: none; position: absolute; z-index: 2;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="切换显示行编号"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-plain-button" title="纯文本显示代码"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-popup-button" title="在新窗口中显示代码"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">128| 64| 32| 16| 8 | 4 | 2 | 1
+-------------------------------
+ 0 | 1 | 0 | 0 | 0 | 0 | 1 | 0
+-------------------------------</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5e9ae226c123f338831225-1" style="height: 15px;">1</div><div class="crayon-num" data-line="crayon-5e9ae226c123f338831225-2" style="height: 15px;">2</div><div class="crayon-num" data-line="crayon-5e9ae226c123f338831225-3" style="height: 15px;">3</div><div class="crayon-num" data-line="crayon-5e9ae226c123f338831225-4" style="height: 15px;">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5e9ae226c123f338831225-1"><span class="crayon-cn">128</span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">64</span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">32</span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">16</span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">8</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">4</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">1</span></div><div class="crayon-line" id="crayon-5e9ae226c123f338831225-2"><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">-</span></div><div class="crayon-line" id="crayon-5e9ae226c123f338831225-3"><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">0</span></div><div class="crayon-line" id="crayon-5e9ae226c123f338831225-4"><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">-</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0189 seconds] -->
+<p>The above binary number may represent the integer 66. We can apply <em>bit shift </em>operations to binary numbers such that if I shifted all the bits right ( &gt;&gt;) by 1 place I would have:</p><!-- Crayon Syntax Highlighter v2.5.0 -->
+
+		<div id="crayon-5e9ae226c127a533611450" class="crayon-syntax crayon-theme-feeldesign crayon-font-monaco crayon-os-mac print-yes notranslate crayon-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important; height: 18px !important; line-height: 18px !important; margin-top: -19px; display: none; position: absolute; z-index: 2;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="切换显示行编号"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-plain-button" title="纯文本显示代码"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-popup-button" title="在新窗口中显示代码"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">128| 64| 32| 16| 8 | 4 | 2 | 1
+-------------------------------
+ 0 | 0 | 1 | 0 | 0 | 0 | 0 | 1
+-------------------------------</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5e9ae226c127a533611450-1" style="height: 15px;">1</div><div class="crayon-num" data-line="crayon-5e9ae226c127a533611450-2" style="height: 15px;">2</div><div class="crayon-num" data-line="crayon-5e9ae226c127a533611450-3" style="height: 15px;">3</div><div class="crayon-num" data-line="crayon-5e9ae226c127a533611450-4" style="height: 15px;">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5e9ae226c127a533611450-1"><span class="crayon-cn">128</span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">64</span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">32</span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">16</span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">8</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">4</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">1</span></div><div class="crayon-line" id="crayon-5e9ae226c127a533611450-2"><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">-</span></div><div class="crayon-line" id="crayon-5e9ae226c127a533611450-3"><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">1</span></div><div class="crayon-line" id="crayon-5e9ae226c127a533611450-4"><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">-</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0036 seconds] -->
+<p>This might represent an integer value of 33. The left most bit has been newly introduced or <em>padded</em>&nbsp;with 0.</p>
+<p>So. When you are thinking about bits, and bit shifting operations, think left to right in terms of significance. Got that? Right, now lets move onto bytes.</p>
+<p>The above examples dealt with a single byte (8 bits). When a multi-byte number is represented in a byte array, it can be either little endian or big endian. On Intel, and in terms of CoreAudio, little endian is used. This means the BYTE with the most significance has the highest memory address and the BYTE with the least significance has the lowest memory address (little-end-first = little-endian).</p>
+<p>See <a title="Understanding AurioTouch" href="http://www.kevatron.co.uk/understanding-auriotouch/" target="_blank">this</a> post for why this is important when dealing with raw sample data in CoreAudio, and <a title="Endianness" href="http://www.codeproject.com/Articles/4804/Basic-concepts-on-Endianness" target="_blank">this</a> post on codeproject for a more in-depth explanation.&nbsp;The most important thing to realise is that Bit order and Byte order significance are different beasts. Dont get confused.</p>
+<p>For the rest of this post, we are dealing with the representation of the binary digits from the perspective of the language, not the architecture. i.e <em>Think in terms of bit order and not byte order.</em></p>
+<p><strong>Converting 8.24 bit samples to 16 bit integer samples</strong></p>
+<p>What does this mean? It means we are going to:</p>
+<ul>
+<li>Preserve the sign of the sample data (+/- bit)</li>
+<li>Throw away 8 bits of the 24 bit sample. We assume these bits contain extra precision that we just dont need or are not interested in.</li>
+<li>Be left with a signed 16 bit sample. A signed 16 bit integer can range from&nbsp;-32,768 to 32,767. This will be the resulting range of our sample.</li>
+</ul>
+<p>Remember, we are thinking in terms of bit order; the most significant bit (or the ‘high order’ bit) is the left-most bit. Here is an example of a 32 bit (4 byte), 8.24 fixed point sample:</p><!-- Crayon Syntax Highlighter v2.5.0 -->
+
+		<div id="crayon-5e9ae226c12a8553148649" class="crayon-syntax crayon-theme-feeldesign crayon-font-monaco crayon-os-mac print-yes notranslate crayon-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important; height: 18px !important; line-height: 18px !important; margin-top: -19px; display: none; position: absolute; z-index: 2;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="切换显示行编号"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-plain-button" title="纯文本显示代码"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-popup-button" title="在新窗口中显示代码"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">  8 bits  |         24 bit sample
+----------------------------------------------
+ 11111111 | 01101010 | 00011101 | 11001011
+----------------------------------------------</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5e9ae226c12a8553148649-1" style="height: 15px;">1</div><div class="crayon-num" data-line="crayon-5e9ae226c12a8553148649-2" style="height: 15px;">2</div><div class="crayon-num" data-line="crayon-5e9ae226c12a8553148649-3" style="height: 15px;">3</div><div class="crayon-num" data-line="crayon-5e9ae226c12a8553148649-4" style="height: 15px;">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5e9ae226c12a8553148649-1"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-cn">8</span><span class="crayon-h"> </span><span class="crayon-i">bits</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-o">|</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-cn">24</span><span class="crayon-h"> </span><span class="crayon-e">bit </span><span class="crayon-i">sample</span></div><div class="crayon-line" id="crayon-5e9ae226c12a8553148649-2"><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span></div><div class="crayon-line" id="crayon-5e9ae226c12a8553148649-3"><span class="crayon-h"> </span><span class="crayon-cn">11111111</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">01101010</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">00011101</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">11001011</span></div><div class="crayon-line" id="crayon-5e9ae226c12a8553148649-4"><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0032 seconds] -->
+<p>In 8.24 fixed point samples, the first 8 bits represent the sign. They are either all 0 or all 1. The next 24 bits represent the sample data. We want to preserve the sign, but chuck away 8 bits of the sample data to give us a signed 16 bit integer sample.</p>
+<p><strong>最高8位是符号位，24位是有效数据位。右移9位可以转换成正常的16位整形数,丢掉低位的值。</strong></p>
+<p>The trick is to shift the bits 9 places to the right. It’s a crafty move. This is what happens to our 32 bits of data if we shift them right 9 places: 9 bits fall of the end, the sign bits get shunted up and the new bits get padded with zeros such that we get left with:</p><!-- Crayon Syntax Highlighter v2.5.0 -->
+
+		<div id="crayon-5e9ae226c12d3781452546" class="crayon-syntax crayon-theme-feeldesign crayon-font-monaco crayon-os-mac print-yes notranslate crayon-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important; height: 18px !important; line-height: 18px !important; margin-top: -19px; display: none; position: absolute; z-index: 2;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="切换显示行编号"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-plain-button" title="纯文本显示代码"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-popup-button" title="在新窗口中显示代码"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">  new bits  |sign bits|                         gone
+------------------------------------------
+&nbsp;00000000 | 0111111 | 10110101 | 00001110    111001011
+------------------------------------------
+                    |   first 16 bits    |</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5e9ae226c12d3781452546-1" style="height: 15px;">1</div><div class="crayon-num" data-line="crayon-5e9ae226c12d3781452546-2" style="height: 15px;">2</div><div class="crayon-num" data-line="crayon-5e9ae226c12d3781452546-3" style="height: 15px;">3</div><div class="crayon-num" data-line="crayon-5e9ae226c12d3781452546-4" style="height: 15px;">4</div><div class="crayon-num" data-line="crayon-5e9ae226c12d3781452546-5" style="height: 15px;">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5e9ae226c12d3781452546-1"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-i">bits</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-o">|</span><span class="crayon-e">sign </span><span class="crayon-i">bits</span><span class="crayon-o">|</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-i">gone</span></div><div class="crayon-line" id="crayon-5e9ae226c12d3781452546-2"><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span></div><div class="crayon-line" id="crayon-5e9ae226c12d3781452546-3">&nbsp;<span class="crayon-cn">00000000</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">0111111</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">10110101</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-cn">00001110</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-cn">111001011</span></div><div class="crayon-line" id="crayon-5e9ae226c12d3781452546-4"><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span><span class="crayon-o">--</span></div><div class="crayon-line" id="crayon-5e9ae226c12d3781452546-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">|</span><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-i">first</span><span class="crayon-h"> </span><span class="crayon-cn">16</span><span class="crayon-h"> </span><span class="crayon-i">bits</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">|</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0053 seconds] -->
+<p>We still have 32 bits of data with the bits shunted up. We are only interested in the first 16 bits of data (the right most bits) that now contain the most significant bits of the 24 bit sample data. A&nbsp;brilliant&nbsp;side effect is that the first (left-most) bit of the first 16 bits represent the sign!</p>
+<p>By casting the resulting 32 bits to a 16 bit signed integer we take the first 16 bits, which are the bits we want, and we have a signed 16 bit sample that ranges from&nbsp;-32,768 to 32,767. If we want this as a floating point value between 0 and 1 we can now simply divide by 32,768. Walla.</p>
+<p>The code is thus:</p><!-- Crayon Syntax Highlighter v2.5.0 -->
+
+		<div id="crayon-5e9ae226c12fe609805322" class="crayon-syntax crayon-theme-feeldesign crayon-font-monaco crayon-os-mac print-yes notranslate crayon-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin: 12px; float: none; clear: both; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" mouseover overlay hide delay" style="font-size: 12px !important; height: 18px !important; line-height: 18px !important; margin-top: -19px; display: none; z-index: 4;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="切换显示行编号"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-plain-button" title="纯文本显示代码"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div><div class="crayon-button crayon-popup-button" title="在新窗口中显示代码"><div class="crayon-button-icon" style="background-size: 48px 128px; background-image: url(&quot;http://www.jmpcrash.com/wp-content/plugins/crayon-syntax-highlighter/css/images/toolbar/buttons@2x.png&quot;);"></div></div></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">SInt16 sampleInt16 = (SInt16)(originalSample &amp;gt;&amp;gt; 9);
+float sampleFloat = sampleInt16 / 32768.0;</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5e9ae226c12fe609805322-1" style="height: 15px;">1</div><div class="crayon-num" data-line="crayon-5e9ae226c12fe609805322-2" style="height: 15px;">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-line" id="crayon-5e9ae226c12fe609805322-1"><span class="crayon-e">SInt16 </span><span class="crayon-v">sampleInt16</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-i">SInt16</span><span class="crayon-sy">)</span><span class="crayon-sy">(</span><span class="crayon-i">originalSample</span><span class="crayon-h"> </span><span class="crayon-o">&amp;</span><span class="crayon-i">gt</span><span class="crayon-sy">;</span><span class="crayon-o">&amp;</span><span class="crayon-i">gt</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-cn">9</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5e9ae226c12fe609805322-2"><span class="crayon-t">float</span><span class="crayon-h"> </span><span class="crayon-v">sampleFloat</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-i">sampleInt16</span><span class="crayon-h"> </span><span class="crayon-o">/</span><span class="crayon-h"> </span><span class="crayon-cn">32768.0</span><span class="crayon-sy">;</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0017 seconds] -->
+<p>Simple when you know how. And why!</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</div>
+<footer>This entry was posted in <a title="View all posts in Development" href="http://www.kevatron.co.uk/category/development/" rel="category tag">Development</a>, <a title="View all posts in iOS" href="http://www.kevatron.co.uk/category/ios/" rel="category tag">iOS</a> and tagged <a href="http://www.kevatron.co.uk/tag/8-24/" rel="tag">8.24</a>, <a href="http://www.kevatron.co.uk/tag/audio-unit/" rel="tag">audio unit</a>, <a href="http://www.kevatron.co.uk/tag/auriotouch/" rel="tag">auriotouch</a>, <a href="http://www.kevatron.co.uk/tag/core-audio/" rel="tag">core audio</a>, <a href="http://www.kevatron.co.uk/tag/ios-2/" rel="tag">ios</a>, <a href="http://www.kevatron.co.uk/tag/little-endian/" rel="tag">little endian</a>, <a href="http://www.kevatron.co.uk/tag/msb/" rel="tag">msb</a>, <a href="http://www.kevatron.co.uk/tag/objective-c/" rel="tag">Objective-C</a>, <a href="http://www.kevatron.co.uk/tag/pcm/" rel="tag">pcm</a>, <a href="http://www.kevatron.co.uk/tag/sound/" rel="tag">Sound</a> by <a href="http://www.kevatron.co.uk/author/kev/">kev</a>. Bookmark the <a title="Permalink to Converting 8.24 bit samples in CoreAudio on iOS" href="http://www.kevatron.co.uk/converting-8-24-bit-samples-in-coreaudio-on-ios/" rel="bookmark">permalink</a>.</footer>
+						
+			<p></p>
+			<p class="pagination">
+				<span class="prev"><a href="http://www.jmpcrash.com/?p=380" rel="prev">UML建模之时序图（Sequence Diagram）</a></span>
+				<span class="next"><a href="http://www.jmpcrash.com/?p=386" rel="next">Goertzel算法解析</a></span>
+			</p>
+
+			<div id="comments">
+				
+
+<!-- You can start editing here. -->
+<div class="comments">
+	<p>Comments are currently closed.</p>
+	
+	<p></p>
+	</div>
+			</div>
+		</article>
+	</div>
+<aside>
+	<div class="cols"><div class="widget col"><h3>近期评论</h3><ul id="recentcomments"></ul></div><div class="widget col">		<h3>近期文章</h3>		<ul>
+					<li>
+				<a href="http://www.jmpcrash.com/?p=1174">打造最强大脑：关于大脑的25个事实</a>
+							<span class="post-date">2016 年 8 月 14 日</span>
+						</li>
+					<li>
+				<a href="http://www.jmpcrash.com/?p=1171">尽力和拼命的区别</a>
+							<span class="post-date">2016 年 8 月 1 日</span>
+						</li>
+					<li>
+				<a href="http://www.jmpcrash.com/?p=1169">scons用户指南第七章：环境</a>
+							<span class="post-date">2016 年 7 月 30 日</span>
+						</li>
+					<li>
+				<a href="http://www.jmpcrash.com/?p=1167">SCons的使用</a>
+							<span class="post-date">2016 年 7 月 30 日</span>
+						</li>
+					<li>
+				<a href="http://www.jmpcrash.com/?p=1162">圈圈</a>
+							<span class="post-date">2016 年 7 月 10 日</span>
+						</li>
+					<li>
+				<a href="http://www.jmpcrash.com/?p=1160">开源项目集</a>
+							<span class="post-date">2016 年 7 月 10 日</span>
+						</li>
+					<li>
+				<a href="http://www.jmpcrash.com/?p=1155">Git原理浅析</a>
+							<span class="post-date">2016 年 3 月 24 日</span>
+						</li>
+					<li>
+				<a href="http://www.jmpcrash.com/?p=1149">Using procrank to measure memory usage on embedded Linux</a>
+							<span class="post-date">2015 年 10 月 10 日</span>
+						</li>
+				</ul>
+		</div><div class="widget col"><h3>分类目录</h3>		<ul>
+	<li class="cat-item cat-item-2"><a href="http://www.jmpcrash.com/?cat=2">ANDROID</a>
+<ul class="children">
+	<li class="cat-item cat-item-16"><a href="http://www.jmpcrash.com/?cat=16">android应用开发</a>
+</li>
+	<li class="cat-item cat-item-19"><a href="http://www.jmpcrash.com/?cat=19">DIY修改</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://www.jmpcrash.com/?cat=3">基础知识</a>
+</li>
+	<li class="cat-item cat-item-17"><a href="http://www.jmpcrash.com/?cat=17">框架分析</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="http://www.jmpcrash.com/?cat=18">解BUG</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-12"><a href="http://www.jmpcrash.com/?cat=12">LINUX</a>
+<ul class="children">
+	<li class="cat-item cat-item-15"><a href="http://www.jmpcrash.com/?cat=15">Kernel</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="http://www.jmpcrash.com/?cat=13">应用开发</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="http://www.jmpcrash.com/?cat=24">专题</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="http://www.jmpcrash.com/?cat=1">临时文件夹</a>
+</li>
+	<li class="cat-item cat-item-20"><a href="http://www.jmpcrash.com/?cat=20">大杂烩</a>
+<ul class="children">
+	<li class="cat-item cat-item-31"><a href="http://www.jmpcrash.com/?cat=31">IT杂文</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="http://www.jmpcrash.com/?cat=23">其它</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="http://www.jmpcrash.com/?cat=21">命令使用</a>
+</li>
+	<li class="cat-item cat-item-22"><a href="http://www.jmpcrash.com/?cat=22">工具使用</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="http://www.jmpcrash.com/?cat=30">音频</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-26"><a href="http://www.jmpcrash.com/?cat=26">学习</a>
+<ul class="children">
+	<li class="cat-item cat-item-27"><a href="http://www.jmpcrash.com/?cat=27">数学</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="http://www.jmpcrash.com/?cat=28">算法</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-25"><a href="http://www.jmpcrash.com/?cat=25" title="与芯片相关
+与硬件器件相关">硬件芯片</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="http://www.jmpcrash.com/?cat=7">语言脚本</a>
+<ul class="children">
+	<li class="cat-item cat-item-8"><a href="http://www.jmpcrash.com/?cat=8">C/C++/C#</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="http://www.jmpcrash.com/?cat=9">JAVA</a>
+</li>
+	<li class="cat-item cat-item-34"><a href="http://www.jmpcrash.com/?cat=34">OpenGL</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="http://www.jmpcrash.com/?cat=11">OTHER</a>
+</li>
+	<li class="cat-item cat-item-33"><a href="http://www.jmpcrash.com/?cat=33">Python</a>
+</li>
+	<li class="cat-item cat-item-35"><a href="http://www.jmpcrash.com/?cat=35">协议</a>
+</li>
+</ul>
+</li>
+		</ul>
+</div></div>				<div class="cols"><div class="widget"><h3>功能</h3>			<ul>
+						<li><a href="http://www.jmpcrash.com/wp-login.php">登录</a></li>
+			<li><a href="http://www.jmpcrash.com/?feed=rss2">文章<abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://www.jmpcrash.com/?feed=comments-rss2">评论<abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://cn.wordpress.org/" title="基于WordPress，一个优美、先进的个人信息发布平台。">WordPress.org</a></li>			</ul>
+			</div></div></aside>	</div></section>
+<!--
+-->
+<br>
+<p align="center">
+ <a href="http://www.miitbeian.gov.cn/" target="_blank">粤ICP备1304785</a></p>
+	<footer><div>
+	
+    	<div class="clearfix widgets">
+        	<div class="cols">
+				<div class="col">
+									</div>
+				<div class="col">
+									</div>
+			</div>
+            <div class="cols">
+				<div class="col">
+									</div>
+				<div class="col">
+									</div>
+			</div>
+        </div>
+    
+		<div class="f-menu">
+			<ul class="menu"></ul>		</div>
+		
+	</div></footer>
+<script type="text/javascript" src="./Converting 8.24 bit samples in CoreAudio on iOS _ 程序猿_files/comment-reply.min.js"></script>
+<script type="text/javascript" src="./Converting 8.24 bit samples in CoreAudio on iOS _ 程序猿_files/wp-embed.min.js"></script>
+	
+<script type="text/javascript" src="./Converting 8.24 bit samples in CoreAudio on iOS _ 程序猿_files/su_new.js"></script>
+
+</body></html>

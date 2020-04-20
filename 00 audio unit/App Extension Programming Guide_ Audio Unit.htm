@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<!-- saved from url=(0107)https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/AudioUnit.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>App Extension Programming Guide: Audio Unit</title>
+  <link rel="stylesheet" type="text/css" href="./App Extension Programming Guide_ Audio Unit_files/style-1.6.3.css">
+  <link rel="stylesheet" type="text/css" href="./App Extension Programming Guide_ Audio Unit_files/feedback-1.6.3.css">
+   
+<meta id="j-version" name="j-version" content="">
+<meta id="build" name="build" content="c1e4c7a89af8f899a21cfa81fc33ba42">
+<meta id="document-version" name="document-version" content="4.4.3">
+<meta id="book-assignments" name="book-assignments" content="{Type/Guide}, {Topic/General}">
+<meta scheme="apple_ref" id="identifier" name="identifier" content="//apple_ref/doc/uid/TP40014214">
+<meta id="chapterId" name="chapterId" content="TP40014214-CH22">
+<meta id="book-title" name="book-title" content="App Extension Programming Guide">
+<meta id="book-resource-type" name="book-resource-type" content="Guide">
+<meta id="book-root" name="book-root" content="./">
+<meta id="book-json" name="book-json" content="book.json">
+<meta id="date" name="date" content="2017-10-19">
+<meta id="description" name="description" content="Describes how to develop an app extension, which is an executable that adds functionality to other apps.">
+<meta id="IndexTitle" name="IndexTitle" content="">
+<meta id="resources-uri" name="resources-uri" content="../../../../Resources/1282">
+<link id="book-index-page" rel="Start" title="" type="text/html" href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/index.html">
+<!-- , next_chapter: next_chapter, previous_chapter: previous_chapter -->
+<link id="next-page" rel="Next" type="text/html" href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/AudioUnit.html">
+<link id="previous-page" rel="Prev" type="text/html" href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/AudioUnit.html">
+<meta id="devcenter" name="devcenter" content="&lt;!-- DEVCENTER_NAME --&gt;">
+<meta id="devcenter-url" name="devcenter-url" content="&lt;!-- DEVCENTER_URL --&gt;">
+<meta id="reflib" name="reflib" content="&lt;!-- REFLIB_NAME --&gt;">
+
+<meta id="xcode-display" name="xcode-display" content="render">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta id="platforms" name="platforms" content="OS X,iOS,tvOS,watchOS">
+</head>
+
+  <body id="conceptual_flow_with_tasks" class="jazz">
+    
+    <header id="ios_header" class="hideOnPrint hideInXcode">
+  <div class="content-wrapper">
+    <p class="header-text">
+    	<a href="https://developer.apple.com/library/archive/navigation/" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/navigation/_1&quot;;return this.s_oc?this.s_oc(e):true">Documentation Archive
+ 		</a>
+ </p>
+    <p id="wwdr"><img id="apple_logo" src="./App Extension Programming Guide_ Audio Unit_files/apple2.png" height="14px" width="12px" aria-hidden="true"><a href="https://developer.apple.com/" onclick="s_objectID=&quot;https://developer.apple.com/_1&quot;;return this.s_oc?this.s_oc(e):true">Developer</a></p>
+  </div>
+</header>
+
+    <section id="valence">
+  <div class="content-wrapper">
+    <p id="hierarchial_navigation">
+      <span id="book_title">App Extension Programming Guide</span>
+    </p>
+    <form id="search" class="hideInXcode" method="get" action="https://developer.apple.com/search/index.php" accept-charset="utf-8" autocomplete="off">
+  <input type="search" id="ssi_SearchField" placeholder="Search Documentation Archive" name="q" autocomplete="off" tabindex="2">
+</form>
+
+      
+   
+   
+
+
+
+    <img id="shortstack" src="./App Extension Programming Guide_ Audio Unit_files/shortstack_2x.png">
+  </div>
+</section>
+    <div class="content-wrapper">
+      <nav id="navigator" class="book-parts hideInXcode" role="navigation">
+    <ul class="nav-parts">
+        <li data-id="//apple_ref/doc/uid/TP40014214-CH4-SW1" class="part-name">
+            <a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/index.html#//apple_ref/doc/uid/TP40014214-CH20-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH20-SW1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/inde_1&quot;;return this.s_oc?this.s_oc(e):true">App Extension Essentials</a>
+          <ul class="nav-chapters">
+              <li class="nav-chapter">
+              	<a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/index.html#//apple_ref/doc/uid/TP40014214-CH20-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH20-SW1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/inde_2&quot;;return this.s_oc?this.s_oc(e):true">App Extensions Increase Your Impact</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/ExtensionOverview.html#//apple_ref/doc/uid/TP40014214-CH2-SW2" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH2-SW2" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Exte_1&quot;;return this.s_oc?this.s_oc(e):true">Understand How an App Extension Works</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/ExtensionCreation.html#//apple_ref/doc/uid/TP40014214-CH5-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH5-SW1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Exte_2&quot;;return this.s_oc?this.s_oc(e):true">Creating an App Extension</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/ExtensionScenarios.html#//apple_ref/doc/uid/TP40014214-CH21-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH21-SW1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Exte_3&quot;;return this.s_oc?this.s_oc(e):true">Handling Common Scenarios</a>
+              </li>
+          </ul>
+        </li>
+        <li data-id="//apple_ref/doc/uid/TP40014214-CH14-SW1" class="part-name nav-part-active open-part">
+            <a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Action.html#//apple_ref/doc/uid/TP40014214-CH13-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH13-SW1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Acti_1&quot;;return this.s_oc?this.s_oc(e):true">App Extension Types</a>
+          <ul class="nav-chapters">
+              <li class="nav-chapter">
+              	<a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Action.html#//apple_ref/doc/uid/TP40014214-CH13-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH13-SW1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Acti_2&quot;;return this.s_oc?this.s_oc(e):true">Action</a>
+              </li>
+              <li class="nav-chapter nav-current-chapter">
+              	<a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/AudioUnit.html#//apple_ref/doc/uid/TP40014214-CH22-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH22-SW1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Audi_1&quot;;return this.s_oc?this.s_oc(e):true">Audio Unit</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/ContentBlocker.html#//apple_ref/doc/uid/TP40014214-CH26-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH26-SW1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Cont_1&quot;;return this.s_oc?this.s_oc(e):true">Content Blocker</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/CustomKeyboard.html#//apple_ref/doc/uid/TP40014214-CH16-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH16-SW1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Cust_1&quot;;return this.s_oc?this.s_oc(e):true">Custom Keyboard</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/FileProvider.html#//apple_ref/doc/uid/TP40014214-CH18-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH18-SW1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/File_1&quot;;return this.s_oc?this.s_oc(e):true">Document Provider</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Finder.html#//apple_ref/doc/uid/TP40014214-CH15-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH15-SW1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Find_1&quot;;return this.s_oc?this.s_oc(e):true">Finder Sync</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Photos.html#//apple_ref/doc/uid/TP40014214-CH17-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH17-SW1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Phot_1&quot;;return this.s_oc?this.s_oc(e):true">Photo Editing</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Share.html#//apple_ref/doc/uid/TP40014214-CH12-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH12-SW1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Shar_1&quot;;return this.s_oc?this.s_oc(e):true">Share</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Today.html#//apple_ref/doc/uid/TP40014214-CH11-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH11-SW1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Toda_1&quot;;return this.s_oc?this.s_oc(e):true">Today</a>
+              </li>
+          </ul>
+        </li>
+        <li data-id="revision-history" class="part-name">
+          <a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/RevisionHistory.html#//apple_ref/doc/uid/TP40014214-CH99-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH99-SW1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Revi_1&quot;;return this.s_oc?this.s_oc(e):true">Revision History</a>
+          <ul class="nav-chapters">
+            <li class="nav-chapter">
+              <a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/RevisionHistory.html#//apple_ref/doc/uid/TP40014214-CH99-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH99-SW1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Revi_2&quot;;return this.s_oc?this.s_oc(e):true">Document Revision History</a>
+            </li>
+          </ul>
+        </li>
+    </ul>
+</nav>
+
+      <menu id="bashful" type="toolbar">
+  <div class="shield"></div>
+  <menuitem id="jump_to" class="menu-bar-item closed">
+  <span>On This Page</span>
+  <div class="chevron">
+    <div class="chevy chevron-left"></div>
+    <div class="chevy chevron-right"></div>
+  </div>
+  <menu type="list" class="details">
+      <ul class="list-bullet">
+          <li class="item">
+            <a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/AudioUnit.html#//apple_ref/doc/uid/TP40014214-CH22-SW7" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Audi_2&quot;;return this.s_oc?this.s_oc(e):true">How Audio Unit App Extensions Work</a>
+          </li>
+          <li class="item">
+            <a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/AudioUnit.html#//apple_ref/doc/uid/TP40014214-CH22-SW10" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Audi_3&quot;;return this.s_oc?this.s_oc(e):true">Using the Xcode Audio Unit App Extension Template</a>
+          </li>
+          <li class="item">
+            <a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/AudioUnit.html#//apple_ref/doc/uid/TP40014214-CH22-SW12" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Audi_4&quot;;return this.s_oc?this.s_oc(e):true">Designing the User Interface</a>
+          </li>
+          <li class="item">
+            <a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/AudioUnit.html#//apple_ref/doc/uid/TP40014214-CH22-SW14" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Audi_5&quot;;return this.s_oc?this.s_oc(e):true">Connecting the App Extension UI to the Audio Unit</a>
+          </li>
+          <li class="item">
+            <a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/AudioUnit.html#//apple_ref/doc/uid/TP40014214-CH22-SW16" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Audi_6&quot;;return this.s_oc?this.s_oc(e):true">Overriding AUAudioUnit Properties and Methods</a>
+          </li>
+      </ul>
+  </menu>
+</menuitem>
+
+</menu>
+<div class="pixel-line"></div>
+<div class="rubber-band-gap"></div>
+<article class="chapter">
+  <a name="//apple_ref/doc/uid/TP40014214-CH22"></a><a name="//apple_ref/doc/uid/TP40014214-CH22-SW1"></a>
+
+  <h2 class="chapter-name">Audio Unit</h2>
+
+
+  
+  	<section class="section">
+  		<p class="para">
+  An Audio Unit app extension gives users a convenient way to create or modify audio in any iOS or macOS app that uses sound, including music production apps such as GarageBand or Logic Pro X. 
+</p>
+<p class="para">
+  An Audio Unit app extension has two main elements: an audio unit proper and a user interface (UI) to control the audio unit. The audio unit itself is a custom plug-in in which you implement an audio creation or an audio processing algorithm. You build the audio unit using the Audio Unit framework, whose APIs are described in <em class="u-book"><a href="https://developer.apple.com/documentation/audiounit" class="urlLink" target="_self" onclick="s_objectID=&quot;https://developer.apple.com/documentation/audiounit_1&quot;;return this.s_oc?this.s_oc(e):true">Audio Unit Framework Reference</a></em>. (Designing and building audio units is not covered in the current document, which instead explains how to incorporate an audio unit into an Audio Unit app extension target.) When creating an Audio Unit app extension, you design and create its UI in the storyboard file that is included in the extension’s Xcode template.  
+</p>
+<p class="para">
+  <span class="x-name-no-link">Figure 6-1</span> shows the architectural relationships between an audio unit proper and its user interface, which are both contained in the Audio Unit app extension, and between the extension and the host app that is using it.
+</p>
+<figure class="figure">
+  <a name="//apple_ref/doc/uid/TP40014214-CH22-SW3"></a>
+  <span class="caption"><strong class="caption-number">Figure 6-1</strong>Architecture of an Audio Unit app extension in use by a host app</span>
+  <img src="./App Extension Programming Guide_ Audio Unit_files/audio_unit_containers_2x.png" alt="image: Art/audio_unit_containers_2x.png" width="384" height="192">
+</figure>
+<p class="para">
+  If you have need to provide an Audio Unit app extension without a UI, you can do so by excluding the audio unit user interface, as suggested by the dashed outline in the figure.
+</p>
+<div class="note">
+  <a name="//apple_ref/doc/uid/TP40014214-CH22-SW8"></a>
+  <aside class="aside">
+    <p class="aside-title">Before you begin
+    </p>
+    	<p class="para">Make sure the Audio Unit extension point is appropriate for your purpose. An Audio Unit app extension provides real-time audio processing that generates an audio stream to send to a host app, or that modifies an audio stream from a host app and sends it back to the host app. Audio Unit app extensions cannot perform recording.
+    	</p>
+    <p class="para">
+  To find out about other types of app extensions you can create, see <span class="x-name"><a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/index.html#//apple_ref/doc/uid/TP40014214-CH20-SW3" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH20-SW3" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/inde_3&quot;;return this.s_oc?this.s_oc(e):true">Table 1-1</a></span>.
+</p>
+<p class="para">
+  
+</p>
+
+  </aside>
+</div>
+<p class="para">
+  
+</p>
+<p class="para">
+  <span class="x-name-no-link">Figure 6-2</span> shows an example UI for a custom filter Audio Unit app extension. The “draggable point” in the figure is a control that lets the user modify audio unit parameters for resonance and cutoff frequency.
+</p>
+<figure class="figure">
+  <a name="//apple_ref/doc/uid/TP40014214-CH22-SW5"></a>
+  <span class="caption"><strong class="caption-number">Figure 6-2</strong>User interface of a custom filter Audio Unit app extension</span>
+  <img src="./App Extension Programming Guide_ Audio Unit_files/audiounit_extension_intro_2x.png" alt="image: Art/audiounit_extension_intro_2x.png" width="552" height="335">
+</figure>
+<p class="para">
+  For a video introduction to Audio Unit app extensions, watch the WWDC 2015 presentation <a href="https://developer.apple.com/videos/play/wwdc2015/508/" onclick="s_objectID=&quot;https://developer.apple.com/videos/play/wwdc2015/508/_1&quot;;return this.s_oc?this.s_oc(e):true">Audio Unit Extensions</a>. For a code example that shows how to create an Audio Unit app extension, see <em class="u-book"><a href="https://developer.apple.com/library/archive/samplecode/AudioUnitV3Example/Introduction/Intro.html#//apple_ref/doc/uid/TP40016185" data-renderer-version="1" target="_self" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/samplecode/AudioUnitV3Example/Introduction/Intro.html_1&quot;;return this.s_oc?this.s_oc(e):true">AudioUnitV3Example: A Basic AudioUnit Extension and Host Implementation</a></em>. For more information on the audio unit API, see <em class="u-book"><a href="https://developer.apple.com/documentation/audiounit" class="urlLink" target="_self" onclick="s_objectID=&quot;https://developer.apple.com/documentation/audiounit_2&quot;;return this.s_oc?this.s_oc(e):true">Audio Unit Framework Reference</a></em>.
+</p>
+<p class="para">
+  Audio Unit app extensions are supported in iOS 9.0 and later, and in macOS v10.11 and later. The Audio Unit app extension template is available starting in Xcode 7.
+</p>
+
+		</section> 
+
+
+  <section class="section">
+  <a name="//apple_ref/doc/uid/TP40014214-CH22-SW7"></a>
+  <h3 class="section-name" tabindex="0">How Audio Unit App Extensions Work</h3>
+  <p class="para">
+  In a host app that supports audio units in its audio processing pipeline, a user can choose to use an Audio Unit app extension to add the app extension’s features to the host app.
+</p><p class="para">
+  Each Audio Unit app extension contains exactly one audio unit. There are four audio unit types you can choose from, according to the role for your app extension:
+</p><ul class="list-bullet">
+  <li class="item"><p class="para">
+  <strong class="inline-head">For audio creation:</strong> A <em>generator unit</em> creates audio according to a digital signal processing (DSP) algorithm that you provide. An <em>instrument unit</em> creates audio, typically using a voice bank, in response to MIDI events. 
+</p>
+</li><li class="item"><p class="para">
+  <strong class="inline-head">For audio modification:</strong> An <em>effect unit</em> modifies audio according to a DSP algorithm. A <em>music effect unit</em> modifies audio, using DSP, in response to MIDI events. 
+</p>
+</li>
+</ul><p class="para">
+  <span class="x-name-no-link">Table 6-1</span> summarizes the four variants of Audio Unit app extension you can create, according to the contained audio unit type:
+</p><div class="tableholder">
+  <a name="//apple_ref/doc/uid/TP40014214-CH22-SW9"></a>
+  <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+    <caption class="tablecaption"><strong class="caption-number">Table 6-1</strong>Audio unit types for the four Audio Unit app extension variants</caption>
+    <thead>
+        <tr>
+            <th scope="col" class="TableHeading_TableRow_TableCell"><p class="para">
+  Category
+</p></th>
+            <th scope="col" class="TableHeading_TableRow_TableCell"><p class="para">
+  Employs DSP
+</p></th>
+            <th scope="col" class="TableHeading_TableRow_TableCell"><p class="para">
+  Employs DSP and responds to MIDI events
+</p></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="row-heading" scope="row">
+              <p class="para">
+  Audio creation
+</p>
+
+            </td>
+            <td><p class="para">
+  <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/audiotoolbox/kaudiounittype_generator" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/audiotoolbox/kaudiounittype_generator_1&quot;;return this.s_oc?this.s_oc(e):true">kAudioUnitType_Generator</a></code> (Generator variant)
+</p></td>
+            <td><p class="para">
+  <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/audiotoolbox/1584142-audio_unit_types/kaudiounittype_musicdevice" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/audiotoolbox/1584142-audio_unit_types/kaudiounittype_mu_1&quot;;return this.s_oc?this.s_oc(e):true">kAudioUnitType_MusicDevice</a></code> (Instrument variant)
+</p></td>
+        </tr>
+        <tr>
+            <td class="row-heading" scope="row">
+              <p class="para">
+  Audio modification
+</p>
+
+            </td>
+            <td><p class="para">
+  <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/audiotoolbox/1584142-audio_unit_types/kaudiounittype_effect" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/audiotoolbox/1584142-audio_unit_types/kaudiounittype_ef_1&quot;;return this.s_oc?this.s_oc(e):true">kAudioUnitType_Effect</a></code> (Effect variant)
+</p></td>
+            <td><p class="para">
+  <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/audiotoolbox/1584142-audio_unit_types/kaudiounittype_musiceffect" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/audiotoolbox/1584142-audio_unit_types/kaudiounittype_mu_2&quot;;return this.s_oc?this.s_oc(e):true">kAudioUnitType_MusicEffect</a></code> (Music Effect variant)
+</p></td>
+        </tr>
+    </tbody>
+  </table>
+</div><p class="para">
+  .
+</p><p class="para">
+  For the principal class in an Audio Unit app extension, subclass the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/coreaudiokit/auviewcontroller" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/coreaudiokit/auviewcontroller_1&quot;;return this.s_oc?this.s_oc(e):true">AUViewController</a></code> class. (If you need to provide an Audio Unit app extension with no UI, subclass the <code class="code-voice u-api"><a href="https://developer.apple.com/library/archive/documentation/LegacyTechnologies/WebObjects/WebObjects_3.5/Reference/Frameworks/ObjC/Foundation/Classes/NSObject/Description.html#//apple_ref/occ/cl/NSObject" data-renderer-version="1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/LegacyTechnologies/WebObjects/WebObject_1&quot;;return this.s_oc?this.s_oc(e):true">NSObject</a></code> class instead.) The principal class for your extension must conform to the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/audiotoolbox/auaudiounitfactory" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/audiotoolbox/auaudiounitfactory_1&quot;;return this.s_oc?this.s_oc(e):true">AUAudioUnitFactory</a></code> protocol.
+</p>
+  
+</section>
+<section class="section">
+  <a name="//apple_ref/doc/uid/TP40014214-CH22-SW10"></a>
+  <h3 class="section-name" tabindex="0">Using the Xcode Audio Unit App Extension Template</h3>
+  <p class="para">
+  The Xcode Audio Unit app extension template includes default source files for an <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/audiotoolbox/auaudiounit" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/audiotoolbox/auaudiounit_1&quot;;return this.s_oc?this.s_oc(e):true">AUAudioUnit</a></code> subclass for the audio unit itself, an <code class="code-voice">Info.plist</code> file, an <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/coreaudiokit/auviewcontroller" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/coreaudiokit/auviewcontroller_2&quot;;return this.s_oc?this.s_oc(e):true">AUViewController</a></code> subclass, and a <code class="code-voice">MainInterface.storyboard</code> file. 
+</p><p class="para">
+  <span class="x-name-no-link">Listing 6-1</span> shows the <code class="code-voice">Info.plist</code> keys and values for an iOS Audio Unit app extension for the Effect variant. The <code class="code-voice">type</code> key in this property list specifies the audio unit type that determines the variant, in this case with a value of <code class="code-voice">aufx</code>. For explanations of all the available keys and values, see <span class="x-name"><a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/AudioUnit.html#//apple_ref/doc/uid/TP40014214-CH22-SW2" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH22-SW2" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Audi_7&quot;;return this.s_oc?this.s_oc(e):true">Table 6-2</a></span>.
+</p><section class="code-listing">
+  <a name="//apple_ref/doc/uid/TP40014214-CH22-SW6"></a>
+    <span class="caption"><strong class="caption-number">Listing 6-1</strong>Audio Unit app extension template for an Effect variant</span>
+  <div class="code-sample">
+      <div class="">
+        <ol class="code-lines">
+            <li><code class="code-voice">&lt;key&gt;NSExtension&lt;/key&gt;</code></li>
+            <li><code class="code-voice">    &lt;dict&gt;</code></li>
+            <li><code class="code-voice">        &lt;key&gt;NSExtensionAttributes&lt;/key&gt;</code></li>
+            <li><code class="code-voice">        &lt;dict&gt;</code></li>
+            <li><code class="code-voice">            &lt;key&gt;AudioComponents&lt;/key&gt;</code></li>
+            <li><code class="code-voice">            &lt;array&gt;</code></li>
+            <li><code class="code-voice">                &lt;dict&gt;</code></li>
+            <li><code class="code-voice">                    &lt;key&gt;description&lt;/key&gt;</code></li>
+            <li><code class="code-voice">                    &lt;string&gt;TremoloUnit&lt;/string&gt;</code></li>
+            <li><code class="code-voice">                    &lt;key&gt;manufacturer&lt;/key&gt;</code></li>
+            <li><code class="code-voice">                    &lt;string&gt;Aaud&lt;/string&gt;</code></li>
+            <li><code class="code-voice">                    &lt;key&gt;name&lt;/key&gt;</code></li>
+            <li><code class="code-voice">                    &lt;string&gt;Aaud: TremoloUnit&lt;/string&gt;</code></li>
+            <li><code class="code-voice">                    &lt;key&gt;sandboxSafe&lt;/key&gt;</code></li>
+            <li><code class="code-voice">                    &lt;true/&gt;</code></li>
+            <li><code class="code-voice">                    &lt;key&gt;subtype&lt;/key&gt;</code></li>
+            <li><code class="code-voice">                    &lt;string&gt;tmlo&lt;/string&gt;</code></li>
+            <li><code class="code-voice">                    &lt;key&gt;tags&lt;/key&gt;</code></li>
+            <li><code class="code-voice">                    &lt;array&gt;</code></li>
+            <li><code class="code-voice">                        &lt;string&gt;Effects&lt;/string&gt;</code></li>
+            <li><code class="code-voice">                    &lt;/array&gt;</code></li>
+            <li><code class="code-voice">                    &lt;key&gt;type&lt;/key&gt;</code></li>
+            <li><code class="code-voice">                    &lt;string&gt;aufx&lt;/string&gt;</code></li>
+            <li><code class="code-voice">                    &lt;key&gt;version&lt;/key&gt;</code></li>
+            <li><code class="code-voice">                    &lt;integer&gt;0001&lt;/integer&gt;</code></li>
+            <li><code class="code-voice">                &lt;/dict&gt;</code></li>
+            <li><code class="code-voice">            &lt;/array&gt;</code></li>
+            <li><code class="code-voice">        &lt;/dict&gt;</code></li>
+            <li><code class="code-voice">        &lt;key&gt;NSExtensionMainStoryboard&lt;/key&gt;</code></li>
+            <li><code class="code-voice">        &lt;string&gt;MainInterface&lt;/string&gt;</code></li>
+            <li><code class="code-voice">        &lt;key&gt;NSExtensionPointIdentifier&lt;/key&gt;</code></li>
+            <li><code class="code-voice">        &lt;string&gt;com.apple.AudioUnit-UI&lt;/string&gt;</code></li>
+            <li><code class="code-voice">    &lt;/dict&gt;</code></li>
+        </ol>
+      </div>
+  </div>
+</section><p class="para">
+  The Audio Unit app extension template includes an Audio Unit Type option that lets you pick among four variants: Instrument, Generator, Effect, and Music Effect. Each of these variants includes a storyboard file for a user interface. If you need to create an app extension without a UI, with any of these variants, perform the following steps after you have created the app extension target:
+</p><ol class="list-number">
+  <li class="item"><p class="para">
+  Replace the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/coreaudiokit/auviewcontroller" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/coreaudiokit/auviewcontroller_3&quot;;return this.s_oc?this.s_oc(e):true">AUViewController</a></code> subclass with an <code class="code-voice u-api"><a href="https://developer.apple.com/library/archive/documentation/LegacyTechnologies/WebObjects/WebObjects_3.5/Reference/Frameworks/ObjC/Foundation/Classes/NSObject/Description.html#//apple_ref/occ/cl/NSObject" data-renderer-version="1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/LegacyTechnologies/WebObjects/WebObject_2&quot;;return this.s_oc?this.s_oc(e):true">NSObject</a></code> subclass.
+</p>
+</li><li class="item"><p class="para">
+  Replace the <code class="code-voice">NSExtensionMainStoryboard</code> key with the <code class="code-voice">NSExtensionPrincipalClass</code> key.
+</p>
+</li>
+</ol><p class="para">
+  An Audio Unit app extension has several customizable values in its <code class="code-voice">Info.plist</code> file, described in <span class="x-name-no-link">Table 6-2</span>.
+</p><div class="tableholder">
+  <a name="//apple_ref/doc/uid/TP40014214-CH22-SW2"></a>
+  <table class="graybox" border="0" cellspacing="0" cellpadding="5">
+    <caption class="tablecaption"><strong class="caption-number">Table 6-2</strong>Customizable Audio Unit app extension <code class="code-voice">Info.plist</code> values</caption>
+    <thead>
+        <tr>
+            <th scope="col" class="TableHeading_TableRow_TableCell"><p class="para">
+  Key
+</p></th>
+            <th scope="col" class="TableHeading_TableRow_TableCell"><p class="para">
+  Value description
+</p></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td scope="row"><p class="para">
+  <code class="code-voice">description</code>
+</p></td>
+            <td><p class="para">
+  A product name for the audio unit, such as <code class="code-voice">TremoloUnit</code>.
+</p></td>
+        </tr>
+        <tr>
+            <td scope="row"><p class="para">
+  <code class="code-voice">manufacturer</code>
+</p></td>
+            <td><p class="para">
+  A manufacturer code for the audio unit, such as <code class="code-voice">Aaud</code>. This value must be exactly 4 alphanumeric characters.
+</p></td>
+        </tr>
+        <tr>
+            <td scope="row"><p class="para">
+  <code class="code-voice">name</code>
+</p></td>
+            <td><p class="para">
+  The full name of the audio unit. This is derived from the <code class="code-voice">manufacturer</code> and <code class="code-voice">description</code> key values.
+</p></td>
+        </tr>
+        <tr>
+            <td scope="row"><p class="para">
+  <code class="code-voice">sandboxSafe</code>
+</p></td>
+            <td><p class="para">
+  (macOS only) A Boolean value indicating whether the audio unit can be loaded directly into a sandboxed process. For more information on sandboxing, see <a href="https://developer.apple.com/app-sandboxing/" onclick="s_objectID=&quot;https://developer.apple.com/app-sandboxing/_1&quot;;return this.s_oc?this.s_oc(e):true">App Sandboxing</a>.
+</p></td>
+        </tr>
+        <tr>
+            <td scope="row"><p class="para">
+  <code class="code-voice">subtype</code>
+</p></td>
+            <td><p class="para">
+  A subtype code for the audio unit, such as <code class="code-voice">tmlo</code>. This value must be exactly 4 alphanumeric characters.
+</p></td>
+        </tr>
+        <tr>
+            <td scope="row"><p class="para">
+  <code class="code-voice">tags</code>
+</p></td>
+            <td><p class="para">
+  An array of tags that describe the audio unit. The following predefined tags are already localized for your convenience: <code class="code-voice">Bass</code>, <code class="code-voice">Delay</code>, <code class="code-voice">Distortion</code>, <code class="code-voice">Drums</code>, <code class="code-voice">Dynamics</code>, <code class="code-voice">Dynamics Processor</code>, <code class="code-voice">Effects</code>, <code class="code-voice">Equalizer</code>, <code class="code-voice">Filter</code>, <code class="code-voice">Format Converter</code>, <code class="code-voice">Guitar</code>, <code class="code-voice">Imaging</code>, <code class="code-voice">MIDI</code>, <code class="code-voice">Mixer</code>, <code class="code-voice">Offline Effect</code>, <code class="code-voice">Output</code>, <code class="code-voice">Panner</code>, <code class="code-voice">Pitch</code>, <code class="code-voice">Reverb</code>, <code class="code-voice">Sampler</code>, <code class="code-voice">Synthesizer</code>, <code class="code-voice">Time Effect</code>, <code class="code-voice">Vocal</code>. Optionally, include additional tags that describe the extension in a meaningful way to your users.
+</p></td>
+        </tr>
+        <tr>
+            <td scope="row"><p class="para">
+  <code class="code-voice">type</code>
+</p></td>
+            <td><p class="para">
+  The specific variant of the Audio Unit app extension, as you choose it when setting up the Xcode template. The four possible types and their values are: Effect (<code class="code-voice">aufx</code>), Generator (<code class="code-voice">augn</code>), Instrument (<code class="code-voice">aumu</code>), and Music Effect (<code class="code-voice">aufm</code>).
+</p></td>
+        </tr>
+        <tr>
+            <td scope="row"><p class="para">
+  <code class="code-voice">version</code>
+</p></td>
+            <td><p class="para">
+  A version number for the Audio Unit app extension, such as <code class="code-voice">0001</code>.
+</p></td>
+        </tr>
+        <tr>
+            <td scope="row"><p class="para">
+  <code class="code-voice">NSExtensionMainStoryboard</code>
+</p></td>
+            <td><p class="para">
+  The name of the main storyboard file for the Audio Unit app extension. This key is required unless you are specifically creating an Audio Unit app extension without a user interface. In that unusual case, use the <code class="code-voice">NSExtensionPrincipalClass</code> key instead.
+</p></td>
+        </tr>
+        <tr>
+            <td scope="row"><p class="para">
+  <code class="code-voice">NSExtensionPointIdentifier</code>
+</p></td>
+            <td><p class="para">
+  The extension point identifier for the Audio Unit app extension. This value is <code class="code-voice">com.apple.AudioUnit-UI</code> for a extension that has a user interface (the default and usual case), or <code class="code-voice">com.apple.AudioUnit</code> for one without a UI.
+</p></td>
+        </tr>
+    </tbody>
+  </table>
+</div>
+  
+</section>
+<section class="section">
+  <a name="//apple_ref/doc/uid/TP40014214-CH22-SW12"></a>
+  <h3 class="section-name" tabindex="0">Designing the User Interface</h3>
+  <p class="para">
+  In iOS, a host app defines the size and position of a container view that embeds the remote view controller from the Audio Unit app extension.
+</p><p class="para">
+  For more information on designing app extension user interfaces for iOS, see <em class="u-book"><!-- a href="" target="_self" -->iOS Human Interface Guidelines<!-- /a --></em>.
+</p><p class="para">
+  For macOS, consider the size and position of the selected content in the host app when specifying the size and position of the Audio Unit app extension’s main view.
+</p><p class="para">
+  For macOS, use the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/appkit/nsviewcontroller/1434409-preferredcontentsize" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/appkit/nsviewcontroller/1434409-preferredcontentsize_1&quot;;return this.s_oc?this.s_oc(e):true">preferredContentSize</a></code> property of the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/appkit/nsviewcontroller" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/appkit/nsviewcontroller_1&quot;;return this.s_oc?this.s_oc(e):true">NSViewController</a></code> class to specify the Audio Unit app extension main view’s preferred size, based on the size of the selected content. (You can also specify minimum and maximum sizes for the extension’s view, to ensure that a host app doesn’t make unreasonable adjustments to the view.) To specify a preferred position for the app extension main view, set the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/appkit/nsviewcontroller/1434468-preferredscreenorigin" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/appkit/nsviewcontroller/1434468-preferredscreenorigin_1&quot;;return this.s_oc?this.s_oc(e):true">preferredScreenOrigin</a></code> property to the lower-left corner of the extension’s view.
+</p><p class="para">
+  For more information on designing app extensions for macOS, see <em class="u-book"><!-- a href="" target="_self" -->macOS Human Interface Guidelines<!-- /a --></em>.
+</p><div class="important clear">
+  <a name="//apple_ref/doc/uid/TP40014214-CH22-DontLinkElementID_13"></a>
+  <aside class="aside">
+    <p class="aside-title">Important
+    </p>
+    <p class="para">For best results on either platform, use Auto Layout to implement the user interface of an Audio Unit app extension.
+    </p>
+    
+  </aside>
+</div>
+  
+</section>
+<section class="section">
+  <a name="//apple_ref/doc/uid/TP40014214-CH22-SW14"></a>
+  <h3 class="section-name" tabindex="0">Connecting the App Extension UI to the Audio Unit</h3>
+  <p class="para">
+  You must connect your App Extension UI—specifically, the audio unit user interface code—to the audio unit proper. Critically, you cannot assume the order in which the extension UI and its associated audio unit are loaded when a host app requests the app extension. The <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/coreaudiokit/auviewcontroller" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/coreaudiokit/auviewcontroller_4&quot;;return this.s_oc?this.s_oc(e):true">AUViewController</a></code> subclass must attempt to connect its UI controls to its audio unit parameters when either the UI has been loaded or when the audio unit has been loaded, whichever happens first. <span class="x-name-no-link">Listing 6-2</span> shows code that attempts to connect the extension UI to its audio unit for both cases.
+</p><section class="code-listing">
+  <a name="//apple_ref/doc/uid/TP40014214-CH22-SW4"></a>
+    <span class="caption"><strong class="caption-number">Listing 6-2</strong>Connecting the app extension UI to the audio unit</span>
+  <div class="code-sample">
+      <div class="Objective-C">
+        <ol class="code-lines">
+            <li><code class="code-voice"><span class="k">@implementation</span> <span class="nc">AudioUnitViewController</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">    <span class="n">AUAudioUnit</span> <span class="o">*</span><span class="n">audioUnit</span><span class="p">;</span>
+</code></li>
+            <li><code class="code-voice"><span class="p">}</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice"><span class="o">-</span> <span class="p">(</span><span class="n">AUAudioUnit</span> <span class="o">*</span><span class="p">)</span><span class="nl">createAudioUnitWithComponentDescription:</span><span class="p">(</span><span class="n">AudioComponentDescription</span><span class="p">)</span><span class="n">desc</span> <span class="nl">error:</span><span class="p">(</span><span class="n">NSError</span> <span class="o">**</span><span class="p">)</span><span class="n">error</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">    <span class="n">audioUnit</span> <span class="o">=</span> <span class="p">[[</span><span class="n">MyAudioUnit</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithComponentDescription:</span><span class="n">desc</span> <span class="nl">error:</span><span class="n">error</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">    <span class="c1">// Check if the UI has been loaded</span>
+</code></li>
+            <li><code class="code-voice">    <span class="k">if</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">isViewLoaded</span><span class="p">)</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">        <span class="p">[</span><span class="n">self</span> <span class="n">connectUIToAudioUnit</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice">    <span class="p">}</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">    <span class="k">return</span> <span class="n">audioUnit</span><span class="p">;</span>
+</code></li>
+            <li><code class="code-voice"><span class="p">}</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice"><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">viewDidLoad</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">    <span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">    <span class="c1">// Check if the Audio Unit has been loaded</span>
+</code></li>
+            <li><code class="code-voice">    <span class="k">if</span><span class="p">(</span><span class="n">audioUnit</span><span class="p">)</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">        <span class="p">[</span><span class="n">self</span> <span class="n">connectUIToAudioUnit</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice">    <span class="p">}</span>
+</code></li>
+            <li><code class="code-voice"><span class="p">}</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice"><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">connectUIToAudioUnit</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">    <span class="c1">// Get the parameter tree and add observers for any parameters that the UI needs to keep in sync with the Audio Unit</span>
+</code></li>
+            <li><code class="code-voice"><span class="p">}</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice"><span class="k">@end</span>
+</code></li>
+        </ol>
+      </div>
+  </div>
+</section>
+  
+</section>
+<section class="section">
+  <a name="//apple_ref/doc/uid/TP40014214-CH22-SW16"></a>
+  <h3 class="section-name" tabindex="0">Overriding AUAudioUnit Properties and Methods</h3>
+  <p class="para">
+  You must override the following properties in your <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/audiotoolbox/auaudiounit" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/audiotoolbox/auaudiounit_2&quot;;return this.s_oc?this.s_oc(e):true">AUAudioUnit</a></code> subclass:
+</p><ul class="list-bullet">
+  <li class="item"><p class="para">
+  Override the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/audiotoolbox/auaudiounit/1387636-inputbusses" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/audiotoolbox/auaudiounit/1387636-inputbusses_1&quot;;return this.s_oc?this.s_oc(e):true">inputBusses</a></code> getter method to return the app extension’s audio input connection points.
+</p>
+</li><li class="item"><p class="para">
+  Override the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/audiotoolbox/auaudiounit/1387503-outputbusses" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/audiotoolbox/auaudiounit/1387503-outputbusses_1&quot;;return this.s_oc?this.s_oc(e):true">outputBusses</a></code> getter method to return the app extension’s audio output connection points.
+</p>
+</li><li class="item"><p class="para">
+  Override the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/audiotoolbox/auaudiounit/1439864-internalrenderblock" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/audiotoolbox/auaudiounit/1439864-internalrenderblock_1&quot;;return this.s_oc?this.s_oc(e):true">internalRenderBlock</a></code> getter method to return the block that implements the app extension’s audio rendering loop.
+</p>
+</li>
+</ul><p class="para">
+  Also override the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/audiotoolbox/auaudiounit/1387620-allocaterenderresourcesandreturn" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/audiotoolbox/auaudiounit/1387620-allocaterenderresource_1&quot;;return this.s_oc?this.s_oc(e):true">allocateRenderResourcesAndReturnError:</a></code> method, which the host app calls before it starts to render audio, and override the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/audiotoolbox/auaudiounit/1387612-deallocaterenderresources" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/audiotoolbox/auaudiounit/1387612-deallocaterenderresour_1&quot;;return this.s_oc?this.s_oc(e):true">deallocateRenderResources</a></code> method, which the host app calls after it has finished rendering audio. Within each override, call the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/audiotoolbox/auaudiounit" class="urlLink" onclick="s_objectID=&quot;https://developer.apple.com/documentation/audiotoolbox/auaudiounit_3&quot;;return this.s_oc?this.s_oc(e):true">AUAudioUnit</a></code> superclass implementation.
+</p>
+  
+</section>
+
+  	
+ 	<section id="next_previous" class="">
+    		<p class="previous-link"><a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Action.html#//apple_ref/doc/uid/TP40014214-CH13-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH13-SW1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Acti_3&quot;;return this.s_oc?this.s_oc(e):true">Action</a></p>
+  			<p class="next-link"><a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/ContentBlocker.html#//apple_ref/doc/uid/TP40014214-CH26-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH26-SW1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Cont_2&quot;;return this.s_oc?this.s_oc(e):true">Content Blocker</a></p>
+
+    <p class="copyright">Copyright © 2018 Apple Inc. All rights reserved. 
+  <a class="link" href="http://www.apple.com/legal/terms/site.html" target="_blank" rel="external" onclick="s_objectID=&quot;http://www.apple.com/legal/terms/site.html_1&quot;;return this.s_oc?this.s_oc(e):true">Terms of Use</a> | 
+  <a class="link" href="http://www.apple.com/privacy/" target="_blank" rel="external" onclick="s_objectID=&quot;http://www.apple.com/privacy/_1&quot;;return this.s_oc?this.s_oc(e):true">Privacy Policy</a> | 
+  <a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/RevisionHistory.html#//apple_ref/doc/uid/TP40014214-CH99-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40014214-CH99-SW1" onclick="s_objectID=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Revi_3&quot;;return this.s_oc?this.s_oc(e):true">Updated: 2017-10-19</a>
+</p>
+  </section>
+</article>
+
+    </div>
+    <div id="big_button"></div>
+    <footer id="footer">
+  <script src="./App Extension Programming Guide_ Audio Unit_files/devpubs-1.6.3.js" type="text/javascript" charset="utf-8"></script>
+  <div id="_omniture_top">
+<!-- SiteCatalyst code version: H.8. Copyright 1997-2006 Omniture, Inc. -->
+<script type="text/javascript">
+/* RSID: */
+var s_account="appleglobal,appleusdeveloper,dappdeveloperlib"
+</script>
+
+<script type="text/javascript" src="./App Extension Programming Guide_ Audio Unit_files/s_code_h.js"></script>
+<script type="text/javascript">
+s.pageName=AC.Tracking.pageName();
+s.channel="www.us.developer"
+
+/************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+var s_code=s.t();if(s_code)document.write(s_code)</script>
+<!-- End SiteCatalyst code version: H.8. -->
+</div>
+
+</footer>
+
+    
+  
+    <div id="blackout">
+    <div id="preload"></div>
+</div>
+<div id="modal" aria-hidden="true">
+    <div id="closebox" tabindex="0" aria-label="Close feedback form" role="button"></div>
+    <div id="sending" class="hidden">
+        <h2 tabindex="0">Sending feedback…</h2>
+        <div id="sending_img"></div>
+    </div>
+    <div id="error" class="hidden">
+        <h2 tabindex="0">We’re sorry, an error has occurred.</h2>
+        <p>Please try submitting your feedback later.</p>
+        <div id="error_icon"></div>
+    </div>
+    <div id="success" class="hidden">
+        <h2 tabindex="0">Thank you for providing feedback!</h2>
+        <p>Your input helps improve our developer documentation.</p>
+        <div id="thank_you_icon"></div>
+    </div>
+    
+    <form id="feedback" action="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/AudioUnit.html#" method="post">
+        <div class="left-leaf">
+            <h2 id="helpful_title" data-asterisk="a1" tabindex="0">How helpful is this document?</h2>     
+            <sup id="a1" class="asterisk" aria-hidden="true">*</sup>
+
+            <div id="star_group" role="radiogroup" aria-required="true">
+                <label> 
+                    <input class="radio" type="radio" name="helped" value="1"> 
+                    Very helpful
+                </label>
+                <label> 
+                    <input class="radio" type="radio" name="helped" value="2"> 
+                    Somewhat helpful
+                </label>
+                <label>
+                    <input class="radio" type="radio" name="helped" value="3"> 
+                    Not helpful
+                </label>
+            </div>
+        </div>
+        <div class="right-leaf">
+            <h2>How can we improve this document?</h2>
+            <div id="improve" class="checkboxes">
+                <label>
+                    <input type="checkbox" name="typo"> 
+                    Fix typos or links
+                </label>
+                <label>
+                    <input type="checkbox" name="infoIncorrect"> 
+                    Fix incorrect information
+                </label>
+                <label>
+                    <input type="checkbox" name="needs_examples"> 
+                    Add or update code samples
+                </label>
+                <label>
+                    <input type="checkbox" name="needs_art"> 
+                    Add or update illustrations
+                </label>
+                <label>
+                    <input type="checkbox" name="missingInfo"> 
+                    Add information about...
+                </label>
+            </div>
+        </div>
+
+        <textarea id="comment" name="problem" cols="70" rows="8" placeholder="Please tell us more about your experience with this document" data-asterisk="a2" required=""></textarea>
+        <sup id="a2" class="asterisk" aria-hidden="true">*</sup>
+
+        <p class="fineprint">
+            <em aria-hidden="true"><span>*</span> Required information</em>
+        </p> 
+
+        <input id="submit" type="button" value="Send">
+
+        <section id="legal">
+            <p>
+                To submit a product bug or enhancement request, please visit the 
+                <a href="https://developer.apple.com/bugreporter/" target="_blank" onclick="s_objectID=&quot;https://developer.apple.com/bugreporter/_1&quot;;return this.s_oc?this.s_oc(e):true">Bug Reporter</a> 
+                page.
+            </p>
+            <p>
+                Please read <a href="http://www.apple.com/legal/policies/ideas.html" target="_blank" onclick="s_objectID=&quot;http://www.apple.com/legal/policies/ideas.html_1&quot;;return this.s_oc?this.s_oc(e):true">Apple's Unsolicited Idea Submission Policy</a> 
+                before you send us your feedback.
+            </p> 
+        </section>
+    </form>
+</div>
+
+
+
+</body></html>

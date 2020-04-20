@@ -1,0 +1,28 @@
+
+/* Short description follow button */
+.j-mini-modal .j-following {
+
+}
+
+#j-globalNav-bg .j-globalNav>li#jive-nav-link-conx, 
+li[data-value="people"] { 
+	display: none;
+}
+
+.j-search-results-aside.j-box .j-alternate-search:first-child{
+	display: none;
+}
+
+.j-act-social-news {
+	display: none;
+}
+
+#j-stream .j-act-like,
+.j-recommender #leaderboard-module {
+	display: none !important;
+}
+
+/* View all on newest members */
+.jive-widget-newestmemberswidget .jive-sidebar-viewall {
+	display: none;
+}
