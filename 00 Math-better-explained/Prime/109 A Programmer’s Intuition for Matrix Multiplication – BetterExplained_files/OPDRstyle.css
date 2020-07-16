@@ -1,0 +1,9 @@
+/* This file works the date remover magic
+ * Edits here will be overwritten by plugin updates. So edit freely, and backup often.
+ * 
+ * Old Post Date Remover is a plugin by Ben Meredith at http://benandjacq.com
+ */
+
+dd.create, .post-meta-date, .entry-meta .published, .date, .post_meta .calendar, .meta date, time, p.post-meta.date-extra, .meta time, time.post_date.date.updated, i.icon-calendar.mi, .cb-date.cb-byline-element, h6.edate, li.enigma_post_date, .entry-date, post-date, span.post-date, span.date, .entry-time, span.post_date, span.post_date_intro, span.posted-on, span.meta-date {
+    display: none !important;
+}

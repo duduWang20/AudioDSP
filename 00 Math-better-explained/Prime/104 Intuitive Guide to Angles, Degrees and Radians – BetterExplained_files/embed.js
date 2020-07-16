@@ -1,0 +1,1 @@
+var getScriptURL=(function(){var scripts=document.getElementsByTagName('script');var index=scripts.length-1;var myScript=scripts[index];return function(){return myScript.src;};})();var instacalc_embed=getScriptURL().replace(".js","");document.write('<iframe src="'+instacalc_embed+'" frameborder="0" width="450" height="410"></iframe>');

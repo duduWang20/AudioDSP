@@ -1,0 +1,117 @@
+/*
+Theme Name: Avada Child (BetterExplained)
+Description: Child theme for Avada theme
+Author: ThemeFusion
+Author URI: https://theme-fusion.com
+Template: Avada
+Version: 1.0.0
+Text Domain:  Avada
+*/
+
+.fusion-blog-layout-grid .fusion-post-content-wrapper {
+    padding: 30px;
+}
+
+.fusion-standard-logo {
+    width: 220px !important;
+}
+
+h1.entry-title {
+	xfont-style: italic;
+	font-weight: bold;
+	font-size: 32px !important;
+}
+
+h2 {
+    font-size: 1.4rem !important;
+    xfont-style: italic;
+}
+
+.fusion-standard-logo {
+    width: 220px !important;
+}
+
+.fusion-header-wrapper {
+    margin-bottom: 20px;
+}
+
+.fusion-page-title-captions {
+    display: inline-block;
+    width: 100%;
+}
+
+.fusion-page-title-secondary {
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+}
+
+span.breadcrumb-leaf {
+    color: #333;
+}
+
+#main {
+    padding-top: 10px;
+}
+
+/* sidebar */
+
+.widget h4 {
+    font-size: 18px!important;
+}
+
+.widget {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #d8d8d8;
+    margin-bottom: 1.0rem;
+    padding: 1.25rem;
+    background: #f2f2f2;
+    color: #333;
+    font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
+    text-align: center;
+    line-height: 1.5rem;
+    font-weight: 300;
+}
+
+.egs-posts {
+    font-size: 0.9em;
+    margin: 0px 0px 0px 10px;
+    text-align: left;
+    padding: 0px;
+}
+
+li.egs-posts-item {
+    display: list-item!important;
+    margin-bottom: 5px!important;
+    list-style-type: decimal;
+    list-style-position: outside;
+    padding-left: 10px;
+}
+
+/* More wordpress theme stuff here */
+.entry-content {
+    overflow: hidden
+}
+
+.entry-content img,.comment-content img,.widget img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 97.5%
+}
+
+.entry-content li img {
+    display: inline;
+    vertical-align: middle
+}
+
+.comment-content .tex {
+    display: inline-block
+}
+
+embed,iframe,object,video {
+    max-width: 100%;
+    display: block;
+    margin: 0px auto
+}
