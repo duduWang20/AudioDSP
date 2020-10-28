@@ -1,0 +1,32 @@
+/* Basic code - don't modify */
+ 
+ #nav { display: block; margin: 0; padding: 0; position: relative; font-size:14px;}
+  #nav li { display: block; list-style: none; margin: 0; padding: 0; float: left; position: relative; margin-right:5px; }
+  #nav li.drop {background:url(../images/arr-down.gif) no-repeat right;}
+  #nav a { display: block; }
+  #nav ul { display: none; position: absolute; left: 0; margin: 0; padding: 0; }
+  * html #nav ul { line-height: 0; } /* IE6 "fix" */
+  	#nav ul a { zoom: 1; } /* IE6/7 fix */
+    #nav ul li { float: none; }
+    #nav ul ul { top: 0; }
+    
+/* Essentials - configure this */
+
+#nav ul { width: 220px; }
+#nav ul ul { left: 221px; width:250px; }
+
+/* Everything else is theming */
+ 
+#nav {  height: 52px; text-align:left; margin-top:1px; }
+#nav *:hover { background-color: none; }
+#nav a {  font-size:12px; color:#000000; padding: 10px 10px 10px 10px; line-height: 1; text-decoration:none; }
+  #nav li.hover a { background-color: #f0f0f0;  text-decoration:none;}
+  #nav ul { top: 35px; }
+    #nav ul li a { background: #f0f0f0 url(../images/bg-menu.gif) repeat-x bottom; text-decoration:none; padding: 5px 10px; color:#1c1c1c; line-height:16px; }
+      #nav ul a.hover { background: #464646 url(../images/bg-menu.gif) repeat-x bottom; color:#fff; }
+   #nav ul a {  border-right: none; opacity: 0.9; filter: alpha(opacity=90); }
+/* #nav ul a { border-bottom: none; } - I also needed this for IE6/7 */
+#nav ul li {margin-bottom:0px;}
+
+#nav a.selected {color:#4c4cf4;}
+

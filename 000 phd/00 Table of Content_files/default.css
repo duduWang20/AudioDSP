@@ -1,0 +1,129 @@
+body {
+	margin:0px; background:url(../images/bg-page.jpg);
+	font-family:Arial; font-size:12px; color:#dedede;
+	}
+
+
+/* GLOBAL */
+
+#divPage {background:url(../images/bg-wrapper.jpg) repeat-x top left #252525;}
+#wrapper {width:960px; margin:0 auto; background:url(../images/bg-book.jpg) no-repeat top right; min-height:650px; padding-bottom:20px; position:relative;}
+#wrapper .not-logged-in {padding-bottom:225px;}
+
+a {color:#dedede; outline:none;}
+
+.left {float:left; display:inline;}
+.right {float:right; display:inline;}
+.clear {clear:both; height:0px;}
+
+form {margin:0px; padding:0px;}
+
+.txtBlue {color:#6464ff;}
+.txtGrey {color:#2f3134;}
+
+.txt26 {font-size:26px;}
+
+
+/* HEADER */
+#header {height:220px; font-family:Tahoma; padding-bottom:20px;}
+#header h1 {color:#2b2b2c; font-size:32px; font-weight:normal; margin:0px; padding:40px 0 15px 15px;}
+
+#menu {background:url(../images/bg-menu.gif) repeat-x top left; padding:2px 10px 0 0; width:570px;}
+
+
+/* CONTENT */
+
+#columnLeft {width:205px; padding:5px 10px 5px 0; float:left; background:url(../images/line-2x1.png) repeat-y right; margin-right:15px;}
+#columnLeft .box {padding:0 5px 10px 5px; background:url(../images/line-1x2.png) repeat-x bottom;}
+#columnLeft .box h2 {margin:0px; padding:5px 0; font-size:16px; font-weight:bold; color:#b4b4e9;}
+
+#search {}
+#search .txtField {color:#000; border:1px solid #9c9c9c; width:135px; padding:2px 5px; float:left; font-size:12px; cursor:pointer;}
+#search .button {float:left; margin-left:5px;}
+
+#columnRight {width:725px; padding:5px 0px 5px 0; float:left; line-height:18px;}
+#columnRight h2 {margin:0px; padding:5px 0 20px 0; font-size:20px; font-weight:bold; color:#b4b4e9;}
+#columnRight h3 {margin:0px; padding:5px 0; font-size:16px; font-weight:bold; color:#b4b4e9;}
+#columnRight ul { list-style-image: url("../images/arr-list.gif"); margin:0px; padding:0 0 0 15px; }
+#columnRight ul li {padding:3px 0;}
+
+#columnRight .breadcrumbs {padding-bottom:10px;}
+#columnRight .breadcrumbs a {color:#dedede;}
+
+#columnRight .subTitle {font-size:16px; font-weight:bold; color:#62c217; padding-bottom:10px;}
+
+#adbox {width: 300px; margin-top: 70px; padding: 15px; float:right;}
+
+#loginBox {
+	background:url(../images/line-1x2.png) repeat-x top; 
+	padding-top:20px; 
+	position:absolute; left:230px; bottom:0px;
+	width:725px;
+	}
+#greenBox2 {background:#62c217; padding:15px 0px 15px 0px; margin-bottom:20px; font-size:11px; color:#2f3134; line-height:15px;}
+#greenBox2 .box {
+	background:url(../images/line-green.gif) repeat-y left;
+	float:left; width:305px; padding-left:40px
+	}
+#greenBox2 .box h2 {margin:0px; padding:5px 0; font-size:18px; font-weight:normal; color:#fff; text-transform:uppercase;}
+#greenBox2 a {color:#2f3134; text-decoration:none;}
+
+#greenBox2 form {margin:0px; padding:0px;}
+#greenBox2 input.txtField {width:180px; border:1px solid #224805; margin:0 0 8px 0; outline:none; padding:0 0 0 5px;}
+#greenBox2 label {display:block; margin:1px 5px 0 0; float:left; clear:left; width:70px; color:#fff; font-size:12px;}
+#greenBox2 input.button {float:right; margin-right:43px;}
+
+#greenBox2 form.comment {padding:0 20px; color:#fff; font-size:14px;}
+#greenBox2 textarea {margin:10px 0; border:1px solid #224805; width:95%; resize:none; padding:5px; height:100px;}
+
+.banner300x250 {width:250px; margin:100px 0 15px 15px;}
+
+.line {background:url(../images/line-1x2.png) repeat-x top; height:10px; margin-top:20px;}
+
+.commentEntry {padding-bottom:15px; border-bottom:1px dotted #fff; margin-bottom:15px;}
+.commentEntry a {color:#62c217; text-decoration:none;}
+.commentEntry b {color:#62c217;}
+
+
+/* FOOTER */
+#footer {border-top:2px solid #4141fe; padding:10px 0 25px 0; text-align:center; font-size:11px; color:#2b2b2c;}
+#footer a {color:#2b2b2c; text-decoration:none; padding:0 5px;}
+#footer a:hover {text-decoration:underline;}
+
+
+
+
+
+/* **** Homepage *** */
+#column-1 {width:280px; padding:5px 15px 5px 0; float:left; background:url(../images/line-2x1.png) repeat-y right; margin-right:15px; font-size:14px;}
+#column-1 h2 {margin:0px; padding:5px 0; font-size:17px; font-weight:bold; color:#79e920;}
+
+#column-2 {width:405px; padding:0; float:left;}
+#column-2 h2 {margin:0px; padding:5px 0; font-size:16px; font-weight:bold; color:#b4b4e9;}
+#column-2 ul { list-style-image: url("../images/arr-list.gif"); margin:0px; padding:0 0 0 15px; }
+#column-2 ul li {padding:3px 0;}
+
+#greenBox {background:#62c217; padding:10px 5px; width:660px; margin-bottom:20px;}
+#greenBox .left {width:325px; font-size:17px; font-weight:bold; font-style:italic; color:#ffffff;}
+#greenBox .right {width:315px; font-size:12px; font-weight:bold; color:#2f3134; line-height:20px;}
+#greenBox a {color:#2f3134; text-decoration:none;}
+
+/* **** Contact **** */
+.column-3 {
+	width:325px; min-height:400px; 
+	padding:5px 15px 5px 0; 
+	float:left; 
+	background:url(../images/line-2x1.png) repeat-y right; 
+	margin-right:15px; 
+	font-size:14px;
+	}
+.column-3 h2 {margin:0px; padding:5px 0; font-size:20px; font-weight:bold; color:#aeaeeb;}
+.column-3 h3 {margin:0px; padding:5px 0; font-size:17px; font-weight:normal; color:#aeaeeb;}
+.column-3 a {color:#aeaeeb; text-decoration:none;}
+
+#contact form {margin:0px; padding:0px;}
+#contact input.txtField {width:220px; border:1px solid #224805; margin:0 0 8px 0; outline:none; padding:0 0 0 5px;}
+#contact label {display:block; margin:1px 5px 0 0; float:left; clear:left; width:70px; color:#fff; font-size:12px;}
+#contact input.button {margin-left:75px;}
+#contact textarea {resize:none; height:140px; width:220px; border:1px solid #224805; margin:0 0 8px 0; outline:none; padding:0 0 0 5px;}
+
